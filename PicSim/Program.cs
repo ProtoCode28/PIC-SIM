@@ -18,8 +18,6 @@ namespace PicSim
             hexnumbers = new int[1024];
             programcounter = new int[1024];
             rx = new Regex(@"\b\d{4} (\d|\w){4}\b");
-            //reg = new Regex(@"[A-F]");
-            
         }
 
         public void Einlesen()
@@ -40,9 +38,7 @@ namespace PicSim
                     hexnumbers[counter] = Umwandelnprogramcounter(result);
                     counter++;
                 }
-
             }
-
             file.Close();
         }
 
