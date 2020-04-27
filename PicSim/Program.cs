@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace PicSim
 {
-    class Program
+    public class Program
     {
         string path;
         int[] hexnumbers;
@@ -21,8 +21,7 @@ namespace PicSim
         }
 
         public void Einlesen()
-        {
-            
+        {   
             string line;
             MatchCollection matches;
             System.IO.StreamReader file = new System.IO.StreamReader(@path);
@@ -42,7 +41,7 @@ namespace PicSim
             file.Close();
         }
 
-        public int Umwandelnhex(string res)
+        public static int Umwandelnhex(string res)
         {
             Regex rx = new Regex(@"\b (\d|\w){4}\b");
             Match match = rx.Match(res);
@@ -50,6 +49,8 @@ namespace PicSim
             int result = int.Parse(var, System.Globalization.NumberStyles.HexNumber);
             return result;
         }
+
+
 
         public int Umwandelnprogramcounter(string res)
         {
@@ -75,6 +76,10 @@ namespace PicSim
             Program T1 = new Program(@"D:\TPicSim1.LST");
             T1.Einlesen();
             T1.Ausgeben();
+            Register R1 = new Register();
+            R1.Reset();
+            R1.Ausgeben();
+
         }
     }
 }
