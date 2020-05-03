@@ -4,25 +4,24 @@ using System.Text.RegularExpressions;
 
 namespace PicSim
 {
-    class Program
+    public class LSTParse
     {
         string path;
-        int[] hexnumbers;
+        int[] programmemory;
         int[] programcounter;
         Regex rx;
         int counter = 0;
 
-        public Program(string path)
+        public LSTParse(string path)
         {
             this.path = path;
-            hexnumbers = new int[1024];
+            programmemory = new int[1024];
             programcounter = new int[1024];
             rx = new Regex(@"\b\d{4} (\d|\w){4}\b");
         }
 
         public void Einlesen()
         {
-            
             string line;
             MatchCollection matches;
             System.IO.StreamReader file = new System.IO.StreamReader(@path);
@@ -35,7 +34,7 @@ namespace PicSim
                     string result = match.Value;
                     System.Console.WriteLine(result);
                     programcounter[counter] = Umwandelnhex(result);
-                    hexnumbers[counter] = Umwandelnprogramcounter(result);
+                    programmemory[counter] = Umwandelnprogramcounter(result);
                     counter++;
                 }
             }
@@ -51,6 +50,8 @@ namespace PicSim
             return result;
         }
 
+
+
         public int Umwandelnprogramcounter(string res)
         {
             Regex rx = new Regex(@"\b\d{4} \b");
@@ -64,17 +65,25 @@ namespace PicSim
         {
             for (int i = 0; i < counter; i++)
             {
-                System.Console.WriteLine(hexnumbers[i]);
+                System.Console.WriteLine(programmemory[i]);
                 System.Console.WriteLine(programcounter[i]);
             }
         }
 
+        public int Transfer(int i)
+        {
+            return programmemory[i];
+        }
 
         static void Main(string[] args)
         {
-            Program T1 = new Program(@"D:\TPicSim1.LST");
+            LSTParse T1 = new LSTParse(@"D:\TPicSim1.LST");
             T1.Einlesen();
             T1.Ausgeben();
+            Register R1 = new Register();
+            R1.Reset();
+            R1.Ausgeben();
+
         }
     }
 }
