@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace PicSim
 {
     class Commands
     {
-        public void Switchcase()
+        
+        Regex rx;
+        
+        public void Switchcase(int pc) //pc ist programcounter
         {
-            LSTParse lst = new LSTParse(@"D:\TPicSim1.LST");
-            for (int i = 0; i<1024; i++)
-            {
-                switch  (lst.Transfer(i))
+            for(int i = 0; i <= pc; i++)
+            { 
+
+                switch  (Globals.programmemory[i])
                 {
                     case int n when (n >= 0b00_0111_0000_0000 && n < 0b00_0111_1111_1111): ADDWF(); break; //DONE
                     case int n when (n >= 0b00_0101_0000_0000 && n < 0b00_0101_1111_1111): ANDWF(); break; //DONE
@@ -41,7 +46,7 @@ namespace PicSim
                     case int n when (n >= 0b00_0000_0110_0100 && n < 0b00_0000_0110_0100): CLRWDT(); break; //DONE
                     case int n when (n >= 0b10_1000_0000_0000 && n < 0b10_1111_1111_1111): GOTO(); break; //DONE
                     case int n when (n >= 0b11_1000_0000_0000 && n < 0b11_1000_1111_1111): IORLW(); break; //DONE
-                    case int n when (n >= 0b11_0000_0000_0000 && n < 0b11_0011_1111_1111): MOVLW(); break; //DONE
+                    case int n when (n >= 0b11_0000_0000_0000 && n < 0b11_0011_1111_1111): MOVLW(); System.Console.WriteLine("ok"); break; //DONE
                     case int n when (n >= 0b00_0000_0000_1001 && n < 0b00_0000_0000_1001): RETFIE(); break; //DONE
                     case int n when (n >= 0b11_0100_0000_0000 && n < 0b11_0111_1111_1111): RETLW(); break; //DONE
                     case int n when (n >= 0b00_0000_0000_1000 && n < 0b00_0000_0000_1000): RETURN(); break; //DONE
@@ -54,6 +59,17 @@ namespace PicSim
             }
         }
 
+        public int Cut(int data)
+        {
+            
+            string datas = data.ToString();
+            rx = new Regex(@"\d\d\b");
+            Match match = rx.Match(datas);
+            string var = match.Value;
+            int result = int.Parse(var, System.Globalization.NumberStyles.HexNumber);
+            System.Console.WriteLine(result);
+            return result;
+        }
         public void ADDWF()
         {
            
@@ -174,7 +190,7 @@ namespace PicSim
         }
         public void MOVLW()
         {
-
+            
         }
         public void RETFIE()
         {

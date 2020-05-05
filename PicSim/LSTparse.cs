@@ -4,19 +4,20 @@ using System.Text.RegularExpressions;
 
 namespace PicSim
 {
+    
     public class LSTParse
     {
+        
         string path;
-        int[] programmemory;
-        int[] programcounter;
+        
         Regex rx;
-        int counter = 0;
-
+        
+      
         public LSTParse(string path)
         {
             this.path = path;
-            programmemory = new int[1024];
-            programcounter = new int[1024];
+            Globals.programmemory = new int[1024];
+
             rx = new Regex(@"\b\d{4} (\d|\w){4}\b");
         }
 
@@ -32,10 +33,11 @@ namespace PicSim
                 foreach (Match match in matches)
                 {
                     string result = match.Value;
-                    System.Console.WriteLine(result);
-                    programcounter[counter] = Umwandelnhex(result);
-                    programmemory[counter] = Umwandelnprogramcounter(result);
-                    counter++;
+                    //System.Console.WriteLine(result);
+                    Globals.programmemory[Umwandelnprogramcounter(result)] = Umwandelnhex(result);
+                    Globals.Getprogramcounter = Umwandelnprogramcounter(result);
+                    //System.Console.WriteLine(Globals.programcounter);
+
                 }
             }
             file.Close();
@@ -63,16 +65,16 @@ namespace PicSim
 
         public void Ausgeben()
         {
-            for (int i = 0; i < counter; i++)
+            for (int i = 0; i < Globals.Getprogramcounter; i++)
             {
-                System.Console.WriteLine(programmemory[i]);
-                System.Console.WriteLine(programcounter[i]);
+                System.Console.WriteLine(Globals.programmemory[i]);
+                //System.Console.WriteLine(Globals.programcounter);
             }
         }
-
-        public int Transfer(int i)
+ 
+        public int Transferprogrammemory(int i)
         {
-            return programmemory[i];
+            return Globals.programmemory[i];
         }
 
         static void Main(string[] args)
@@ -80,9 +82,15 @@ namespace PicSim
             LSTParse T1 = new LSTParse(@"D:\TPicSim1.LST");
             T1.Einlesen();
             T1.Ausgeben();
-            Register R1 = new Register();
-            R1.Reset();
-            R1.Ausgeben();
+            //Register R1 = new Register();
+            //R1.Reset();
+            //R1.Ausgeben();
+            Commands cmd = new Commands();
+            cmd.Switchcase(Globals.Getprogramcounter);
+            //Buttons but = new Buttons();
+            //but.GoButton();
+
+
 
         }
     }

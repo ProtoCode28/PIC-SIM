@@ -43,3 +43,5 @@ namespace PicSim
         }
     }
 }
+    //indirekte adressierung
+    //pcl als zieladresse müssen wir überlegen ob wir uns eine methode schreiben die die einzelnen mehtoden aufrufen
