@@ -7,7 +7,7 @@ namespace PicSim
         public static int programcounter; // Modifiable
         public static int[] programmemory;
         public static int w;
-        public static int Getprogramcounter
+       /* public static int Getprogramcounter
         {
             get
             {
@@ -18,7 +18,7 @@ namespace PicSim
                 programcounter = value;
             }
 
-        }
+        }*/
     }
 
 }

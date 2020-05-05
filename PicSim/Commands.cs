@@ -13,7 +13,7 @@ namespace PicSim
         
         public void Switchcase(int pc) //pc ist programcounter
         {
-            for(int i = 0; i <= pc; i++)
+            for(int i = 0; i <= pc; i++) //muss durch stepbutton methode ersetzt werden
             { 
 
                 switch  (Globals.programmemory[i])

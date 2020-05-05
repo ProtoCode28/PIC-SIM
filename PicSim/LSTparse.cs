@@ -34,8 +34,9 @@ namespace PicSim
                 {
                     string result = match.Value;
                     //System.Console.WriteLine(result);
-                    Globals.programmemory[Umwandelnprogramcounter(result)] = Umwandelnhex(result);
-                    Globals.Getprogramcounter = Umwandelnprogramcounter(result);
+                
+                    Globals.programmemory[Globals.programcounter = Umwandelnprogramcounter(result)] = Umwandelnhex(result);
+                    //Globals.programcounter = Umwandelnprogramcounter(result)
                     //System.Console.WriteLine(Globals.programcounter);
 
                 }
@@ -65,7 +66,7 @@ namespace PicSim
 
         public void Ausgeben()
         {
-            for (int i = 0; i < Globals.Getprogramcounter; i++)
+            for (int i = 0; i < Globals.programcounter; i++)
             {
                 System.Console.WriteLine(Globals.programmemory[i]);
                 //System.Console.WriteLine(Globals.programcounter);
@@ -79,14 +80,14 @@ namespace PicSim
 
         static void Main(string[] args)
         {
-            LSTParse T1 = new LSTParse(@"D:\TPicSim1.LST");
+            LSTParse T1 = new LSTParse(@"C:\vm\TPicSim1.LST");
             T1.Einlesen();
             T1.Ausgeben();
             //Register R1 = new Register();
             //R1.Reset();
             //R1.Ausgeben();
             Commands cmd = new Commands();
-            cmd.Switchcase(Globals.Getprogramcounter);
+            cmd.Switchcase(Globals.programcounter);
             //Buttons but = new Buttons();
             //but.GoButton();
 
