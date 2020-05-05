@@ -5,7 +5,7 @@ namespace PicSim
 
     public class Buttons
     {
-
+		Commands cmd = new Commands();
 		/*public void GoButton()
 		{
 			
@@ -14,14 +14,12 @@ namespace PicSim
 				//cmd.Switchcase(i);
 			}
 		}
-		
+		*/
         public void StepButton()
         {
-
-            
-            //cmd.Switchcase(programcounter);
+			cmd.Switchcase(Globals.programcounter);
         }
-		*/
+		
     }
 }
 

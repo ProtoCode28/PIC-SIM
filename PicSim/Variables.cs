@@ -7,18 +7,20 @@ namespace PicSim
         public static int programcounter; // Modifiable
         public static int[] programmemory;
         public static int w;
-       /* public static int Getprogramcounter
-        {
-            get
-            {
-                return programcounter;
-            }
-            set
-            {
-                programcounter = value;
-            }
+        public static int[] bank0;
+        public static int[] bank1;
+        /* public static int Getprogramcounter
+         {
+             get
+             {
+                 return programcounter;
+             }
+             set
+             {
+                 programcounter = value;
+             }
 
-        }*/
+         }*/
     }
 
 }

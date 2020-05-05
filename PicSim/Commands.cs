@@ -13,10 +13,8 @@ namespace PicSim
         
         public void Switchcase(int pc) //pc ist programcounter
         {
-            for(int i = 0; i <= pc; i++) //muss durch stepbutton methode ersetzt werden
-            { 
-
-                switch  (Globals.programmemory[i])
+            Globals.programcounter++;
+                switch  (Globals.programmemory[pc])
                 {
                     case int n when (n >= 0b00_0111_0000_0000 && n < 0b00_0111_1111_1111): ADDWF(); break; //DONE
                     case int n when (n >= 0b00_0101_0000_0000 && n < 0b00_0101_1111_1111): ANDWF(); break; //DONE
@@ -29,7 +27,7 @@ namespace PicSim
                     case int n when (n >= 0b00_1111_0000_0000 && n < 0b00_1111_1111_1111): INCFSZ(); break; //DONE
                     case int n when (n >= 0b00_0100_0000_0000 && n < 0b00_0100_1111_1111): IORWF(); break; //DONE
                     case int n when (n >= 0b00_1000_0000_0000 && n < 0b00_1000_1111_1111): MOVF(); break; //DONE
-                    case int n when (n >= 0b00_0000_1000_0000 && n < 0b00_0000_1111_1111): MOVWF(); break; //DONE
+                    case int n when (n >= 0b00_0000_1000_0000 && n < 0b00_0000_1111_1111): MOVWF(Globals.programmemory[pc]); break; //DONE
                     case int n when (n >= 0b00_0000_0000_0000 && n < 0b00_0000_0110_0000): NOP(); break; //DONE
                     case int n when (n >= 0b00_1101_0000_0000 && n < 0b00_1101_1111_1111): RLF(); break; //DONE
                     case int n when (n >= 0b00_1100_0000_0000 && n < 0b00_1100_1111_1111): RRF(); break; //DONE
@@ -41,12 +39,12 @@ namespace PicSim
                     case int n when (n >= 0b01_1000_0000_0000 && n < 0b01_1011_1111_1111): BTFSC(); break; //DONE
                     case int n when (n >= 0b01_1100_0000_0000 && n < 0b01_1111_1111_1111): BTFSS(); break; //DONE
                     case int n when (n >= 0b11_1110_0000_0000 && n < 0b11_1111_1111_1111): ADDLW(); break; //DONE
-                    case int n when (n >= 0b11_1001_0000_0000 && n < 0b11_1001_1111_1111): ANDLW(); break; //DONE
+                    case int n when (n >= 0b11_1001_0000_0000 && n < 0b11_1001_1111_1111): ANDLW(Globals.programmemory[pc]); break; //DONE
                     case int n when (n >= 0b10_0000_0000_0000 && n < 0b10_0111_1111_1111): CALL(); break; //DONE
                     case int n when (n >= 0b00_0000_0110_0100 && n < 0b00_0000_0110_0100): CLRWDT(); break; //DONE
                     case int n when (n >= 0b10_1000_0000_0000 && n < 0b10_1111_1111_1111): GOTO(); break; //DONE
                     case int n when (n >= 0b11_1000_0000_0000 && n < 0b11_1000_1111_1111): IORLW(); break; //DONE
-                    case int n when (n >= 0b11_0000_0000_0000 && n < 0b11_0011_1111_1111): MOVLW(); System.Console.WriteLine("ok"); break; //DONE
+                    case int n when (n >= 0b11_0000_0000_0000 && n < 0b11_0011_1111_1111): MOVLW(Globals.programmemory[pc]); break; //DONE
                     case int n when (n >= 0b00_0000_0000_1001 && n < 0b00_0000_0000_1001): RETFIE(); break; //DONE
                     case int n when (n >= 0b11_0100_0000_0000 && n < 0b11_0111_1111_1111): RETLW(); break; //DONE
                     case int n when (n >= 0b00_0000_0000_1000 && n < 0b00_0000_0000_1000): RETURN(); break; //DONE
@@ -56,34 +54,37 @@ namespace PicSim
 
 
                 }
-            }
         }
 
-        public int Cut(int data)
+        public int ExtractDestination(int cmd)
         {
-            
-            string datas = data.ToString();
-            rx = new Regex(@"\d\d\b");
-            Match match = rx.Match(datas);
-            string var = match.Value;
-            int result = int.Parse(var, System.Globalization.NumberStyles.HexNumber);
-            System.Console.WriteLine(result);
-            return result;
+            return cmd & 0x80; //Erste Stelle der 8 Bit wird extrahiert  
         }
+
+
+        public int ExtractAdress(int cmd)
+        {
+            return cmd & 0x7F; //
+        }
+        
+        public int ExtractLiteral(int cmd)
+        {
+            return cmd & 0b1111_1111;
+        }
+
         public void ADDWF()
         {
-           
-
+            System.Console.WriteLine("ADDWF");
         }
 
         public void ANDWF()
         {
-
+            System.Console.WriteLine("ANDWF");
         }
 
         public void CLRF()
         {
-
+            System.Console.WriteLine("CLRF");
         }
 
         public void CLRW()
@@ -120,9 +121,11 @@ namespace PicSim
         {
 
         }
-        public void MOVWF()
+        public void MOVWF(int cmd)
         {
-
+            int adress = ExtractAdress(cmd);
+            Globals.bank0[adress] = Globals.w;
+            System.Console.WriteLine($"MOVWF adress: {adress} bank: {Globals.bank0[adress]}");
         }
         public void NOP()
         {
@@ -168,9 +171,11 @@ namespace PicSim
         {
 
         }
-        public void ANDLW()
+        public void ANDLW(int cmd)
         {
-
+            int literal = ExtractLiteral(cmd);
+            Globals.w &= literal;
+            System.Console.WriteLine($"ANDLW W: {Globals.w} literal {literal}"); //$ + geschwungene klammern formatieren den String
         }
         public void CALL()
         {
@@ -188,9 +193,11 @@ namespace PicSim
         {
 
         }
-        public void MOVLW()
+        public void MOVLW(int cmd)
         {
-            
+            int literal = ExtractLiteral(cmd);
+            Globals.w = literal;
+            System.Console.WriteLine($"MOVLW w: {Globals.w} literal: {literal}");
         }
         public void RETFIE()
         {
