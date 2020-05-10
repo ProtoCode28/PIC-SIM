@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PicSim
 {
@@ -9,18 +10,8 @@ namespace PicSim
         public static int w;
         public static int[] bank0;
         public static int[] bank1;
-        /* public static int Getprogramcounter
-         {
-             get
-             {
-                 return programcounter;
-             }
-             set
-             {
-                 programcounter = value;
-             }
-
-         }*/
+        public static int z;
+        public static Stack<int> stack;
     }
 
 }

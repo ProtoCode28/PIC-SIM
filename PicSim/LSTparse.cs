@@ -79,7 +79,7 @@ namespace PicSim
 
         static void Main(string[] args)
         {
-            LSTParse T1 = new LSTParse(@"D:\TPicSim1.LST");
+            LSTParse T1 = new LSTParse(@"D:\TPicSim2.LST");
             T1.Einlesen();
             T1.Ausgeben();
             Register R1 = new Register();
@@ -91,6 +91,11 @@ namespace PicSim
             Buttons but = new Buttons();
             but.StepButton();
             but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            //but.StepButton();
+            //but.StepButton();
+
 
 
 
