@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace PicSim
 {
     public class Register
     {
-  
+
 
         public Register()
         {
@@ -43,6 +40,6 @@ namespace PicSim
         }
     }
 }
-    //indirekte adressierung
-    //pcl als zieladresse müssen wir überlegen ob wir uns eine methode schreiben die die einzelnen mehtoden aufrufen
-    //für UI hilfsmethode die UI regelmäßig refreshed nach jedem Step/execution
+//indirekte adressierung
+//pcl als zieladresse müssen wir überlegen ob wir uns eine methode schreiben die die einzelnen mehtoden aufrufen
+//für UI hilfsmethode die UI regelmäßig refreshed nach jedem Step/execution

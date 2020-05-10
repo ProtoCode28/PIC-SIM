@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Globalization;
+
 using System.Text.RegularExpressions;
 
 namespace PicSim
 {
-    
+
     public class LSTParse
     {
-        
-        string path;
-        
-        Regex rx;
-        
-      
+
+        public string path;
+
+        public Regex rx;
+
+
         public LSTParse(string path)
         {
             this.path = path;
@@ -34,9 +34,9 @@ namespace PicSim
                 {
                     string result = match.Value;
                     //System.Console.WriteLine(result);
-                
+
                     Globals.programmemory[Globals.programcounter = Umwandelnprogramcounter(result)] = Umwandelnhex(result);
-                    
+
 
                 }
             }
@@ -67,17 +67,17 @@ namespace PicSim
         {
             for (int i = 0; i < Globals.programcounter; i++)
             {
-                System.Console.WriteLine(Globals.programmemory[i]);
-                System.Console.WriteLine(Globals.programcounter);
+                Console.WriteLine(Globals.programmemory[i]);
+                Console.WriteLine(Globals.programcounter);
             }
         }
- 
+
         public int Transferprogrammemory(int i)
         {
             return Globals.programmemory[i];
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             LSTParse T1 = new LSTParse(@"D:\TPicSim2.LST");
             T1.Einlesen();
@@ -93,8 +93,8 @@ namespace PicSim
             but.StepButton();
             but.StepButton();
             but.StepButton();
-            //but.StepButton();
-            //but.StepButton();
+            but.StepButton();
+            but.StepButton();
 
 
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿
 namespace PicSim
 {
 
 
-    public class Buttons
-    {
+	public class Buttons
+	{
 		Commands cmd = new Commands();
 		/*public void GoButton()
 		{
@@ -15,12 +15,12 @@ namespace PicSim
 			}
 		}
 		*/
-        public void StepButton()
-        {
+		public void StepButton()
+		{
 			cmd.Switchcase(Globals.programcounter);
-        }
-		
-    }
+		}
+
+	}
 }
 
 //sichtbarkeit der variabeln in c# -> programcounter
