@@ -21,9 +21,9 @@ namespace PicSim
                 case int n when (n >= 0b00_0001_0000_0000 && n < 0b00_0001_0111_1111): CLRW(); break; //DONE
                 case int n when (n >= 0b00_1001_0000_0000 && n < 0b00_1001_1111_1111): COMF(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b00_0011_0000_0000 && n < 0b00_0011_1111_1111): DECF(Globals.programmemory[pc]); break; //DONE
-                case int n when (n >= 0b00_1011_0000_0000 && n < 0b00_1011_1111_1111): DECFSZ(); break; //DONE
+                case int n when (n >= 0b00_1011_0000_0000 && n < 0b00_1011_1111_1111): DECFSZ(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b00_1010_0000_0000 && n < 0b00_1010_1111_1111): INCF(Globals.programmemory[pc]); break; //DONE
-                case int n when (n >= 0b00_1111_0000_0000 && n < 0b00_1111_1111_1111): INCFSZ(); break; //DONE
+                case int n when (n >= 0b00_1111_0000_0000 && n < 0b00_1111_1111_1111): INCFSZ(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b00_0100_0000_0000 && n < 0b00_0100_1111_1111): IORWF(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b00_1000_0000_0000 && n < 0b00_1000_1111_1111): MOVF(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b00_0000_1000_0000 && n < 0b00_0000_1111_1111): MOVWF(Globals.programmemory[pc]); break; //DONE
@@ -33,10 +33,10 @@ namespace PicSim
                 case int n when (n >= 0b00_0010_0000_0000 && n < 0b00_0010_1111_1111): SUBWF(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b00_1110_0000_0000 && n < 0b00_1110_1111_1111): SWAPF(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b00_0110_0000_0000 && n < 0b00_0110_1111_1111): XORWF(Globals.programmemory[pc]); break; //DONE
-                case int n when (n >= 0b01_0000_0000_0000 && n < 0b01_0011_1111_1111): BCF(); break; //DONE
-                case int n when (n >= 0b01_0100_0000_0000 && n < 0b01_0111_1111_1111): BSF(); break; //DONE
-                case int n when (n >= 0b01_1000_0000_0000 && n < 0b01_1011_1111_1111): BTFSC(); break; //DONE
-                case int n when (n >= 0b01_1100_0000_0000 && n < 0b01_1111_1111_1111): BTFSS(); break; //DONE
+                case int n when (n >= 0b01_0000_0000_0000 && n < 0b01_0011_1111_1111): BCF(Globals.programmemory[pc]); break; //DONE
+                case int n when (n >= 0b01_0100_0000_0000 && n < 0b01_0111_1111_1111): BSF(Globals.programmemory[pc]); break; //DONE
+                case int n when (n >= 0b01_1000_0000_0000 && n < 0b01_1011_1111_1111): BTFSC(Globals.programmemory[pc]); break; //DONE
+                case int n when (n >= 0b01_1100_0000_0000 && n < 0b01_1111_1111_1111): BTFSS(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b11_1110_0000_0000 && n < 0b11_1111_1111_1111): ADDLW(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b11_1001_0000_0000 && n < 0b11_1001_1111_1111): ANDLW(Globals.programmemory[pc]); break; //DONE
                 case int n when (n >= 0b10_0000_0000_0000 && n < 0b10_0111_1111_1111): CALL(Globals.programmemory[pc]); break; //DONE
@@ -100,6 +100,11 @@ namespace PicSim
         public int ExtractIRP()
         {
             return Globals.bank0[3] & 0b1000_0000;
+        }
+
+        public int ExtractBitB(int cmd)
+        {
+            return cmd & 0b0000_1111;
         }
 
         public int GetData(int cmd)
@@ -258,9 +263,18 @@ namespace PicSim
             System.Console.WriteLine($"DECF-> result: {result}");
         }
 
-        public void DECFSZ()
+        public void DECFSZ(int cmd)
         {
-
+            int result = GetData(cmd) - 1;
+            WoF(cmd, result);
+            if (result == 0)
+            {
+                NOP();
+            }
+            else
+            {
+                System.Console.WriteLine($"DECFSZ-> result: {result}");
+            }
         }
 
         public void INCF(int cmd)
@@ -271,9 +285,18 @@ namespace PicSim
             System.Console.WriteLine($"INCF-> result: {result}");
         }
 
-        public void INCFSZ()
+        public void INCFSZ(int cmd)
         {
-
+            int result = GetData(cmd) + 1;
+            WoF(cmd, result);
+            if (result == 0)
+            {
+                NOP();
+            }
+            else
+            {
+                System.Console.WriteLine($"INCFSZ-> result: {result}");
+            }
         }
 
         public void IORWF(int cmd)
@@ -348,24 +371,172 @@ namespace PicSim
             ChangeZ(result);
         }
 
-        public void BCF()
+        public void BCF(int cmd)
         {
-
+            int result = GetData(cmd);
+            int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 0 gesetzt werden
+            int b = 0;
+            if (a == 7)
+            {
+                b = 0b0111_1111;
+            }
+            else if (a == 6)
+            {
+                b = 0b1011_1111;
+            }
+            else if (a == 5)
+            {
+                b = 0b1101_1111;
+            }
+            else if (a == 4)
+            {
+                b = 0b1110_1111;
+            }
+            else if (a == 3)
+            {
+                b = 0b1111_0111;
+            }
+            else if (a == 2)
+            {
+                b = 0b1111_1011;
+            }
+            else if (a == 1)
+            {
+                b = 0b1111_1101;
+            }
+            else if (a == 0)
+            {
+                b = 0b1111_1110;
+            }
+            result &= b;
+            SetData(cmd, result);
         }
 
-        public void BSF()
+        public void BSF(int cmd)
         {
-
+            int result = GetData(cmd);
+            int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 1 gesetzt werden 
+            int b = 0;
+            if (a == 7)
+            {
+                b = 0b1000_0000;
+            }
+            else if (a == 6)
+            {
+                b = 0b0100_0000;
+            }
+            else if (a == 5)
+            {
+                b = 0b0010_0000;
+            }
+            else if (a == 4)
+            {
+                b = 0b0001_0000;
+            }
+            else if (a == 3)
+            {
+                b = 0b0000_1000;
+            }
+            else if (a == 2)
+            {
+                b = 0b0000_0100;
+            }
+            else if (a == 1)
+            {
+                b = 0b0000_0010;
+            }
+            else if (a == 0)
+            {
+                b = 0b0000_0001;
+            }
+            result |= b;
+            SetData(cmd, result);
         }
 
-        public void BTFSC()
+        public void BTFSC(int cmd)
         {
-
+            int address = GetData(cmd);
+            int a = ExtractBitB(cmd);
+            int b = 0;
+            if (a == 7)
+            {
+                b = 0b1000_0000;
+            }
+            else if (a == 6)
+            {
+                b = 0b0100_0000;
+            }
+            else if (a == 5)
+            {
+                b = 0b0010_0000;
+            }
+            else if (a == 4)
+            {
+                b = 0b0001_0000;
+            }
+            else if (a == 3)
+            {
+                b = 0b0000_1000;
+            }
+            else if (a == 2)
+            {
+                b = 0b0000_0100;
+            }
+            else if (a == 1)
+            {
+                b = 0b0000_0010;
+            }
+            else if (a == 0)
+            {
+                b = 0b0000_0001;
+            }
+            if ((address & b) == 0) // wenn (address & b) = 0, dann ist address an der stelle a 0 
+            {
+                NOP();
+            }
         }
 
-        public void BTFSS()
+        public void BTFSS(int cmd)
         {
-
+            int address = GetData(cmd);
+            int a = ExtractBitB(cmd);
+            int b = 0;
+            if (a == 7)
+            {
+                b = 0b1000_0000;
+            }
+            else if (a == 6)
+            {
+                b = 0b0100_0000;
+            }
+            else if (a == 5)
+            {
+                b = 0b0010_0000;
+            }
+            else if (a == 4)
+            {
+                b = 0b0001_0000;
+            }
+            else if (a == 3)
+            {
+                b = 0b0000_1000;
+            }
+            else if (a == 2)
+            {
+                b = 0b0000_0100;
+            }
+            else if (a == 1)
+            {
+                b = 0b0000_0010;
+            }
+            else if (a == 0)
+            {
+                b = 0b0000_0001;
+            }
+            if ((address & b) == 1) // wenn (address & b) = 1, dann ist address an der stelle a 1 
+            {
+                NOP();
+            }
         }
 
         public void ADDLW(int cmd) //wieso wird DC beeinflusst?
@@ -426,7 +597,9 @@ namespace PicSim
 
         public void RETFIE()    //Interrupt
         {
-
+            Globals.programcounter = Globals.stack.Pop();
+            Globals.bank1[11] |= 0b1000_0000;
+            Globals.bank0[11] |= 0b1000_0000;
         }
 
         public void RETLW(int cmd)
@@ -443,8 +616,13 @@ namespace PicSim
             System.Console.WriteLine($"Programcounter: {Globals.programcounter} ");
         }
 
-        public void SLEEP()
+        public void SLEEP() // noch nicht fertig programmiert!
         {
+            
+            Globals.bank0[3] |= 0b0001_0000; //Set TO to 1
+            Globals.bank1[3] |= 0b0001_0000; //Set TO to 1
+            Globals.bank0[3] &= 0b1111_0111; //Set PD to 0
+            Globals.bank1[3] &= 0b1111_0111; //Set PD to 0
 
         }
 

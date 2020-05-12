@@ -6,15 +6,12 @@ namespace PicSim
 	public class Buttons
 	{
 		Commands cmd = new Commands();
-		/*public void GoButton()
+		public void GoButton()
 		{
-			
-			for (int i = 0; i <= TransferPCLength();i++)
-			{
-				//cmd.Switchcase(i);
-			}
+			StepButton();
+			GoButton();
 		}
-		*/
+		
 		public void StepButton()
 		{
 			cmd.Switchcase(Globals.programcounter);
