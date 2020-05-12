@@ -12,19 +12,19 @@ namespace PicSim
         }
         public void Reset()
         {
-            Globals.bank0[2] = 00;
-            Globals.bank0[3] = 18;
-            Globals.bank0[10] = 00;
-            Globals.bank0[11] = 00;
+            Globals.bank0[2] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);     //PCL
+            Globals.bank0[3] = int.Parse("0018", System.Globalization.NumberStyles.HexNumber);     //Statusregister Bit0 = c, Bit1 = DC, Bit2 = z; bit3 = PD; bit4 = TO
+            Globals.bank0[10] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);    //PCLATH
+            Globals.bank0[11] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);    //INTCON
 
-            Globals.bank1[1] = int.Parse("00FF", System.Globalization.NumberStyles.HexNumber);
-            Globals.bank1[2] = 00;
-            Globals.bank1[3] = 18;
-            Globals.bank1[5] = int.Parse("FF", System.Globalization.NumberStyles.HexNumber);
-            Globals.bank1[6] = int.Parse("FF", System.Globalization.NumberStyles.HexNumber);
-            Globals.bank1[8] = 00;
-            Globals.bank1[10] = 00;
-            Globals.bank1[11] = 00;
+            Globals.bank1[1] = int.Parse("00FF", System.Globalization.NumberStyles.HexNumber);     //OPTION
+            Globals.bank1[2] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);     //PCL
+            Globals.bank1[3] = int.Parse("0018", System.Globalization.NumberStyles.HexNumber);     //Statusregister
+            Globals.bank1[5] = int.Parse("00FF", System.Globalization.NumberStyles.HexNumber);     //TRISA
+            Globals.bank1[6] = int.Parse("00FF", System.Globalization.NumberStyles.HexNumber);     //TRISB
+            Globals.bank1[8] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);     //nicht benannt
+            Globals.bank1[10] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);    //PCLATH
+            Globals.bank1[11] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);    //INTCON
             Globals.programcounter = 0;
 
         }

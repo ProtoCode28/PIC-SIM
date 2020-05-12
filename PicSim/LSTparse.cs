@@ -95,8 +95,10 @@ namespace PicSim
             but.StepButton();
             but.StepButton();
             but.StepButton();
-
-
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
 
 
         }
