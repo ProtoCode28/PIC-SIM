@@ -52,7 +52,7 @@ namespace PicSim
                 case int n when (n >= 0b11_1010_0000_0000 && n < 0b11_1010_1111_1111): XORLW(Globals.programmemory[pc]); break; //DONE
             }
         }
-        public int ExtractDestination(int cmd) //Destinationbit.
+        public int ExtractDestination(int cmd) //Destinationbit
         {
             return cmd & 0x80; //Erste Stelle der 8 Bit wird extrahiert  
         }
