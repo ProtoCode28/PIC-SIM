@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-
+using System.Security.Cryptography;
 
 namespace PicSim
 {
@@ -104,7 +104,19 @@ namespace PicSim
 
         public int ExtractBitB(int cmd)
         {
-            return cmd & 0b0000_1111;
+            return cmd & 0b0000_0111;
+        }
+        
+        public int SetBit(int cmd, int offset, bool value)
+        {
+            int result = cmd;
+            cmd &= ~(1 << offset);
+            cmd |= (1 << offset);
+            return result;
+        }
+        public int GetBitB(int cmd, int offset)
+        {
+            return (cmd >> offset) & 1;
         }
 
         public int GetData(int cmd)
@@ -375,168 +387,42 @@ namespace PicSim
         {
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 0 gesetzt werden
-            int b = 0;
-            if (a == 7)
-            {
-                b = 0b0111_1111;
-            }
-            else if (a == 6)
-            {
-                b = 0b1011_1111;
-            }
-            else if (a == 5)
-            {
-                b = 0b1101_1111;
-            }
-            else if (a == 4)
-            {
-                b = 0b1110_1111;
-            }
-            else if (a == 3)
-            {
-                b = 0b1111_0111;
-            }
-            else if (a == 2)
-            {
-                b = 0b1111_1011;
-            }
-            else if (a == 1)
-            {
-                b = 0b1111_1101;
-            }
-            else if (a == 0)
-            {
-                b = 0b1111_1110;
-            }
-            result &= b;
-            SetData(cmd, result);
+            int b = SetBit(result, a, false);
+            SetData(cmd, b);
         }
 
         public void BSF(int cmd)
         {
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 1 gesetzt werden 
-            int b = 0;
-            if (a == 7)
-            {
-                b = 0b1000_0000;
-            }
-            else if (a == 6)
-            {
-                b = 0b0100_0000;
-            }
-            else if (a == 5)
-            {
-                b = 0b0010_0000;
-            }
-            else if (a == 4)
-            {
-                b = 0b0001_0000;
-            }
-            else if (a == 3)
-            {
-                b = 0b0000_1000;
-            }
-            else if (a == 2)
-            {
-                b = 0b0000_0100;
-            }
-            else if (a == 1)
-            {
-                b = 0b0000_0010;
-            }
-            else if (a == 0)
-            {
-                b = 0b0000_0001;
-            }
-            result |= b;
-            SetData(cmd, result);
+            int b = SetBit(result, a, true);
+            SetData(cmd, b);
         }
 
         public void BTFSC(int cmd)
         {
-            int address = GetData(cmd);
+            int result = GetData(cmd);
             int a = ExtractBitB(cmd);
-            int b = 0;
-            if (a == 7)
-            {
-                b = 0b1000_0000;
-            }
-            else if (a == 6)
-            {
-                b = 0b0100_0000;
-            }
-            else if (a == 5)
-            {
-                b = 0b0010_0000;
-            }
-            else if (a == 4)
-            {
-                b = 0b0001_0000;
-            }
-            else if (a == 3)
-            {
-                b = 0b0000_1000;
-            }
-            else if (a == 2)
-            {
-                b = 0b0000_0100;
-            }
-            else if (a == 1)
-            {
-                b = 0b0000_0010;
-            }
-            else if (a == 0)
-            {
-                b = 0b0000_0001;
-            }
-            if ((address & b) == 0) // wenn (address & b) = 0, dann ist address an der stelle a 0 
+            int b = GetBitB(result, a);
+
+            if (b == 0) // wenn b = 0, dann ist address an der stelle a 0 
             {
                 NOP();
             }
+
         }
 
         public void BTFSS(int cmd)
         {
-            int address = GetData(cmd);
+            int result = GetData(cmd);
             int a = ExtractBitB(cmd);
-            int b = 0;
-            if (a == 7)
-            {
-                b = 0b1000_0000;
-            }
-            else if (a == 6)
-            {
-                b = 0b0100_0000;
-            }
-            else if (a == 5)
-            {
-                b = 0b0010_0000;
-            }
-            else if (a == 4)
-            {
-                b = 0b0001_0000;
-            }
-            else if (a == 3)
-            {
-                b = 0b0000_1000;
-            }
-            else if (a == 2)
-            {
-                b = 0b0000_0100;
-            }
-            else if (a == 1)
-            {
-                b = 0b0000_0010;
-            }
-            else if (a == 0)
-            {
-                b = 0b0000_0001;
-            }
-            if ((address & b) == 1) // wenn (address & b) = 1, dann ist address an der stelle a 1 
+            int b = GetBitB(result, a);
+
+            if (b == 1) // wenn b = 1, dann ist address an der stelle a 0 
             {
                 NOP();
             }
+
         }
 
         public void ADDLW(int cmd) //wieso wird DC beeinflusst?
