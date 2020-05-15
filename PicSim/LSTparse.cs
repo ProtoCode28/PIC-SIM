@@ -43,7 +43,7 @@ namespace PicSim
             file.Close();
         }
 
-        public int Umwandelnhex(string res)
+        public int Umwandelnhex(string res) //gleiche funktion wie Umwandelnprogramcounter aber andere Regex
         {
             Regex rx = new Regex(@"\b (\d|\w){4}\b");
             Match match = rx.Match(res);
@@ -54,12 +54,12 @@ namespace PicSim
 
 
 
-        public int Umwandelnprogramcounter(string res) //Programmcounter in Spalte 1: ... 8 9 A B C D E F 10 11 12 ... aber A=10 usw?
+        public int Umwandelnprogramcounter(string res) //gleiche funktion wie Umwandelnhex aber andere Regex
         {
             Regex rx = new Regex(@"\b(\d|\w){4} \b");
             Match match = rx.Match(res);
             string var = match.Value;
-            int result = Convert.ToInt32(var);
+            int result = int.Parse(var, System.Globalization.NumberStyles.HexNumber);
             return result;
         }
 
@@ -79,7 +79,7 @@ namespace PicSim
 
         public static void Main(string[] args)
         {
-            LSTParse T1 = new LSTParse(@"D:\TPicSim3.LST");
+            LSTParse T1 = new LSTParse(@"C:\vm\TPicSim3.LST");
             T1.Einlesen();
             T1.Ausgeben();
             Register R1 = new Register();
