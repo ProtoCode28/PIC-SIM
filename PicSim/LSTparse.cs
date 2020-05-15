@@ -18,7 +18,7 @@ namespace PicSim
             this.path = path;
             Globals.programmemory = new int[1024];
 
-            rx = new Regex(@"\b\d{4} (\d|\w){4}\b");
+            rx = new Regex(@"\b\d(\d|\w){3} (\d|\w){4}\b");
         }
 
         public void Einlesen()

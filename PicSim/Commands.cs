@@ -313,7 +313,8 @@ namespace PicSim
 
         public void DECF(int cmd)
         {
-            int result = GetData(cmd) - 1;
+            int data = GetData(cmd);
+            int result = data - 1;
             WoF(cmd, result);
             ChangeZ(result);
             System.Console.WriteLine($"DECF-> result: {result} w: {Globals.w}");
