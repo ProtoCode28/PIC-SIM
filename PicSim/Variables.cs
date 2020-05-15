@@ -10,6 +10,8 @@ namespace PicSim
         public static int[] bank0;
         public static int[] bank1;
         public static Stack<int> stack;
+        public static int prescaler;
+        public static int WDT;
     }
 
 }

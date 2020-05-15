@@ -102,16 +102,58 @@ namespace PicSim
             return Globals.bank0[3] & 0b1000_0000;
         }
 
+        public int ExtractT0IF()
+        {
+            return Globals.bank0[11] & 0b0000_0100;
+        }
+
+        public int ExtractPrescaler()
+        {
+            return Globals.bank1[1] & 0b0000_0111;
+        }
+
+        public void CalcPrescalerWDT()
+        {
+            int ps = ExtractPrescaler();
+            switch(ps)
+            {
+                case int n when (n == 0): Globals.prescaler = 1; break;
+                case int n when (n == 1): Globals.prescaler = 2; break;
+                case int n when (n == 2): Globals.prescaler = 4; break;
+                case int n when (n == 3): Globals.prescaler = 8; break;
+                case int n when (n == 4): Globals.prescaler = 16; break;
+                case int n when (n == 5): Globals.prescaler = 32; break;
+                case int n when (n == 6): Globals.prescaler = 64; break;
+                case int n when (n == 7): Globals.prescaler = 128; break;
+            }    
+        }
+
+        public void CalcPrescalerTimer()
+        {
+            int ps = ExtractPrescaler();
+            switch (ps)
+            {
+                case int n when (n == 0): Globals.prescaler = 2; break;
+                case int n when (n == 1): Globals.prescaler = 4; break;
+                case int n when (n == 2): Globals.prescaler = 8; break;
+                case int n when (n == 3): Globals.prescaler = 16; break;
+                case int n when (n == 4): Globals.prescaler = 32; break;
+                case int n when (n == 5): Globals.prescaler = 64; break;
+                case int n when (n == 6): Globals.prescaler = 128; break;
+                case int n when (n == 7): Globals.prescaler = 256; break;
+            }
+        }
+
         public int ExtractBitB(int cmd)
         {
             return cmd & 0b0000_0111;
         }
         
-        public int SetBit(int cmd, int offset, bool value)
+        public int SetBitB(int cmd, int offset)
         {
             int result = cmd;
-            cmd &= ~(1 << offset);
-            cmd |= (1 << offset);
+            result &= ~(1 << offset);
+            result |= (1 << offset);
             return result;
         }
         public int GetBitB(int cmd, int offset)
@@ -233,7 +275,7 @@ namespace PicSim
             ChangeZ(result);
             ChangeC(result);
             WoF(cmd, result & 255); //&255 da nur die 8 bit gültig sind und der übertrag im ChangeC steht
-            System.Console.WriteLine($"ADDWF-> address: {GetData(cmd)} result: {result} w: {Globals.w}");
+            System.Console.WriteLine($"ADDWF-> result: {result} w: {Globals.w}");
         }
 
         public void ANDWF(int cmd)
@@ -250,6 +292,7 @@ namespace PicSim
             int result = 0;
             SetData(cmd, result);
             ChangeZ(result);
+            System.Console.WriteLine($"CLRF: Success");
         }
 
         public void CLRW()
@@ -257,6 +300,7 @@ namespace PicSim
             int result = 0;
             Globals.w = result;
             ChangeZ(result);
+            System.Console.WriteLine($"CLRF-> w: {Globals.w}");
         }
 
         public void COMF(int cmd) 
@@ -272,7 +316,7 @@ namespace PicSim
             int result = GetData(cmd) - 1;
             WoF(cmd, result);
             ChangeZ(result);
-            System.Console.WriteLine($"DECF-> result: {result}");
+            System.Console.WriteLine($"DECF-> result: {result} w: {Globals.w}");
         }
 
         public void DECFSZ(int cmd)
@@ -282,6 +326,7 @@ namespace PicSim
             if (result == 0)
             {
                 NOP();
+                System.Console.WriteLine($"NOP von DECFSZ");
             }
             else
             {
@@ -304,6 +349,7 @@ namespace PicSim
             if (result == 0)
             {
                 NOP();
+                System.Console.WriteLine($"NOP von INCFSZ");
             }
             else
             {
@@ -328,7 +374,7 @@ namespace PicSim
 
         public void MOVWF(int cmd)
         {
-            int result = GetData(cmd);
+            int result = Globals.w;
             WoF(cmd, result);
             System.Console.WriteLine($"MOVWF result: {result} Programcounter: {Globals.programcounter}");
         }
@@ -344,6 +390,7 @@ namespace PicSim
             result <<= 1;
             WoF(cmd, result);
             ChangeC(result);
+            System.Console.WriteLine($"RLF-> result: {result} w: {Globals.w}");
         }
 
         public void RRF(int cmd)
@@ -381,22 +428,25 @@ namespace PicSim
             int result = Globals.w ^ GetData(cmd);
             WoF(cmd, result);
             ChangeZ(result);
+            System.Console.WriteLine($"XORWF-> w: {result}");
         }
 
         public void BCF(int cmd)
         {
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 0 gesetzt werden
-            int b = SetBit(result, a, false);
+            int b = SetBitB(result, a);
             SetData(cmd, b);
+            System.Console.WriteLine($"BCF: Succes");
         }
 
         public void BSF(int cmd)
         {
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 1 gesetzt werden 
-            int b = SetBit(result, a, true);
+            int b = SetBitB(result, a);
             SetData(cmd, b);
+            System.Console.WriteLine($"BSF: Succes");
         }
 
         public void BTFSC(int cmd)
@@ -408,6 +458,7 @@ namespace PicSim
             if (b == 0) // wenn b = 0, dann ist address an der stelle a 0 
             {
                 NOP();
+                System.Console.WriteLine($"NOP von BTFSC");
             }
 
         }
@@ -421,6 +472,7 @@ namespace PicSim
             if (b == 1) // wenn b = 1, dann ist address an der stelle a 0 
             {
                 NOP();
+                System.Console.WriteLine($"NOP von BTFSS");
             }
 
         }
@@ -453,9 +505,16 @@ namespace PicSim
             System.Console.WriteLine($"Programcounter: {Globals.programcounter} adress {address} "); 
         }
 
-        public void CLRWDT()    //watchdogtimer
-        {
+        public void CLRWDT()    //watchdogtimer //TMR0 = Globals.Bank0[1] = 8 bit und T0IF-Bit = Überlauf = Globals.bank0/1[11] = 0000_0100 
+        {                       //Prescaler für WDT eigene Variable?
 
+            Globals.WDT = 0x00; //18ms
+            Globals.prescaler = 1; //kleinster wert ist eins, sonst teilt man durch 0 und das wird unendlich
+            Globals.bank0[3] |= 0b0001_0000; //Set TO to 1
+            Globals.bank1[3] |= 0b0001_0000; //Set TO to 1
+            Globals.bank0[3] |= 0b0000_1000; //Set PD to 1
+            Globals.bank1[3] |= 0b0000_1000; //Set PD to 1
+            System.Console.WriteLine($"CLRWDT-> WTD: {Globals.WDT} PS: {Globals.prescaler}");
         }
 
         public void GOTO(int cmd)
@@ -486,6 +545,7 @@ namespace PicSim
             Globals.programcounter = Globals.stack.Pop();
             Globals.bank1[11] |= 0b1000_0000;
             Globals.bank0[11] |= 0b1000_0000;
+            System.Console.WriteLine($"RETFIE: Succes");
         }
 
         public void RETLW(int cmd)
@@ -509,7 +569,9 @@ namespace PicSim
             Globals.bank1[3] |= 0b0001_0000; //Set TO to 1
             Globals.bank0[3] &= 0b1111_0111; //Set PD to 0
             Globals.bank1[3] &= 0b1111_0111; //Set PD to 0
-
+            Globals.WDT = 0x00; //18ms
+            Globals.prescaler = 1; //kleinster wert ist eins, sonst teilt man durch 0 und das wird unendlich
+            System.Console.WriteLine($"Sleep");
         }
 
         public void SUBLW(int cmd)

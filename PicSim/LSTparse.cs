@@ -54,9 +54,9 @@ namespace PicSim
 
 
 
-        public int Umwandelnprogramcounter(string res)
+        public int Umwandelnprogramcounter(string res) //Programmcounter in Spalte 1: ... 8 9 A B C D E F 10 11 12 ... aber A=10 usw?
         {
-            Regex rx = new Regex(@"\b\d{4} \b");
+            Regex rx = new Regex(@"\b(\d|\w){4} \b");
             Match match = rx.Match(res);
             string var = match.Value;
             int result = Convert.ToInt32(var);
@@ -79,7 +79,7 @@ namespace PicSim
 
         public static void Main(string[] args)
         {
-            LSTParse T1 = new LSTParse(@"D:\TPicSim2.LST");
+            LSTParse T1 = new LSTParse(@"D:\TPicSim3.LST");
             T1.Einlesen();
             T1.Ausgeben();
             Register R1 = new Register();
@@ -99,7 +99,17 @@ namespace PicSim
             but.StepButton();
             but.StepButton();
             but.StepButton();
-
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
 
         }
     }

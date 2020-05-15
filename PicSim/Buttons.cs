@@ -20,5 +20,4 @@ namespace PicSim
 	}
 }
 
-//sichtbarkeit der variabeln in c# -> programcounter
-//klassen ineinander einbinden -> methoden anderer klassen aufrufen
+
