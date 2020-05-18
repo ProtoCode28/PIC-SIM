@@ -79,7 +79,7 @@ namespace PicSim
 
         public static void Main(string[] args)
         {
-            LSTParse T1 = new LSTParse(@"C:\vm\TPicSim3.LST");
+            LSTParse T1 = new LSTParse(@"C:\vm\TPicSim6.LST");
             T1.Einlesen();
             T1.Ausgeben();
             Register R1 = new Register();
@@ -89,6 +89,7 @@ namespace PicSim
             //cmd.Switchcase(Globals.programcounter); wird von buttons aufgerufen
 
             Buttons but = new Buttons();
+          /*  but.StepButton();
             but.StepButton();
             but.StepButton();
             but.StepButton();
@@ -110,6 +111,42 @@ namespace PicSim
             but.StepButton();
             but.StepButton();
             but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton();
+            but.StepButton(); */
+
+            but.GoButton();
 
         }
     }

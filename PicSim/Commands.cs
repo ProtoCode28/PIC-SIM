@@ -152,26 +152,47 @@ namespace PicSim
         public int SetBitB(int cmd, int offset)
         {
             int result = cmd;
-            result &= ~(1 << offset);
             result |= (1 << offset);
+            return result;
+        }
+        public int ClearBitB(int cmd, int offset)
+        {
+            int result = cmd;
+            result &= ~(1 << offset);
             return result;
         }
         public int GetBitB(int cmd, int offset)
         {
-            return (cmd >> offset) & 1;
+            int result = (cmd >> offset) & 0b0000_0001;
+            return result;
         }
 
         public int GetData(int cmd)
         {
             int address = ExtractAdress(cmd);
             int result;
-            if(ExtractRP0() == 32)
+            if (address == 0)
             {
-                result = Globals.bank1[address];
+                address = GetData(4);
+                if ((address & 0x80) == 0)
+                {
+                    result = Globals.bank0[address & 0x7f];
+                }
+                else
+                {
+                    result = Globals.bank1[address & 0x7f];
+                }
             }
             else
             {
-                result = Globals.bank0[address];
+                if (ExtractRP0() == 32)
+                {
+                    result = Globals.bank1[address];
+                }
+                else
+                {
+                    result = Globals.bank0[address];
+                }
             }
             return result;
         }
@@ -179,14 +200,33 @@ namespace PicSim
         public void SetData(int cmd, int result)
         {
             int address = ExtractAdress(cmd);
-            
-            if (ExtractRP0() == 32)
+
+            if (address == 0)
             {
-               Globals.bank1[address] = result;
+                address = GetData(4);
+                if ((address & 0x80) == 0)
+                {
+                    Globals.bank0[address & 0x7f] = result;
+                    System.Console.WriteLine($"SetData result: {Globals.bank0[address & 0x7f]}");
+                }
+                else
+                {
+                    Globals.bank1[address & 0x7f] = result;
+                    System.Console.WriteLine($"SetData result: {Globals.bank1[address & 0x7f]}");
+                }
             }
             else
             {
-                Globals.bank0[address] = result;
+                if (ExtractRP0() == 32)
+                {
+                    Globals.bank1[address] = result;
+                    System.Console.WriteLine($"SetData result: {Globals.bank1[address]}");
+                }
+                else
+                {
+                    Globals.bank0[address] = result;
+                    System.Console.WriteLine($"SetData result: {Globals.bank0[address]}");
+                }
             }
         }
 
@@ -300,7 +340,7 @@ namespace PicSim
             int result = 0;
             Globals.w = result;
             ChangeZ(result);
-            System.Console.WriteLine($"CLRF-> w: {Globals.w}");
+            System.Console.WriteLine($"CLRW-> w: {Globals.w}");
         }
 
         public void COMF(int cmd) 
@@ -327,6 +367,7 @@ namespace PicSim
             if (result == 0)
             {
                 NOP();
+                Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
                 System.Console.WriteLine($"NOP von DECFSZ");
             }
             else
@@ -347,9 +388,10 @@ namespace PicSim
         {
             int result = GetData(cmd) + 1;
             WoF(cmd, result);
-            if (result == 0)
+            if ((result&0b1111_1111) == 0) //muss maskiert werden weil 256 = 100h und somit != 0 --> incfsz würde sonst nie enden
             {
                 NOP();
+                Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
                 System.Console.WriteLine($"NOP von INCFSZ");
             }
             else
@@ -364,7 +406,7 @@ namespace PicSim
             WoF(cmd, result);
             System.Console.WriteLine($"IORWF-> w: {Globals.w}");
             ChangeZ(result);
-        }   //Z-Flag invertiert?
+        }   //Z-Flag invertiert? siehe neues datasheet
 
         public void MOVF(int cmd)
         {
@@ -432,16 +474,16 @@ namespace PicSim
             System.Console.WriteLine($"XORWF-> w: {result}");
         }
 
-        public void BCF(int cmd)
+        public void BCF(int cmd) 
         {
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 0 gesetzt werden
-            int b = SetBitB(result, a);
+            int b = ClearBitB(result, a);
             SetData(cmd, b);
             System.Console.WriteLine($"BCF: Succes");
         }
 
-        public void BSF(int cmd)
+        public void BSF(int cmd) 
         {
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 1 gesetzt werden 
@@ -459,7 +501,12 @@ namespace PicSim
             if (b == 0) // wenn b = 0, dann ist address an der stelle a 0 
             {
                 NOP();
+                Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
                 System.Console.WriteLine($"NOP von BTFSC");
+            }
+            else
+            {
+                System.Console.WriteLine($"BTFSC-> result: {result}");
             }
 
         }
@@ -473,7 +520,12 @@ namespace PicSim
             if (b == 1) // wenn b = 1, dann ist address an der stelle a 0 
             {
                 NOP();
+                Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
                 System.Console.WriteLine($"NOP von BTFSS");
+            }
+            else
+            {
+                System.Console.WriteLine($"BTFSS-> result: {result}");
             }
 
         }
@@ -541,7 +593,7 @@ namespace PicSim
             System.Console.WriteLine($"MOVLW w: {Globals.w} literal: {literal}");
         }
 
-        public void RETFIE()    //Interrupt
+        public void RETFIE()    
         {
             Globals.programcounter = Globals.stack.Pop();
             Globals.bank1[11] |= 0b1000_0000;

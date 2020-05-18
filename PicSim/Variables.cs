@@ -10,8 +10,9 @@ namespace PicSim
         public static int[] bank0;
         public static int[] bank1;
         public static Stack<int> stack;
-        public static int prescaler;
-        public static int WDT;
+        public static int prescaler; //auch einfach eine variable, die je nach dem ob der WDT oder der TMR0 sie verwendet, angepasst wird
+        public static float WDT; //variable die hoch oder runter gezählt wird, muss aber ein float sein da abhängig von quarz
+        
     }
 
 }
