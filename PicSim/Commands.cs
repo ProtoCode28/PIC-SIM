@@ -430,18 +430,18 @@ namespace PicSim
         public void RLF(int cmd)
         {
             int result = GetData(cmd);
-            result <<= 1;
+            result <<= 9;
+            result += ExtractCFlag();
             WoF(cmd, result);
-            ChangeC(result);
             System.Console.WriteLine($"RLF-> result: {result} w: {Globals.w}");
         }
 
         public void RRF(int cmd)
         {
             int result = GetData(cmd);
+            result &= ExtractCFlag();
             result >>= 1;
             WoF(cmd, result);
-            ChangeC(result);
             System.Console.WriteLine($"RRF-> result: {result} w: {Globals.w}");
         }
 
