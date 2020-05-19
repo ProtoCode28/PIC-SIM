@@ -79,7 +79,7 @@ namespace PicSim
 
         public static void Main(string[] args)
         {
-            LSTParse T1 = new LSTParse(@"D:\TPicSim6.LST"); //Pfad Marcel @"D:\TPicSim6.LST" //Pfad Max @"C:\vm\TPicSim6.LST"
+            LSTParse T1 = new LSTParse(@"C:\vm\TPicSim6.LST"); //Pfad Marcel @"D:\TPicSim6.LST" //Pfad Max @"C:\vm\TPicSim6.LST"
             T1.Einlesen();
             T1.Ausgeben();
             Register R1 = new Register();

@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
@@ -146,7 +147,7 @@ namespace PicSim
 
         public int ExtractBitB(int cmd)
         {
-            return cmd & 0b0000_0111;
+            return (cmd & 0b11_1000_0000) >> 7 ;
         }
         
         public int SetBitB(int cmd, int offset)
@@ -246,7 +247,7 @@ namespace PicSim
 
         public void ChangeC(int result)
         {
-            if(result > 255 )
+            if(result > 255)
             {
                 Globals.bank0[3] |= 0b0000_0001;
                 Globals.bank1[3] |= 1;              // geht weil zahl <9
@@ -430,8 +431,10 @@ namespace PicSim
         public void RLF(int cmd)
         {
             int result = GetData(cmd);
-            result <<= 9;
+            result <<= 1;
             result += ExtractCFlag();
+            ChangeC(result);
+            result &= 0b1111_1111;
             WoF(cmd, result);
             System.Console.WriteLine($"RLF-> result: {result} w: {Globals.w}");
         }
@@ -439,8 +442,11 @@ namespace PicSim
         public void RRF(int cmd)
         {
             int result = GetData(cmd);
-            result &= ExtractCFlag();
+            result += ExtractCFlag() << 9; // damit changeC funktioniert muss unser Carrybit an die 9 Stelle, also an die overflow stelle
+            result += ((result & 0b1) << 10);
             result >>= 1;
+            ChangeC(result);
+            result &= 0b1111_1111;
             WoF(cmd, result);
             System.Console.WriteLine($"RRF-> result: {result} w: {Globals.w}");
         }
@@ -480,7 +486,7 @@ namespace PicSim
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 0 gesetzt werden
             int b = ClearBitB(result, a);
             SetData(cmd, b);
-            System.Console.WriteLine($"BCF: Succes");
+            System.Console.WriteLine($"BCF: Success, index: {a}");
         }
 
         public void BSF(int cmd) 
@@ -489,7 +495,7 @@ namespace PicSim
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 1 gesetzt werden 
             int b = SetBitB(result, a);
             SetData(cmd, b);
-            System.Console.WriteLine($"BSF: Succes");
+            System.Console.WriteLine($"BSF: Success, index: {a}");
         }
 
         public void BTFSC(int cmd)
