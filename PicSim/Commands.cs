@@ -14,6 +14,7 @@ namespace PicSim
         public void Switchcase(int pc) //pc ist programcounter
         {
             Globals.programcounter++;
+            CalcTMR0();
             switch (Globals.programmemory[pc])
             {
                 case int n when (n >= 0b00_0111_0000_0000 && n < 0b00_0111_1111_1111): ADDWF(Globals.programmemory[pc]); break; //DONE
@@ -142,6 +143,15 @@ namespace PicSim
                 case int n when (n == 5): Globals.prescaler = 64; break;
                 case int n when (n == 6): Globals.prescaler = 128; break;
                 case int n when (n == 7): Globals.prescaler = 256; break;
+            }
+        }
+        
+        public void CalcTMR0()
+        {
+            CalcPrescalerTimer();
+            if (Globals.bank0[1] % Globals.prescaler == 0)
+            {
+                Globals.bank0[1]++;
             }
         }
 
