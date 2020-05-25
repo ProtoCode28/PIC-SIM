@@ -79,11 +79,11 @@ namespace PicSim
 
         public static void Main(string[] args)
         {
-            LSTParse T1 = new LSTParse(@"C:\vm\TPicSim7.LST"); //Pfad Marcel @"D:\TPicSim6.LST" //Pfad Max @"C:\vm\TPicSim6.LST"
+            LSTParse T1 = new LSTParse(@"D:\TPicSim7.LST"); //Pfad Marcel @"D:\TPicSim6.LST" //Pfad Max @"C:\vm\TPicSim6.LST"
             T1.Einlesen();
             T1.Ausgeben();
             Register R1 = new Register();
-            R1.Reset();
+            R1.PowerReset();
             //R1.Ausgeben();
             //Commands cmd = new Commands();
             //cmd.Switchcase(Globals.programcounter); wird von buttons aufgerufen

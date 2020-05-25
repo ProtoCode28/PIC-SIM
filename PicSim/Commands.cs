@@ -7,6 +7,7 @@ namespace PicSim
 {
     class Commands
     {
+        private static int lastPortA = -1;
         public Commands()
         {
             Globals.stack = new Stack<int>();
@@ -14,7 +15,19 @@ namespace PicSim
         public void Switchcase(int pc) //pc ist programcounter
         {
             Globals.programcounter++;
-            CalcTMR0();
+            if ((Globals.bank1[1] & 0b0010_0000) == 0)
+            {
+                CalcTMR0();
+            }
+            else // hier muss geprüft werden, ob die richtige flanke an RA4 anliegt (vergleich alterzustand/neuerzustand)
+            {
+                int bit4 = lastPortA & 0b0001_0000;
+                if (lastPortA != -1 && (bit4 != (Globals.bank0[5] & 0b0001_0000)) && bit4 == 1)
+                {
+                    CalcTMR0();
+                }
+                lastPortA = Globals.bank0[5];
+            }
             switch (Globals.programmemory[pc])
             {
                 case int n when (n >= 0b00_0111_0000_0000 && n < 0b00_0111_1111_1111): ADDWF(Globals.programmemory[pc]); break; //DONE
@@ -114,46 +127,80 @@ namespace PicSim
             return Globals.bank1[1] & 0b0000_0111;
         }
 
-        public void CalcPrescalerWDT()
-        {
-            int ps = ExtractPrescaler();
-            switch(ps)
-            {
-                case int n when (n == 0): Globals.prescaler = 1; break;
-                case int n when (n == 1): Globals.prescaler = 2; break;
-                case int n when (n == 2): Globals.prescaler = 4; break;
-                case int n when (n == 3): Globals.prescaler = 8; break;
-                case int n when (n == 4): Globals.prescaler = 16; break;
-                case int n when (n == 5): Globals.prescaler = 32; break;
-                case int n when (n == 6): Globals.prescaler = 64; break;
-                case int n when (n == 7): Globals.prescaler = 128; break;
-            }    
-        }
 
-        public void CalcPrescalerTimer()
+        public void CalcPrescaler()
         {
             int ps = ExtractPrescaler();
-            switch (ps)
+            if ((Globals.bank1[1] & 0b0000_1000) == 0)
             {
-                case int n when (n == 0): Globals.prescaler = 2; break;
-                case int n when (n == 1): Globals.prescaler = 4; break;
-                case int n when (n == 2): Globals.prescaler = 8; break;
-                case int n when (n == 3): Globals.prescaler = 16; break;
-                case int n when (n == 4): Globals.prescaler = 32; break;
-                case int n when (n == 5): Globals.prescaler = 64; break;
-                case int n when (n == 6): Globals.prescaler = 128; break;
-                case int n when (n == 7): Globals.prescaler = 256; break;
+                int scaler = 2 ^ (ps + 1);
+                Globals.prescaler = scaler;
+            }
+            else
+            {
+                Globals.prescaler = 2 ^ ps;
             }
         }
         
         public void CalcTMR0()
         {
-            CalcPrescalerTimer();
-            if (Globals.bank0[1] % Globals.prescaler == 0)
+            //ist prescaler überhaupt für timer? ist timer für flanke oder befehl? 
+            //checkbox in gui für WDT überprüfung ob WDT aktiv, wenn ja dann ausführen, wenn nein dann halt nicht
+            //immer wenn optionregister beschrieben wird calcprescalertimer
+            //RA4 
+            if ((Globals.bank1[1] & 0b0000_1000) == 0)
             {
-                Globals.bank0[1]++;
+                Globals.prescaler--;
+                if (Globals.prescaler == 0)
+                {
+                    Globals.bank0[1]++;
+                    CalcPrescaler();
+                    if (Globals.bank0[1] > 255)
+                    {
+                        Globals.bank0[11] |= 0b0000_0100;
+                        Globals.bank1[11] |= 0b0000_0100;
+                        Globals.bank0[1] = 0;
+                    }
+                }
+            }
+            else
+            {
+                Globals.bank0[1]++; 
+                if(Globals.bank0[1] > 255)
+                {
+                    Globals.bank0[11] |= 0b0000_0100;
+                    Globals.bank1[11] |= 0b0000_0100;
+                    Globals.bank0[1] = 0;
+                }
             }
         }
+
+        public void CalcWdt()
+        {
+            //laufzeitberechnung in label ausgeben und berechnen in calcwdt  
+            //für jeden befehl müssen wir die zyklen berechnen und in befehlsdauer eintragen checkboxfürWDT = 1 und quartzfrequenz einstellen
+            if (Globals.bank0[1] == 1)//da steht akutell stuss drin // wenn optionregister beschirben wird (movwf 1) dann calcprescaler
+            {
+                Globals.WDT += Globals.Befehlsdauer;
+                if (Globals.WDT == 18000)
+                {
+                    if ((Globals.bank1[1] & 0b0000_1000) != 0)      //bei maskierung auf richtigen wert prüfen = bzw != 0
+                    {
+                        Globals.prescaler--;
+                        Globals.WDT = 0;
+                        if(Globals.prescaler == 0)
+                        {
+                            Register.Reset();
+                        }
+                    }
+                    else
+                    {
+                        Register.Reset();
+                    }
+                }
+            }
+        }
+
 
         public int ExtractBitB(int cmd)
         {
@@ -379,6 +426,8 @@ namespace PicSim
             {
                 NOP();
                 Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
+                CalcTMR0();
+                CalcWdt();
                 System.Console.WriteLine($"NOP von DECFSZ");
             }
             else
@@ -403,6 +452,8 @@ namespace PicSim
             {
                 NOP();
                 Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
+                CalcTMR0();
+                CalcWdt();
                 System.Console.WriteLine($"NOP von INCFSZ");
             }
             else
@@ -518,6 +569,8 @@ namespace PicSim
             {
                 NOP();
                 Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
+                CalcTMR0();
+                CalcWdt();
                 System.Console.WriteLine($"NOP von BTFSC");
             }
             else
@@ -537,6 +590,8 @@ namespace PicSim
             {
                 NOP();
                 Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
+                CalcTMR0();
+                CalcWdt();
                 System.Console.WriteLine($"NOP von BTFSS");
             }
             else
