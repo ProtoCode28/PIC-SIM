@@ -1,3 +1,5 @@
 .vs
 PicSim/bin
 PicSim/obj
+/PicSimGui/bin
+/PicSimGui/obj
