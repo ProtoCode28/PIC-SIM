@@ -127,7 +127,6 @@ namespace PicSim
             return Globals.bank1[1] & 0b0000_0111;
         }
 
-
         public void CalcPrescaler()
         {
             int ps = ExtractPrescaler();
@@ -144,10 +143,7 @@ namespace PicSim
         
         public void CalcTMR0()
         {
-            //ist prescaler überhaupt für timer? ist timer für flanke oder befehl? 
-            //checkbox in gui für WDT überprüfung ob WDT aktiv, wenn ja dann ausführen, wenn nein dann halt nicht
-            //immer wenn optionregister beschrieben wird calcprescalertimer
-            //RA4 
+            //immer wenn optionregister beschrieben wird calcprescalertimer ---> abfrage ob optionregister das ziel ist -> falls ja
             if ((Globals.bank1[1] & 0b0000_1000) == 0)
             {
                 Globals.prescaler--;
@@ -179,7 +175,7 @@ namespace PicSim
         {
             //laufzeitberechnung in label ausgeben und berechnen in calcwdt  
             //für jeden befehl müssen wir die zyklen berechnen und in befehlsdauer eintragen checkboxfürWDT = 1 und quartzfrequenz einstellen
-            if (Globals.bank0[1] == 1)//da steht akutell stuss drin // wenn optionregister beschirben wird (movwf 1) dann calcprescaler
+            if (Globals.bank0[1] == 1)//da steht aktuell stuss drin // wenn optionregister beschrieben wird (movwf 1) dann calcprescaler
             {
                 Globals.WDT += Globals.Befehlsdauer;
                 if (Globals.WDT == 18000)
