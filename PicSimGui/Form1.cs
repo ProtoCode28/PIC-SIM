@@ -43,6 +43,7 @@ namespace PicSim
               
                     LSTParse T1 = new LSTParse(filePath);
                     T1.Einlesen();
+                    T1.Ausgeben();
                     
                     int pc = Globals.programcounter;
                     for(int i = 0; i <= pc; i++ )
@@ -51,6 +52,7 @@ namespace PicSim
                         string counter = i.ToString("X");
                         Ausgabe.Items.Add(counter).SubItems.Add(pm);
                     }
+                    Globals.programcounter = 0; //nötiger reset sonst wird programm beim letzten befehl gestartet
                 }
             }
         }
@@ -69,7 +71,7 @@ namespace PicSim
                 else
                 {
                     // Perform a time consuming operation and report progress.
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(Globals.speed);
                     but.StepButton();
                 }
             }
@@ -104,6 +106,36 @@ namespace PicSim
             }
         }
 
-     
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+            {
+                Globals.Quartz = 32;
+            }
+            if (comboBox1.SelectedIndex == 1)
+            {
+                Globals.Quartz = 64;
+            }
+            if (comboBox1.SelectedIndex == 2)
+            {
+                Globals.Quartz = 128;
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex == 0)
+            {
+                Globals.speed = 5000;
+            }
+            if (comboBox2.SelectedIndex == 1)
+            {
+                Globals.speed = 500;
+            }
+            if (comboBox2.SelectedIndex == 2)
+            {
+                Globals.speed = 50;
+            }
+        }
     }
 }

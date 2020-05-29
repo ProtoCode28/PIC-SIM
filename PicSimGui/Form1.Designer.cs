@@ -58,6 +58,10 @@
             this.Reset = new System.Windows.Forms.Button();
             this.Stop = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Quartz = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.Ausgabegeschwindigkeit = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.Status.SuspendLayout();
             this.OPTION_REG.SuspendLayout();
@@ -71,7 +75,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1026, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1026, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -81,7 +85,7 @@
             this.ladenToolStripMenuItem,
             this.hilfeToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
             this.dateiToolStripMenuItem.Text = "Datei";
             // 
             // ladenToolStripMenuItem
@@ -350,11 +354,59 @@
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "32",
+            "64",
+            "128"});
+            this.comboBox1.Location = new System.Drawing.Point(681, 325);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 10;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // Quartz
+            // 
+            this.Quartz.AutoSize = true;
+            this.Quartz.Location = new System.Drawing.Point(715, 297);
+            this.Quartz.Name = "Quartz";
+            this.Quartz.Size = new System.Drawing.Size(51, 17);
+            this.Quartz.TabIndex = 11;
+            this.Quartz.Text = "Quartz";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "langsam",
+            "normal",
+            "schnell"});
+            this.comboBox2.Location = new System.Drawing.Point(504, 325);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.TabIndex = 12;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // Ausgabegeschwindigkeit
+            // 
+            this.Ausgabegeschwindigkeit.AutoSize = true;
+            this.Ausgabegeschwindigkeit.Location = new System.Drawing.Point(501, 297);
+            this.Ausgabegeschwindigkeit.Name = "Ausgabegeschwindigkeit";
+            this.Ausgabegeschwindigkeit.Size = new System.Drawing.Size(163, 17);
+            this.Ausgabegeschwindigkeit.TabIndex = 13;
+            this.Ausgabegeschwindigkeit.Text = "Ausgabegeschwindigkeit";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 456);
+            this.Controls.Add(this.Ausgabegeschwindigkeit);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.Quartz);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.Stop);
             this.Controls.Add(this.Reset);
             this.Controls.Add(this.OPTION_REG);
@@ -410,6 +462,10 @@
         private System.Windows.Forms.Button Reset;
         private System.Windows.Forms.Button Stop;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label Quartz;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label Ausgabegeschwindigkeit;
     }
 }
 
