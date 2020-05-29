@@ -55,10 +55,32 @@ namespace PicSim
             }
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            while (true)
+            {
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    // Perform a time consuming operation and report progress.
+                    System.Threading.Thread.Sleep(500);
+                    but.StepButton();
+                }
+            }
+        }
         private void Go_Click(object sender, EventArgs e)
         {
-            but.GoButton();
-            //Buttons.GoButton();
+            if (backgroundWorker1.IsBusy != true)
+            {
+                // Start the asynchronous operation.
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void Step_Click(object sender, EventArgs e)
@@ -67,9 +89,21 @@ namespace PicSim
             but.StepButton();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void Reset_Click(object sender, EventArgs e)
         {
-
+            Register R1 = new Register();
+            R1.PowerReset();
         }
+
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker1.WorkerSupportsCancellation == true)
+            {
+                // Cancel the asynchronous operation.
+                backgroundWorker1.CancelAsync();
+            }
+        }
+
+     
     }
 }

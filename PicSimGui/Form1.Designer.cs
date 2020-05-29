@@ -37,21 +37,41 @@
             this.Program = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Go = new System.Windows.Forms.Button();
             this.Step = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Status = new System.Windows.Forms.GroupBox();
+            this.C = new System.Windows.Forms.Label();
+            this.DC = new System.Windows.Forms.Label();
+            this.Z = new System.Windows.Forms.Label();
+            this.PD = new System.Windows.Forms.Label();
+            this.TO = new System.Windows.Forms.Label();
+            this.RP0 = new System.Windows.Forms.Label();
+            this.RP1 = new System.Windows.Forms.Label();
+            this.IRP = new System.Windows.Forms.Label();
+            this.OPTION_REG = new System.Windows.Forms.GroupBox();
+            this.PS0 = new System.Windows.Forms.Label();
+            this.PS1 = new System.Windows.Forms.Label();
+            this.PS2 = new System.Windows.Forms.Label();
+            this.PSA = new System.Windows.Forms.Label();
+            this.T0SE = new System.Windows.Forms.Label();
+            this.T0CS = new System.Windows.Forms.Label();
+            this.INTEDG = new System.Windows.Forms.Label();
+            this.RBPU = new System.Windows.Forms.Label();
+            this.Reset = new System.Windows.Forms.Button();
+            this.Stop = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.Status.SuspendLayout();
+            this.OPTION_REG.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1026, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -61,20 +81,20 @@
             this.ladenToolStripMenuItem,
             this.hilfeToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.dateiToolStripMenuItem.Text = "Datei";
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(157, 34);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
             this.ladenToolStripMenuItem.Text = "laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // hilfeToolStripMenuItem
             // 
             this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
-            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(157, 34);
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
             this.hilfeToolStripMenuItem.Text = "hilfe";
             // 
             // Ausgabe
@@ -83,9 +103,10 @@
             this.Programcounter,
             this.Program});
             this.Ausgabe.HideSelection = false;
-            this.Ausgabe.Location = new System.Drawing.Point(12, 69);
+            this.Ausgabe.Location = new System.Drawing.Point(11, 55);
+            this.Ausgabe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Ausgabe.Name = "Ausgabe";
-            this.Ausgabe.Size = new System.Drawing.Size(336, 321);
+            this.Ausgabe.Size = new System.Drawing.Size(299, 390);
             this.Ausgabe.TabIndex = 1;
             this.Ausgabe.UseCompatibleStateImageBehavior = false;
             this.Ausgabe.View = System.Windows.Forms.View.Details;
@@ -104,9 +125,10 @@
             // 
             // Go
             // 
-            this.Go.Location = new System.Drawing.Point(562, 176);
+            this.Go.Location = new System.Drawing.Point(884, 325);
+            this.Go.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Go.Name = "Go";
-            this.Go.Size = new System.Drawing.Size(108, 34);
+            this.Go.Size = new System.Drawing.Size(112, 30);
             this.Go.TabIndex = 2;
             this.Go.Text = "Go";
             this.Go.UseVisualStyleBackColor = true;
@@ -114,51 +136,243 @@
             // 
             // Step
             // 
-            this.Step.Location = new System.Drawing.Point(562, 242);
+            this.Step.Location = new System.Drawing.Point(884, 359);
+            this.Step.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Step.Name = "Step";
-            this.Step.Size = new System.Drawing.Size(126, 43);
+            this.Step.Size = new System.Drawing.Size(112, 34);
             this.Step.TabIndex = 3;
             this.Step.Text = "Step";
             this.Step.UseVisualStyleBackColor = true;
             this.Step.Click += new System.EventHandler(this.Step_Click);
             // 
-            // groupBox1
+            // Status
             // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(406, 51);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 100);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.Status.Controls.Add(this.C);
+            this.Status.Controls.Add(this.DC);
+            this.Status.Controls.Add(this.Z);
+            this.Status.Controls.Add(this.PD);
+            this.Status.Controls.Add(this.TO);
+            this.Status.Controls.Add(this.RP0);
+            this.Status.Controls.Add(this.RP1);
+            this.Status.Controls.Add(this.IRP);
+            this.Status.Location = new System.Drawing.Point(361, 41);
+            this.Status.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Status.Name = "Status";
+            this.Status.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Status.Size = new System.Drawing.Size(418, 80);
+            this.Status.TabIndex = 5;
+            this.Status.TabStop = false;
+            this.Status.Text = "Status";
             // 
-            // label1
+            // C
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.C.AutoSize = true;
+            this.C.Location = new System.Drawing.Point(369, 25);
+            this.C.Name = "C";
+            this.C.Size = new System.Drawing.Size(17, 17);
+            this.C.TabIndex = 7;
+            this.C.Text = "C";
+            // 
+            // DC
+            // 
+            this.DC.AutoSize = true;
+            this.DC.Location = new System.Drawing.Point(317, 25);
+            this.DC.Name = "DC";
+            this.DC.Size = new System.Drawing.Size(27, 17);
+            this.DC.TabIndex = 6;
+            this.DC.Text = "DC";
+            // 
+            // Z
+            // 
+            this.Z.AutoSize = true;
+            this.Z.Location = new System.Drawing.Point(265, 25);
+            this.Z.Name = "Z";
+            this.Z.Size = new System.Drawing.Size(17, 17);
+            this.Z.TabIndex = 5;
+            this.Z.Text = "Z";
+            // 
+            // PD
+            // 
+            this.PD.AutoSize = true;
+            this.PD.Location = new System.Drawing.Point(213, 25);
+            this.PD.Name = "PD";
+            this.PD.Size = new System.Drawing.Size(27, 17);
+            this.PD.TabIndex = 4;
+            this.PD.Text = "PD";
+            // 
+            // TO
+            // 
+            this.TO.AutoSize = true;
+            this.TO.Location = new System.Drawing.Point(161, 25);
+            this.TO.Name = "TO";
+            this.TO.Size = new System.Drawing.Size(28, 17);
+            this.TO.TabIndex = 3;
+            this.TO.Text = "TO";
+            // 
+            // RP0
+            // 
+            this.RP0.AutoSize = true;
+            this.RP0.Location = new System.Drawing.Point(109, 25);
+            this.RP0.Name = "RP0";
+            this.RP0.Size = new System.Drawing.Size(35, 17);
+            this.RP0.TabIndex = 2;
+            this.RP0.Text = "RP0";
+            // 
+            // RP1
+            // 
+            this.RP1.AutoSize = true;
+            this.RP1.Location = new System.Drawing.Point(57, 25);
+            this.RP1.Name = "RP1";
+            this.RP1.Size = new System.Drawing.Size(35, 17);
+            this.RP1.TabIndex = 1;
+            this.RP1.Text = "RP1";
+            // 
+            // IRP
+            // 
+            this.IRP.AutoSize = true;
+            this.IRP.Location = new System.Drawing.Point(5, 25);
+            this.IRP.Name = "IRP";
+            this.IRP.Size = new System.Drawing.Size(30, 17);
+            this.IRP.TabIndex = 0;
+            this.IRP.Text = "IRP";
+            // 
+            // OPTION_REG
+            // 
+            this.OPTION_REG.Controls.Add(this.PS0);
+            this.OPTION_REG.Controls.Add(this.PS1);
+            this.OPTION_REG.Controls.Add(this.PS2);
+            this.OPTION_REG.Controls.Add(this.PSA);
+            this.OPTION_REG.Controls.Add(this.T0SE);
+            this.OPTION_REG.Controls.Add(this.T0CS);
+            this.OPTION_REG.Controls.Add(this.INTEDG);
+            this.OPTION_REG.Controls.Add(this.RBPU);
+            this.OPTION_REG.Location = new System.Drawing.Point(361, 152);
+            this.OPTION_REG.Name = "OPTION_REG";
+            this.OPTION_REG.Size = new System.Drawing.Size(418, 76);
+            this.OPTION_REG.TabIndex = 6;
+            this.OPTION_REG.TabStop = false;
+            this.OPTION_REG.Text = "OPTION_REG";
+            // 
+            // PS0
+            // 
+            this.PS0.AutoSize = true;
+            this.PS0.Location = new System.Drawing.Point(371, 22);
+            this.PS0.Name = "PS0";
+            this.PS0.Size = new System.Drawing.Size(34, 17);
+            this.PS0.TabIndex = 7;
+            this.PS0.Text = "PS0";
+            // 
+            // PS1
+            // 
+            this.PS1.AutoSize = true;
+            this.PS1.Location = new System.Drawing.Point(319, 22);
+            this.PS1.Name = "PS1";
+            this.PS1.Size = new System.Drawing.Size(34, 17);
+            this.PS1.TabIndex = 6;
+            this.PS1.Text = "PS1";
+            // 
+            // PS2
+            // 
+            this.PS2.AutoSize = true;
+            this.PS2.Location = new System.Drawing.Point(267, 22);
+            this.PS2.Name = "PS2";
+            this.PS2.Size = new System.Drawing.Size(34, 17);
+            this.PS2.TabIndex = 5;
+            this.PS2.Text = "PS2";
+            // 
+            // PSA
+            // 
+            this.PSA.AutoSize = true;
+            this.PSA.Location = new System.Drawing.Point(215, 22);
+            this.PSA.Name = "PSA";
+            this.PSA.Size = new System.Drawing.Size(35, 17);
+            this.PSA.TabIndex = 4;
+            this.PSA.Text = "PSA";
+            // 
+            // T0SE
+            // 
+            this.T0SE.AutoSize = true;
+            this.T0SE.Location = new System.Drawing.Point(163, 22);
+            this.T0SE.Name = "T0SE";
+            this.T0SE.Size = new System.Drawing.Size(43, 17);
+            this.T0SE.TabIndex = 3;
+            this.T0SE.Text = "T0SE";
+            // 
+            // T0CS
+            // 
+            this.T0CS.AutoSize = true;
+            this.T0CS.Location = new System.Drawing.Point(111, 22);
+            this.T0CS.Name = "T0CS";
+            this.T0CS.Size = new System.Drawing.Size(43, 17);
+            this.T0CS.TabIndex = 2;
+            this.T0CS.Text = "T0CS";
+            // 
+            // INTEDG
+            // 
+            this.INTEDG.AutoSize = true;
+            this.INTEDG.Location = new System.Drawing.Point(59, 22);
+            this.INTEDG.Name = "INTEDG";
+            this.INTEDG.Size = new System.Drawing.Size(60, 17);
+            this.INTEDG.TabIndex = 1;
+            this.INTEDG.Text = "INTEDG";
+            // 
+            // RBPU
+            // 
+            this.RBPU.AutoSize = true;
+            this.RBPU.Location = new System.Drawing.Point(7, 22);
+            this.RBPU.Name = "RBPU";
+            this.RBPU.Size = new System.Drawing.Size(46, 17);
+            this.RBPU.TabIndex = 0;
+            this.RBPU.Text = "RBPU";
+            // 
+            // Reset
+            // 
+            this.Reset.Location = new System.Drawing.Point(884, 290);
+            this.Reset.Name = "Reset";
+            this.Reset.Size = new System.Drawing.Size(112, 30);
+            this.Reset.TabIndex = 7;
+            this.Reset.Text = "Reset";
+            this.Reset.UseVisualStyleBackColor = true;
+            this.Reset.Click += new System.EventHandler(this.Reset_Click);
+            // 
+            // Stop
+            // 
+            this.Stop.Location = new System.Drawing.Point(884, 398);
+            this.Stop.Name = "Stop";
+            this.Stop.Size = new System.Drawing.Size(112, 34);
+            this.Stop.TabIndex = 8;
+            this.Stop.Text = "Stop";
+            this.Stop.UseVisualStyleBackColor = true;
+            this.Stop.Click += new System.EventHandler(this.Stop_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1026, 456);
+            this.Controls.Add(this.Stop);
+            this.Controls.Add(this.Reset);
+            this.Controls.Add(this.OPTION_REG);
+            this.Controls.Add(this.Status);
             this.Controls.Add(this.Step);
             this.Controls.Add(this.Go);
             this.Controls.Add(this.Ausgabe);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Status.ResumeLayout(false);
+            this.Status.PerformLayout();
+            this.OPTION_REG.ResumeLayout(false);
+            this.OPTION_REG.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,8 +389,27 @@
         public System.Windows.Forms.ColumnHeader Programcounter;
         private System.Windows.Forms.Button Go;
         private System.Windows.Forms.Button Step;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox Status;
+        private System.Windows.Forms.Label IRP;
+        private System.Windows.Forms.Label C;
+        private System.Windows.Forms.Label DC;
+        private System.Windows.Forms.Label Z;
+        private System.Windows.Forms.Label PD;
+        private System.Windows.Forms.Label TO;
+        private System.Windows.Forms.Label RP0;
+        private System.Windows.Forms.Label RP1;
+        private System.Windows.Forms.GroupBox OPTION_REG;
+        private System.Windows.Forms.Label PS0;
+        private System.Windows.Forms.Label PS1;
+        private System.Windows.Forms.Label PS2;
+        private System.Windows.Forms.Label PSA;
+        private System.Windows.Forms.Label T0SE;
+        private System.Windows.Forms.Label T0CS;
+        private System.Windows.Forms.Label INTEDG;
+        private System.Windows.Forms.Label RBPU;
+        private System.Windows.Forms.Button Reset;
+        private System.Windows.Forms.Button Stop;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
