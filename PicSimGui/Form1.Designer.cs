@@ -314,7 +314,7 @@
             // INTEDG
             // 
             this.INTEDG.AutoSize = true;
-            this.INTEDG.Location = new System.Drawing.Point(59, 22);
+            this.INTEDG.Location = new System.Drawing.Point(55, 22);
             this.INTEDG.Name = "INTEDG";
             this.INTEDG.Size = new System.Drawing.Size(60, 17);
             this.INTEDG.TabIndex = 1;
