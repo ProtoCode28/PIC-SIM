@@ -12,6 +12,7 @@ namespace PicSim
 {
     public partial class Form1 : Form
     {
+        Buttons but = new Buttons();
         public Form1()
         {
             InitializeComponent();
@@ -21,9 +22,9 @@ namespace PicSim
         {
             var fileContent = string.Empty;
             var filePath = string.Empty;
-
-            Register.Reset();
-            //Ausgabe.Text = "";
+            
+            
+            Ausgabe.Text = "";
             
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -37,17 +38,38 @@ namespace PicSim
                 {
                     //Get the path of specified file
                     filePath = openFileDialog.FileName;
-                    //LSTparse.Main(filePath);
-
-                    //foreach (String value in parser.matches)
-                    //{
-                    //    Ausgabe.Text += value + "\r\n";
-                    //    umwandlung.EingabeAuseinanderschneiden(value);
-
-                    //}
-
+                    Register R1 = new Register();
+                    R1.PowerReset();
+              
+                    LSTParse T1 = new LSTParse(filePath);
+                    T1.Einlesen();
+                    
+                    int pc = Globals.programcounter;
+                    for(int i = 0; i <= pc; i++ )
+                    {
+                        string pm = Globals.programmemory[i].ToString("X");
+                        string counter = i.ToString("X");
+                        Ausgabe.Items.Add(counter).SubItems.Add(pm);
+                    }
                 }
             }
+        }
+
+        private void Go_Click(object sender, EventArgs e)
+        {
+            but.GoButton();
+            //Buttons.GoButton();
+        }
+
+        private void Step_Click(object sender, EventArgs e)
+        {
+            //Buttons.StepButton();
+            but.StepButton();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

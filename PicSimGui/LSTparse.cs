@@ -13,7 +13,7 @@ namespace PicSim
         public Regex rx;
 
 
-        public LSTParse(string path)
+        public  LSTParse(string path)
         {
             this.path = path;
             Globals.programmemory = new int[1024];

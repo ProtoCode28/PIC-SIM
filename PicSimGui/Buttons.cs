@@ -14,6 +14,7 @@ namespace PicSim
 		
 		public void StepButton()
 		{
+			//Commands cmd = new Commands();
 			cmd.Switchcase(Globals.programcounter);
 		}
 
