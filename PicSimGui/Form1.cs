@@ -193,6 +193,7 @@ namespace PicSim
             {
                 Globals.bank0[5] += 16;
             }
+            UpdateGUI();
         }
 
         private void RA3_Click(object sender, EventArgs e)
@@ -205,6 +206,7 @@ namespace PicSim
             {
                 Globals.bank0[5] += 8;
             }
+            UpdateGUI();
         }
 
         private void RA2_Click(object sender, EventArgs e)
@@ -217,6 +219,7 @@ namespace PicSim
             {
                 Globals.bank0[5] += 4;
             }
+            UpdateGUI();
         }
 
         private void RA1_Click(object sender, EventArgs e)
@@ -229,6 +232,7 @@ namespace PicSim
             {
                 Globals.bank0[5] += 2;
             }
+            UpdateGUI();
         }
 
         private void RA0_Click(object sender, EventArgs e)
@@ -241,6 +245,7 @@ namespace PicSim
             {
                 Globals.bank0[5] += 1;
             }
+            UpdateGUI();
         }
 
         private void RB7_Click(object sender, EventArgs e)
@@ -253,6 +258,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 128;
             }
+            UpdateGUI();
         }
 
         private void RB6_Click(object sender, EventArgs e)
@@ -265,6 +271,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 64;
             }
+            UpdateGUI();
         }
 
         private void RB5_Click(object sender, EventArgs e)
@@ -277,6 +284,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 32;
             }
+            UpdateGUI();
         }
 
         private void RB4_Click(object sender, EventArgs e)
@@ -289,6 +297,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 16;
             }
+            UpdateGUI();
         }
 
         private void RB3_Click(object sender, EventArgs e)
@@ -301,6 +310,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 8;
             }
+            UpdateGUI();
         }
 
         private void RB2_Click(object sender, EventArgs e)
@@ -313,6 +323,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 4;
             }
+            UpdateGUI();
         }
 
         private void RB1_Click(object sender, EventArgs e)
@@ -325,6 +336,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 2;
             }
+            UpdateGUI();
         }
 
         private void RB0_Click(object sender, EventArgs e)
@@ -337,6 +349,7 @@ namespace PicSim
             {
                 Globals.bank0[6] += 1;
             }
+            UpdateGUI();
         }
         private void UpdateGUI()
         {
