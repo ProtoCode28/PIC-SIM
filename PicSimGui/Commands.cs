@@ -175,7 +175,7 @@ namespace PicSim
         {
             //laufzeitberechnung in label ausgeben und berechnen in calcwdt  
             //für jeden befehl müssen wir die zyklen berechnen und in befehlsdauer eintragen checkboxfürWDT = 1 und quartzfrequenz einstellen
-            if (Globals.bank0[1] == 1)//da steht aktuell stuss drin // wenn optionregister beschrieben wird (movwf 1) dann calcprescaler
+            if (Globals.WDTCheckbox == true)//da steht aktuell stuss drin // wenn optionregister beschrieben wird (movwf 1) dann calcprescaler
             {
                 Globals.WDT += Globals.Befehlsdauer;
                 if (Globals.WDT == 18000)

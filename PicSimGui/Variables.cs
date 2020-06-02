@@ -15,6 +15,7 @@ namespace PicSim
         public static int Befehlsdauer; // 4/quartz ergibt dauer in microsekunden
         public static float Quartz; //Werte werden von der GUI zugewiesen Quartz => 1/sekunde
         public static int speed = 500;
+        public static bool WDTCheckbox;
       
         
     }

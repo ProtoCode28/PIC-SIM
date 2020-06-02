@@ -16,6 +16,7 @@ namespace PicSim
         public Form1()
         {
             InitializeComponent();
+           
         }
 
         private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace PicSim
               
                     LSTParse T1 = new LSTParse(filePath);
                     T1.Einlesen();
-                    T1.Ausgeben();
+                   
                     
                     int pc = Globals.programcounter;
                     for(int i = 0; i <= pc; i++ )
@@ -55,6 +56,7 @@ namespace PicSim
                     Globals.programcounter = 0; //nötiger reset sonst wird programm beim letzten befehl gestartet
                 }
             }
+            UpdateGUI();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -72,7 +74,7 @@ namespace PicSim
                 {
                     // Perform a time consuming operation and report progress.
                     System.Threading.Thread.Sleep(Globals.speed);
-                    but.StepButton();
+                    UpdateGUI();
                 }
             }
         }
@@ -89,6 +91,7 @@ namespace PicSim
         {
             //Buttons.StepButton();
             but.StepButton();
+            UpdateGUI();
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -136,6 +139,183 @@ namespace PicSim
             {
                 Globals.speed = 50;
             }
+        }
+
+        private void WTDTMR_CheckedChanged(object sender, EventArgs e)
+        {
+            if(WTDTMR.Checked)
+            {
+                Globals.WDTCheckbox = true;
+                Console.WriteLine("checkbox true");
+            }
+            else
+            {
+                Globals.WDTCheckbox = false;
+                Console.WriteLine("checkbox false");
+            }
+        }
+
+        private void RA4_Click(object sender, EventArgs e)
+        {
+           if((Globals.bank0[5] & 0b0001_0000) == 1)
+            {
+                Globals.bank0[5] -= 16; 
+            }
+           else
+            {
+                Globals.bank0[5] += 16;
+            }
+        }
+
+        private void RA3_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[5] & 0b0000_1000) == 1)
+            {
+                Globals.bank0[5] -= 8;
+            }
+            else
+            {
+                Globals.bank0[5] += 8;
+            }
+        }
+
+        private void RA2_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[5] & 0b0000_0100) == 1)
+            {
+                Globals.bank0[5] -= 4;
+            }
+            else
+            {
+                Globals.bank0[5] += 4;
+            }
+        }
+
+        private void RA1_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[5] & 0b0000_0010) == 1)
+            {
+                Globals.bank0[5] -= 2;
+            }
+            else
+            {
+                Globals.bank0[5] += 2;
+            }
+        }
+
+        private void RA0_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[5] & 0b0000_0001) == 1)
+            {
+                Globals.bank0[5] -= 1;
+            }
+            else
+            {
+                Globals.bank0[5] += 1;
+            }
+        }
+
+        private void RB7_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b1000_0000) == 1)
+            {
+                Globals.bank0[6] -= 128;
+            }
+            else
+            {
+                Globals.bank0[6] += 128;
+            }
+        }
+
+        private void RB6_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b0100_0000) == 1)
+            {
+                Globals.bank0[6] -= 64;
+            }
+            else
+            {
+                Globals.bank0[6] += 64;
+            }
+        }
+
+        private void RB5_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b0010_0000) == 1)
+            {
+                Globals.bank0[6] -= 32;
+            }
+            else
+            {
+                Globals.bank0[6] += 32;
+            }
+        }
+
+        private void RB4_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b0001_0000) == 1)
+            {
+                Globals.bank0[6] -= 16;
+            }
+            else
+            {
+                Globals.bank0[6] += 16;
+            }
+        }
+
+        private void RB3_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b0000_1000) == 1)
+            {
+                Globals.bank0[6] -= 8;
+            }
+            else
+            {
+                Globals.bank0[6] += 8;
+            }
+        }
+
+        private void RB2_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b0000_0100) == 1)
+            {
+                Globals.bank0[6] -= 4;
+            }
+            else
+            {
+                Globals.bank0[6] += 4;
+            }
+        }
+
+        private void RB1_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b1000_0010) == 1)
+            {
+                Globals.bank0[6] -= 2;
+            }
+            else
+            {
+                Globals.bank0[6] += 2;
+            }
+        }
+
+        private void RB0_Click(object sender, EventArgs e)
+        {
+            if ((Globals.bank0[6] & 0b0000_0001) == 1)
+            {
+                Globals.bank0[6] -= 1;
+            }
+            else
+            {
+                Globals.bank0[6] += 1;
+            }
+        }
+        private void UpdateGUI()
+        {
+            IRPVALUE.Text = (Globals.bank0[3] >> 7).ToString();
+            //RP1VALUE.Text = (Globals.bank0[3] >> 7).ToString();
+            //RP0VALUE.Text = (Globals.bank0[3] >> 7).ToString();
+            //IRPVALUE.Text = (Globals.bank0[3] >> 7).ToString();
         }
     }
 }

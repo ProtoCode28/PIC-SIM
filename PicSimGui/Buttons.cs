@@ -16,7 +16,9 @@ namespace PicSim
 		{
 			//Commands cmd = new Commands();
 			cmd.Switchcase(Globals.programcounter);
+
 		}
+
 
 	}
 }
