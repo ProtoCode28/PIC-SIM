@@ -37,7 +37,7 @@
             this.Program = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Go = new System.Windows.Forms.Button();
             this.Step = new System.Windows.Forms.Button();
-            this.Status = new System.Windows.Forms.GroupBox();
+            this.STATUS_REG = new System.Windows.Forms.GroupBox();
             this.CVALUE = new System.Windows.Forms.Label();
             this.DCVALUE = new System.Windows.Forms.Label();
             this.ZVALUE = new System.Windows.Forms.Label();
@@ -130,12 +130,34 @@
             this.RB5 = new System.Windows.Forms.Label();
             this.RB6 = new System.Windows.Forms.Label();
             this.RB7 = new System.Windows.Forms.Label();
+            this.Watchdog = new System.Windows.Forms.Label();
+            this.Watchdogvalue = new System.Windows.Forms.Label();
+            this.Specialfunctionregister = new System.Windows.Forms.GroupBox();
+            this.Wregister = new System.Windows.Forms.Label();
+            this.PCL = new System.Windows.Forms.Label();
+            this.PCLATH = new System.Windows.Forms.Label();
+            this.PCintern = new System.Windows.Forms.Label();
+            this.Status = new System.Windows.Forms.Label();
+            this.FSR = new System.Windows.Forms.Label();
+            this.Option = new System.Windows.Forms.Label();
+            this.Prescaler = new System.Windows.Forms.Label();
+            this.Timer0 = new System.Windows.Forms.Label();
+            this.WregisterVALUE = new System.Windows.Forms.Label();
+            this.PCLVALUE = new System.Windows.Forms.Label();
+            this.PCLATHVALUE = new System.Windows.Forms.Label();
+            this.PCinternVALUE = new System.Windows.Forms.Label();
+            this.StatusVALUE = new System.Windows.Forms.Label();
+            this.FSRVALUE = new System.Windows.Forms.Label();
+            this.OptionVALUE = new System.Windows.Forms.Label();
+            this.PrescalerVALUE = new System.Windows.Forms.Label();
+            this.Timer0VALUE = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            this.Status.SuspendLayout();
+            this.STATUS_REG.SuspendLayout();
             this.OPTION_REG.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.PORTA.SuspendLayout();
             this.PORTB.SuspendLayout();
+            this.Specialfunctionregister.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -220,32 +242,32 @@
             this.Step.UseVisualStyleBackColor = true;
             this.Step.Click += new System.EventHandler(this.Step_Click);
             // 
-            // Status
+            // STATUS_REG
             // 
-            this.Status.Controls.Add(this.CVALUE);
-            this.Status.Controls.Add(this.DCVALUE);
-            this.Status.Controls.Add(this.ZVALUE);
-            this.Status.Controls.Add(this.PDVALUE);
-            this.Status.Controls.Add(this.TOVALUE);
-            this.Status.Controls.Add(this.RP0VALUE);
-            this.Status.Controls.Add(this.RP1VALUE);
-            this.Status.Controls.Add(this.IRPVALUE);
-            this.Status.Controls.Add(this.C);
-            this.Status.Controls.Add(this.DC);
-            this.Status.Controls.Add(this.Z);
-            this.Status.Controls.Add(this.PD);
-            this.Status.Controls.Add(this.TO);
-            this.Status.Controls.Add(this.RP0);
-            this.Status.Controls.Add(this.RP1);
-            this.Status.Controls.Add(this.IRP);
-            this.Status.Location = new System.Drawing.Point(594, 35);
-            this.Status.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Status.Name = "Status";
-            this.Status.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Status.Size = new System.Drawing.Size(271, 80);
-            this.Status.TabIndex = 5;
-            this.Status.TabStop = false;
-            this.Status.Text = "Status";
+            this.STATUS_REG.Controls.Add(this.CVALUE);
+            this.STATUS_REG.Controls.Add(this.DCVALUE);
+            this.STATUS_REG.Controls.Add(this.ZVALUE);
+            this.STATUS_REG.Controls.Add(this.PDVALUE);
+            this.STATUS_REG.Controls.Add(this.TOVALUE);
+            this.STATUS_REG.Controls.Add(this.RP0VALUE);
+            this.STATUS_REG.Controls.Add(this.RP1VALUE);
+            this.STATUS_REG.Controls.Add(this.IRPVALUE);
+            this.STATUS_REG.Controls.Add(this.C);
+            this.STATUS_REG.Controls.Add(this.DC);
+            this.STATUS_REG.Controls.Add(this.Z);
+            this.STATUS_REG.Controls.Add(this.PD);
+            this.STATUS_REG.Controls.Add(this.TO);
+            this.STATUS_REG.Controls.Add(this.RP0);
+            this.STATUS_REG.Controls.Add(this.RP1);
+            this.STATUS_REG.Controls.Add(this.IRP);
+            this.STATUS_REG.Location = new System.Drawing.Point(594, 35);
+            this.STATUS_REG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.STATUS_REG.Name = "STATUS_REG";
+            this.STATUS_REG.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.STATUS_REG.Size = new System.Drawing.Size(271, 80);
+            this.STATUS_REG.TabIndex = 5;
+            this.STATUS_REG.TabStop = false;
+            this.STATUS_REG.Text = "STATUS_REG";
             // 
             // CVALUE
             // 
@@ -589,10 +611,17 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "32",
-            "64",
-            "128"});
-            this.comboBox1.Location = new System.Drawing.Point(884, 135);
+            "32 khz",
+            "100 khz",
+            "500 khz",
+            "1 mhz",
+            "2 mhz",
+            "4 mhz",
+            "8 mhz",
+            "12 mhz",
+            "16 mhz",
+            "20 mhz"});
+            this.comboBox1.Location = new System.Drawing.Point(884, 142);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 10;
@@ -601,7 +630,7 @@
             // Quartz
             // 
             this.Quartz.AutoSize = true;
-            this.Quartz.Location = new System.Drawing.Point(925, 115);
+            this.Quartz.Location = new System.Drawing.Point(922, 122);
             this.Quartz.Name = "Quartz";
             this.Quartz.Size = new System.Drawing.Size(51, 17);
             this.Quartz.TabIndex = 11;
@@ -1160,11 +1189,221 @@
             this.RB7.Text = "RB7";
             this.RB7.Click += new System.EventHandler(this.RB7_Click);
             // 
+            // Watchdog
+            // 
+            this.Watchdog.AutoSize = true;
+            this.Watchdog.Location = new System.Drawing.Point(901, 90);
+            this.Watchdog.Name = "Watchdog";
+            this.Watchdog.Size = new System.Drawing.Size(72, 17);
+            this.Watchdog.TabIndex = 18;
+            this.Watchdog.Text = "Watchdog";
+            // 
+            // Watchdogvalue
+            // 
+            this.Watchdogvalue.AutoSize = true;
+            this.Watchdogvalue.Location = new System.Drawing.Point(979, 90);
+            this.Watchdogvalue.Name = "Watchdogvalue";
+            this.Watchdogvalue.Size = new System.Drawing.Size(17, 17);
+            this.Watchdogvalue.TabIndex = 19;
+            this.Watchdogvalue.Text = "X";
+            // 
+            // Specialfunctionregister
+            // 
+            this.Specialfunctionregister.Controls.Add(this.Timer0VALUE);
+            this.Specialfunctionregister.Controls.Add(this.PrescalerVALUE);
+            this.Specialfunctionregister.Controls.Add(this.OptionVALUE);
+            this.Specialfunctionregister.Controls.Add(this.FSRVALUE);
+            this.Specialfunctionregister.Controls.Add(this.StatusVALUE);
+            this.Specialfunctionregister.Controls.Add(this.PCinternVALUE);
+            this.Specialfunctionregister.Controls.Add(this.PCLATHVALUE);
+            this.Specialfunctionregister.Controls.Add(this.PCLVALUE);
+            this.Specialfunctionregister.Controls.Add(this.WregisterVALUE);
+            this.Specialfunctionregister.Controls.Add(this.Timer0);
+            this.Specialfunctionregister.Controls.Add(this.Prescaler);
+            this.Specialfunctionregister.Controls.Add(this.Option);
+            this.Specialfunctionregister.Controls.Add(this.FSR);
+            this.Specialfunctionregister.Controls.Add(this.Status);
+            this.Specialfunctionregister.Controls.Add(this.PCintern);
+            this.Specialfunctionregister.Controls.Add(this.PCLATH);
+            this.Specialfunctionregister.Controls.Add(this.PCL);
+            this.Specialfunctionregister.Controls.Add(this.Wregister);
+            this.Specialfunctionregister.Location = new System.Drawing.Point(346, 55);
+            this.Specialfunctionregister.Name = "Specialfunctionregister";
+            this.Specialfunctionregister.Size = new System.Drawing.Size(127, 370);
+            this.Specialfunctionregister.TabIndex = 20;
+            this.Specialfunctionregister.TabStop = false;
+            this.Specialfunctionregister.Text = "Specialfunctionregister";
+            // 
+            // Wregister
+            // 
+            this.Wregister.AutoSize = true;
+            this.Wregister.Location = new System.Drawing.Point(6, 60);
+            this.Wregister.Name = "Wregister";
+            this.Wregister.Size = new System.Drawing.Size(69, 17);
+            this.Wregister.TabIndex = 0;
+            this.Wregister.Text = "Wregister";
+            // 
+            // PCL
+            // 
+            this.PCL.AutoSize = true;
+            this.PCL.Location = new System.Drawing.Point(6, 87);
+            this.PCL.Name = "PCL";
+            this.PCL.Size = new System.Drawing.Size(34, 17);
+            this.PCL.TabIndex = 1;
+            this.PCL.Text = "PCL";
+            // 
+            // PCLATH
+            // 
+            this.PCLATH.AutoSize = true;
+            this.PCLATH.Location = new System.Drawing.Point(6, 114);
+            this.PCLATH.Name = "PCLATH";
+            this.PCLATH.Size = new System.Drawing.Size(62, 17);
+            this.PCLATH.TabIndex = 2;
+            this.PCLATH.Text = "PCLATH";
+            // 
+            // PCintern
+            // 
+            this.PCintern.AutoSize = true;
+            this.PCintern.Location = new System.Drawing.Point(6, 138);
+            this.PCintern.Name = "PCintern";
+            this.PCintern.Size = new System.Drawing.Size(62, 17);
+            this.PCintern.TabIndex = 3;
+            this.PCintern.Text = "PCintern";
+            // 
+            // Status
+            // 
+            this.Status.AutoSize = true;
+            this.Status.Location = new System.Drawing.Point(6, 167);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(48, 17);
+            this.Status.TabIndex = 4;
+            this.Status.Text = "Status";
+            // 
+            // FSR
+            // 
+            this.FSR.AutoSize = true;
+            this.FSR.Location = new System.Drawing.Point(6, 193);
+            this.FSR.Name = "FSR";
+            this.FSR.Size = new System.Drawing.Size(35, 17);
+            this.FSR.TabIndex = 5;
+            this.FSR.Text = "FSR";
+            // 
+            // Option
+            // 
+            this.Option.AutoSize = true;
+            this.Option.Location = new System.Drawing.Point(6, 219);
+            this.Option.Name = "Option";
+            this.Option.Size = new System.Drawing.Size(50, 17);
+            this.Option.TabIndex = 6;
+            this.Option.Text = "Option";
+            // 
+            // Prescaler
+            // 
+            this.Prescaler.AutoSize = true;
+            this.Prescaler.Location = new System.Drawing.Point(6, 242);
+            this.Prescaler.Name = "Prescaler";
+            this.Prescaler.Size = new System.Drawing.Size(68, 17);
+            this.Prescaler.TabIndex = 7;
+            this.Prescaler.Text = "Prescaler";
+            // 
+            // Timer0
+            // 
+            this.Timer0.AutoSize = true;
+            this.Timer0.Location = new System.Drawing.Point(6, 270);
+            this.Timer0.Name = "Timer0";
+            this.Timer0.Size = new System.Drawing.Size(52, 17);
+            this.Timer0.TabIndex = 8;
+            this.Timer0.Text = "Timer0";
+            // 
+            // WregisterVALUE
+            // 
+            this.WregisterVALUE.AutoSize = true;
+            this.WregisterVALUE.Location = new System.Drawing.Point(81, 60);
+            this.WregisterVALUE.Name = "WregisterVALUE";
+            this.WregisterVALUE.Size = new System.Drawing.Size(17, 17);
+            this.WregisterVALUE.TabIndex = 10;
+            this.WregisterVALUE.Text = "X";
+            // 
+            // PCLVALUE
+            // 
+            this.PCLVALUE.AutoSize = true;
+            this.PCLVALUE.Location = new System.Drawing.Point(81, 87);
+            this.PCLVALUE.Name = "PCLVALUE";
+            this.PCLVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PCLVALUE.TabIndex = 11;
+            this.PCLVALUE.Text = "X";
+            // 
+            // PCLATHVALUE
+            // 
+            this.PCLATHVALUE.AutoSize = true;
+            this.PCLATHVALUE.Location = new System.Drawing.Point(81, 114);
+            this.PCLATHVALUE.Name = "PCLATHVALUE";
+            this.PCLATHVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PCLATHVALUE.TabIndex = 12;
+            this.PCLATHVALUE.Text = "X";
+            // 
+            // PCinternVALUE
+            // 
+            this.PCinternVALUE.AutoSize = true;
+            this.PCinternVALUE.Location = new System.Drawing.Point(81, 138);
+            this.PCinternVALUE.Name = "PCinternVALUE";
+            this.PCinternVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PCinternVALUE.TabIndex = 13;
+            this.PCinternVALUE.Text = "X";
+            // 
+            // StatusVALUE
+            // 
+            this.StatusVALUE.AutoSize = true;
+            this.StatusVALUE.Location = new System.Drawing.Point(81, 167);
+            this.StatusVALUE.Name = "StatusVALUE";
+            this.StatusVALUE.Size = new System.Drawing.Size(17, 17);
+            this.StatusVALUE.TabIndex = 14;
+            this.StatusVALUE.Text = "X";
+            // 
+            // FSRVALUE
+            // 
+            this.FSRVALUE.AutoSize = true;
+            this.FSRVALUE.Location = new System.Drawing.Point(81, 193);
+            this.FSRVALUE.Name = "FSRVALUE";
+            this.FSRVALUE.Size = new System.Drawing.Size(17, 17);
+            this.FSRVALUE.TabIndex = 15;
+            this.FSRVALUE.Text = "X";
+            // 
+            // OptionVALUE
+            // 
+            this.OptionVALUE.AutoSize = true;
+            this.OptionVALUE.Location = new System.Drawing.Point(81, 219);
+            this.OptionVALUE.Name = "OptionVALUE";
+            this.OptionVALUE.Size = new System.Drawing.Size(17, 17);
+            this.OptionVALUE.TabIndex = 16;
+            this.OptionVALUE.Text = "X";
+            // 
+            // PrescalerVALUE
+            // 
+            this.PrescalerVALUE.AutoSize = true;
+            this.PrescalerVALUE.Location = new System.Drawing.Point(81, 242);
+            this.PrescalerVALUE.Name = "PrescalerVALUE";
+            this.PrescalerVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PrescalerVALUE.TabIndex = 17;
+            this.PrescalerVALUE.Text = "X";
+            // 
+            // Timer0VALUE
+            // 
+            this.Timer0VALUE.AutoSize = true;
+            this.Timer0VALUE.Location = new System.Drawing.Point(81, 270);
+            this.Timer0VALUE.Name = "Timer0VALUE";
+            this.Timer0VALUE.Size = new System.Drawing.Size(17, 17);
+            this.Timer0VALUE.TabIndex = 18;
+            this.Timer0VALUE.Text = "X";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 456);
+            this.Controls.Add(this.Specialfunctionregister);
+            this.Controls.Add(this.Watchdogvalue);
+            this.Controls.Add(this.Watchdog);
             this.Controls.Add(this.PORTB);
             this.Controls.Add(this.PORTA);
             this.Controls.Add(this.groupBox1);
@@ -1176,7 +1415,7 @@
             this.Controls.Add(this.Stop);
             this.Controls.Add(this.Reset);
             this.Controls.Add(this.OPTION_REG);
-            this.Controls.Add(this.Status);
+            this.Controls.Add(this.STATUS_REG);
             this.Controls.Add(this.Step);
             this.Controls.Add(this.Go);
             this.Controls.Add(this.Ausgabe);
@@ -1187,8 +1426,8 @@
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.Status.ResumeLayout(false);
-            this.Status.PerformLayout();
+            this.STATUS_REG.ResumeLayout(false);
+            this.STATUS_REG.PerformLayout();
             this.OPTION_REG.ResumeLayout(false);
             this.OPTION_REG.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1197,6 +1436,8 @@
             this.PORTA.PerformLayout();
             this.PORTB.ResumeLayout(false);
             this.PORTB.PerformLayout();
+            this.Specialfunctionregister.ResumeLayout(false);
+            this.Specialfunctionregister.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1213,7 +1454,7 @@
         public System.Windows.Forms.ColumnHeader Programcounter;
         private System.Windows.Forms.Button Go;
         private System.Windows.Forms.Button Step;
-        private System.Windows.Forms.GroupBox Status;
+        private System.Windows.Forms.GroupBox STATUS_REG;
         private System.Windows.Forms.Label IRP;
         private System.Windows.Forms.Label C;
         private System.Windows.Forms.Label DC;
@@ -1306,6 +1547,27 @@
         public System.Windows.Forms.Label RB5VALUE;
         public System.Windows.Forms.Label RB6VALUE;
         public System.Windows.Forms.Label RB7VALUE;
+        private System.Windows.Forms.Label Watchdog;
+        private System.Windows.Forms.Label Watchdogvalue;
+        private System.Windows.Forms.GroupBox Specialfunctionregister;
+        private System.Windows.Forms.Label Timer0;
+        private System.Windows.Forms.Label Prescaler;
+        private System.Windows.Forms.Label Option;
+        private System.Windows.Forms.Label FSR;
+        private System.Windows.Forms.Label Status;
+        private System.Windows.Forms.Label PCintern;
+        private System.Windows.Forms.Label PCLATH;
+        private System.Windows.Forms.Label PCL;
+        private System.Windows.Forms.Label Wregister;
+        public System.Windows.Forms.Label Timer0VALUE;
+        public System.Windows.Forms.Label PrescalerVALUE;
+        public System.Windows.Forms.Label OptionVALUE;
+        public System.Windows.Forms.Label FSRVALUE;
+        public System.Windows.Forms.Label StatusVALUE;
+        public System.Windows.Forms.Label PCinternVALUE;
+        public System.Windows.Forms.Label PCLATHVALUE;
+        public System.Windows.Forms.Label PCLVALUE;
+        public System.Windows.Forms.Label WregisterVALUE;
     }
 }
 

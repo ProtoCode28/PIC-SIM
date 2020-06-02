@@ -117,11 +117,39 @@ namespace PicSim
             }
             if (comboBox1.SelectedIndex == 1)
             {
-                Globals.Quartz = 64;
+                Globals.Quartz = 100;
             }
             if (comboBox1.SelectedIndex == 2)
             {
-                Globals.Quartz = 128;
+                Globals.Quartz = 500;
+            }
+            if (comboBox1.SelectedIndex == 3)
+            {
+                Globals.Quartz = 1000;
+            }
+            if (comboBox1.SelectedIndex == 4)
+            {
+                Globals.Quartz = 2000;
+            }
+            if (comboBox1.SelectedIndex == 5)
+            {
+                Globals.Quartz = 4000;
+            }
+            if (comboBox1.SelectedIndex == 6)
+            {
+                Globals.Quartz = 8000;
+            }
+            if (comboBox1.SelectedIndex == 7)
+            {
+                Globals.Quartz = 12000;
+            }
+            if (comboBox1.SelectedIndex == 8)
+            {
+                Globals.Quartz = 16000;
+            }
+            if (comboBox1.SelectedIndex == 9)
+            {
+                Globals.Quartz = 20000;
             }
         }
 
@@ -312,10 +340,51 @@ namespace PicSim
         }
         private void UpdateGUI()
         {
-            IRPVALUE.Text = (Globals.bank0[3] >> 7).ToString();
-            //RP1VALUE.Text = (Globals.bank0[3] >> 7).ToString();
-            //RP0VALUE.Text = (Globals.bank0[3] >> 7).ToString();
-            //IRPVALUE.Text = (Globals.bank0[3] >> 7).ToString();
+            Watchdogvalue.Text = Globals.WDT.ToString();
+            WregisterVALUE.Text = Globals.w.ToString();
+            PrescalerVALUE.Text = "1:" + Globals.prescaler.ToString();
+
+            IRPVALUE.Text = ((Globals.bank0[3] & 0b1000_0000) >> 7).ToString();
+            RP1VALUE.Text = ((Globals.bank0[3] & 0b0100_0000) >> 6).ToString();
+            RP0VALUE.Text = ((Globals.bank0[3] & 0b0010_0000) >> 5).ToString();
+            TOVALUE.Text = ((Globals.bank0[3] & 0b0001_0000) >> 4).ToString();
+            PDVALUE.Text = ((Globals.bank0[3] & 0b0000_1000) >> 3).ToString();
+            ZVALUE.Text = ((Globals.bank0[3] & 0b0000_0100) >> 2).ToString();
+            DCVALUE.Text = ((Globals.bank0[3] & 0b0000_0010) >> 1).ToString();
+            CVALUE.Text = (Globals.bank0[3] & 0b0000_0001).ToString();
+
+            RBPUVALUE.Text = ((Globals.bank1[1] & 0b1000_0000) >> 7).ToString();
+            INTEDGVALUE.Text = ((Globals.bank1[1] & 0b0100_0000) >> 6).ToString();
+            T0CSVALUE.Text = ((Globals.bank1[1] & 0b0010_0000) >> 5).ToString();
+            T0SEVALUE.Text = ((Globals.bank1[1] & 0b0001_0000) >> 4).ToString();
+            PSAVALUE.Text = ((Globals.bank1[1] & 0b0000_1000) >> 3).ToString();
+            PS2VALUE.Text = ((Globals.bank1[1] & 0b0000_0100) >> 2).ToString();
+            PS1VALUE.Text = ((Globals.bank1[1] & 0b0000_0010) >> 1).ToString();
+            PS0VALUE.Text = (Globals.bank1[1] & 0b0000_0001).ToString();
+
+            GIEVALUE.Text = ((Globals.bank0[11] & 0b1000_0000) >> 7).ToString();
+            EEIEVALUE.Text = ((Globals.bank0[11] & 0b0100_0000) >> 6).ToString();
+            T0IEVALUE.Text = ((Globals.bank0[11] & 0b0010_0000) >> 5).ToString();
+            INTEVALUE.Text = ((Globals.bank0[11] & 0b0001_0000) >> 4).ToString();
+            RBIEVALUE.Text = ((Globals.bank0[11] & 0b0000_1000) >> 3).ToString();
+            T0IFVALUE.Text = ((Globals.bank0[11] & 0b0000_0100) >> 2).ToString();
+            INTFVALUE.Text = ((Globals.bank0[11] & 0b0000_0010) >> 1).ToString();
+            RBIFVALUE.Text = (Globals.bank0[11] & 0b0000_0001).ToString();
+
+            RA4VALUE.Text = ((Globals.bank0[5] & 0b0001_0000) >> 4).ToString();
+            RA3VALUE.Text = ((Globals.bank0[5] & 0b0000_1000) >> 3).ToString();
+            RA2VALUE.Text = ((Globals.bank0[5] & 0b0000_0100) >> 2).ToString();
+            RA1VALUE.Text = ((Globals.bank0[5] & 0b0000_0010) >> 1).ToString();
+            RA0VALUE.Text = (Globals.bank0[5] & 0b0000_0001).ToString();
+
+            RB7VALUE.Text = ((Globals.bank0[6] & 0b1000_0000) >> 7).ToString();
+            RB6VALUE.Text = ((Globals.bank0[6] & 0b0100_0000) >> 6).ToString();
+            RB5VALUE.Text = ((Globals.bank0[6] & 0b0010_0000) >> 5).ToString();
+            RB4VALUE.Text = ((Globals.bank0[6] & 0b0001_0000) >> 4).ToString();
+            RB3VALUE.Text = ((Globals.bank0[6] & 0b0000_1000) >> 3).ToString();
+            RB2VALUE.Text = ((Globals.bank0[6] & 0b0000_0100) >> 2).ToString();
+            RB1VALUE.Text = ((Globals.bank0[6] & 0b0000_0010) >> 1).ToString();
+            RB0VALUE.Text = (Globals.bank0[6] & 0b0000_0001).ToString();
         }
     }
 }
