@@ -185,7 +185,7 @@ namespace PicSim
 
         private void RA4_Click(object sender, EventArgs e)
         {
-           if((Globals.bank0[5] & 0b0001_0000) == 1)
+           if((Globals.bank0[5] & 0b0001_0000) == 16)
             {
                 Globals.bank0[5] -= 16; 
             }
@@ -198,7 +198,7 @@ namespace PicSim
 
         private void RA3_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[5] & 0b0000_1000) == 1)
+            if ((Globals.bank0[5] & 0b0000_1000) == 8)
             {
                 Globals.bank0[5] -= 8;
             }
@@ -211,7 +211,7 @@ namespace PicSim
 
         private void RA2_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[5] & 0b0000_0100) == 1)
+            if ((Globals.bank0[5] & 0b0000_0100) == 4)
             {
                 Globals.bank0[5] -= 4;
             }
@@ -224,7 +224,7 @@ namespace PicSim
 
         private void RA1_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[5] & 0b0000_0010) == 1)
+            if ((Globals.bank0[5] & 0b0000_0010) == 2)
             {
                 Globals.bank0[5] -= 2;
             }
@@ -250,7 +250,7 @@ namespace PicSim
 
         private void RB7_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[6] & 0b1000_0000) == 1)
+            if ((Globals.bank0[6] & 0b1000_0000) == 128)
             {
                 Globals.bank0[6] -= 128;
             }
@@ -263,7 +263,7 @@ namespace PicSim
 
         private void RB6_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[6] & 0b0100_0000) == 1)
+            if ((Globals.bank0[6] & 0b0100_0000) == 64)
             {
                 Globals.bank0[6] -= 64;
             }
@@ -276,7 +276,7 @@ namespace PicSim
 
         private void RB5_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[6] & 0b0010_0000) == 1)
+            if ((Globals.bank0[6] & 0b0010_0000) == 32)
             {
                 Globals.bank0[6] -= 32;
             }
@@ -289,7 +289,7 @@ namespace PicSim
 
         private void RB4_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[6] & 0b0001_0000) == 1)
+            if ((Globals.bank0[6] & 0b0001_0000) == 16)
             {
                 Globals.bank0[6] -= 16;
             }
@@ -302,7 +302,7 @@ namespace PicSim
 
         private void RB3_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[6] & 0b0000_1000) == 1)
+            if ((Globals.bank0[6] & 0b0000_1000) == 8)
             {
                 Globals.bank0[6] -= 8;
             }
@@ -315,7 +315,7 @@ namespace PicSim
 
         private void RB2_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[6] & 0b0000_0100) == 1)
+            if ((Globals.bank0[6] & 0b0000_0100) == 4)
             {
                 Globals.bank0[6] -= 4;
             }
@@ -328,7 +328,7 @@ namespace PicSim
 
         private void RB1_Click(object sender, EventArgs e)
         {
-            if ((Globals.bank0[6] & 0b1000_0010) == 1)
+            if ((Globals.bank0[6] & 0b1000_0010) == 2)
             {
                 Globals.bank0[6] -= 2;
             }
