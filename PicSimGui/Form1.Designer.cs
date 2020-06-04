@@ -133,24 +133,33 @@
             this.Watchdog = new System.Windows.Forms.Label();
             this.Watchdogvalue = new System.Windows.Forms.Label();
             this.Specialfunctionregister = new System.Windows.Forms.GroupBox();
-            this.Wregister = new System.Windows.Forms.Label();
-            this.PCL = new System.Windows.Forms.Label();
-            this.PCLATH = new System.Windows.Forms.Label();
-            this.PCintern = new System.Windows.Forms.Label();
-            this.Status = new System.Windows.Forms.Label();
-            this.FSR = new System.Windows.Forms.Label();
-            this.Option = new System.Windows.Forms.Label();
-            this.Prescaler = new System.Windows.Forms.Label();
-            this.Timer0 = new System.Windows.Forms.Label();
-            this.WregisterVALUE = new System.Windows.Forms.Label();
-            this.PCLVALUE = new System.Windows.Forms.Label();
-            this.PCLATHVALUE = new System.Windows.Forms.Label();
-            this.PCinternVALUE = new System.Windows.Forms.Label();
-            this.StatusVALUE = new System.Windows.Forms.Label();
-            this.FSRVALUE = new System.Windows.Forms.Label();
-            this.OptionVALUE = new System.Windows.Forms.Label();
-            this.PrescalerVALUE = new System.Windows.Forms.Label();
             this.Timer0VALUE = new System.Windows.Forms.Label();
+            this.PrescalerVALUE = new System.Windows.Forms.Label();
+            this.OptionVALUE = new System.Windows.Forms.Label();
+            this.FSRVALUE = new System.Windows.Forms.Label();
+            this.StatusVALUE = new System.Windows.Forms.Label();
+            this.PCinternVALUE = new System.Windows.Forms.Label();
+            this.PCLATHVALUE = new System.Windows.Forms.Label();
+            this.PCLVALUE = new System.Windows.Forms.Label();
+            this.WregisterVALUE = new System.Windows.Forms.Label();
+            this.Timer0 = new System.Windows.Forms.Label();
+            this.Prescaler = new System.Windows.Forms.Label();
+            this.Option = new System.Windows.Forms.Label();
+            this.FSR = new System.Windows.Forms.Label();
+            this.Status = new System.Windows.Forms.Label();
+            this.PCintern = new System.Windows.Forms.Label();
+            this.PCLATH = new System.Windows.Forms.Label();
+            this.PCL = new System.Windows.Forms.Label();
+            this.Wregister = new System.Windows.Forms.Label();
+            this.Stack = new System.Windows.Forms.GroupBox();
+            this.Stack0 = new System.Windows.Forms.Label();
+            this.Stack1 = new System.Windows.Forms.Label();
+            this.Stack2 = new System.Windows.Forms.Label();
+            this.Stack3 = new System.Windows.Forms.Label();
+            this.Stack4 = new System.Windows.Forms.Label();
+            this.Stack5 = new System.Windows.Forms.Label();
+            this.Stack6 = new System.Windows.Forms.Label();
+            this.Stack7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.STATUS_REG.SuspendLayout();
             this.OPTION_REG.SuspendLayout();
@@ -158,6 +167,7 @@
             this.PORTA.SuspendLayout();
             this.PORTB.SuspendLayout();
             this.Specialfunctionregister.SuspendLayout();
+            this.Stack.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1227,165 +1237,12 @@
             this.Specialfunctionregister.Controls.Add(this.PCLATH);
             this.Specialfunctionregister.Controls.Add(this.PCL);
             this.Specialfunctionregister.Controls.Add(this.Wregister);
-            this.Specialfunctionregister.Location = new System.Drawing.Point(346, 55);
+            this.Specialfunctionregister.Location = new System.Drawing.Point(346, 35);
             this.Specialfunctionregister.Name = "Specialfunctionregister";
-            this.Specialfunctionregister.Size = new System.Drawing.Size(127, 370);
+            this.Specialfunctionregister.Size = new System.Drawing.Size(127, 291);
             this.Specialfunctionregister.TabIndex = 20;
             this.Specialfunctionregister.TabStop = false;
             this.Specialfunctionregister.Text = "Specialfunctionregister";
-            // 
-            // Wregister
-            // 
-            this.Wregister.AutoSize = true;
-            this.Wregister.Location = new System.Drawing.Point(6, 60);
-            this.Wregister.Name = "Wregister";
-            this.Wregister.Size = new System.Drawing.Size(69, 17);
-            this.Wregister.TabIndex = 0;
-            this.Wregister.Text = "Wregister";
-            // 
-            // PCL
-            // 
-            this.PCL.AutoSize = true;
-            this.PCL.Location = new System.Drawing.Point(6, 87);
-            this.PCL.Name = "PCL";
-            this.PCL.Size = new System.Drawing.Size(34, 17);
-            this.PCL.TabIndex = 1;
-            this.PCL.Text = "PCL";
-            // 
-            // PCLATH
-            // 
-            this.PCLATH.AutoSize = true;
-            this.PCLATH.Location = new System.Drawing.Point(6, 114);
-            this.PCLATH.Name = "PCLATH";
-            this.PCLATH.Size = new System.Drawing.Size(62, 17);
-            this.PCLATH.TabIndex = 2;
-            this.PCLATH.Text = "PCLATH";
-            // 
-            // PCintern
-            // 
-            this.PCintern.AutoSize = true;
-            this.PCintern.Location = new System.Drawing.Point(6, 138);
-            this.PCintern.Name = "PCintern";
-            this.PCintern.Size = new System.Drawing.Size(62, 17);
-            this.PCintern.TabIndex = 3;
-            this.PCintern.Text = "PCintern";
-            // 
-            // Status
-            // 
-            this.Status.AutoSize = true;
-            this.Status.Location = new System.Drawing.Point(6, 167);
-            this.Status.Name = "Status";
-            this.Status.Size = new System.Drawing.Size(48, 17);
-            this.Status.TabIndex = 4;
-            this.Status.Text = "Status";
-            // 
-            // FSR
-            // 
-            this.FSR.AutoSize = true;
-            this.FSR.Location = new System.Drawing.Point(6, 193);
-            this.FSR.Name = "FSR";
-            this.FSR.Size = new System.Drawing.Size(35, 17);
-            this.FSR.TabIndex = 5;
-            this.FSR.Text = "FSR";
-            // 
-            // Option
-            // 
-            this.Option.AutoSize = true;
-            this.Option.Location = new System.Drawing.Point(6, 219);
-            this.Option.Name = "Option";
-            this.Option.Size = new System.Drawing.Size(50, 17);
-            this.Option.TabIndex = 6;
-            this.Option.Text = "Option";
-            // 
-            // Prescaler
-            // 
-            this.Prescaler.AutoSize = true;
-            this.Prescaler.Location = new System.Drawing.Point(6, 242);
-            this.Prescaler.Name = "Prescaler";
-            this.Prescaler.Size = new System.Drawing.Size(68, 17);
-            this.Prescaler.TabIndex = 7;
-            this.Prescaler.Text = "Prescaler";
-            // 
-            // Timer0
-            // 
-            this.Timer0.AutoSize = true;
-            this.Timer0.Location = new System.Drawing.Point(6, 270);
-            this.Timer0.Name = "Timer0";
-            this.Timer0.Size = new System.Drawing.Size(52, 17);
-            this.Timer0.TabIndex = 8;
-            this.Timer0.Text = "Timer0";
-            // 
-            // WregisterVALUE
-            // 
-            this.WregisterVALUE.AutoSize = true;
-            this.WregisterVALUE.Location = new System.Drawing.Point(81, 60);
-            this.WregisterVALUE.Name = "WregisterVALUE";
-            this.WregisterVALUE.Size = new System.Drawing.Size(17, 17);
-            this.WregisterVALUE.TabIndex = 10;
-            this.WregisterVALUE.Text = "X";
-            // 
-            // PCLVALUE
-            // 
-            this.PCLVALUE.AutoSize = true;
-            this.PCLVALUE.Location = new System.Drawing.Point(81, 87);
-            this.PCLVALUE.Name = "PCLVALUE";
-            this.PCLVALUE.Size = new System.Drawing.Size(17, 17);
-            this.PCLVALUE.TabIndex = 11;
-            this.PCLVALUE.Text = "X";
-            // 
-            // PCLATHVALUE
-            // 
-            this.PCLATHVALUE.AutoSize = true;
-            this.PCLATHVALUE.Location = new System.Drawing.Point(81, 114);
-            this.PCLATHVALUE.Name = "PCLATHVALUE";
-            this.PCLATHVALUE.Size = new System.Drawing.Size(17, 17);
-            this.PCLATHVALUE.TabIndex = 12;
-            this.PCLATHVALUE.Text = "X";
-            // 
-            // PCinternVALUE
-            // 
-            this.PCinternVALUE.AutoSize = true;
-            this.PCinternVALUE.Location = new System.Drawing.Point(81, 138);
-            this.PCinternVALUE.Name = "PCinternVALUE";
-            this.PCinternVALUE.Size = new System.Drawing.Size(17, 17);
-            this.PCinternVALUE.TabIndex = 13;
-            this.PCinternVALUE.Text = "X";
-            // 
-            // StatusVALUE
-            // 
-            this.StatusVALUE.AutoSize = true;
-            this.StatusVALUE.Location = new System.Drawing.Point(81, 167);
-            this.StatusVALUE.Name = "StatusVALUE";
-            this.StatusVALUE.Size = new System.Drawing.Size(17, 17);
-            this.StatusVALUE.TabIndex = 14;
-            this.StatusVALUE.Text = "X";
-            // 
-            // FSRVALUE
-            // 
-            this.FSRVALUE.AutoSize = true;
-            this.FSRVALUE.Location = new System.Drawing.Point(81, 193);
-            this.FSRVALUE.Name = "FSRVALUE";
-            this.FSRVALUE.Size = new System.Drawing.Size(17, 17);
-            this.FSRVALUE.TabIndex = 15;
-            this.FSRVALUE.Text = "X";
-            // 
-            // OptionVALUE
-            // 
-            this.OptionVALUE.AutoSize = true;
-            this.OptionVALUE.Location = new System.Drawing.Point(81, 219);
-            this.OptionVALUE.Name = "OptionVALUE";
-            this.OptionVALUE.Size = new System.Drawing.Size(17, 17);
-            this.OptionVALUE.TabIndex = 16;
-            this.OptionVALUE.Text = "X";
-            // 
-            // PrescalerVALUE
-            // 
-            this.PrescalerVALUE.AutoSize = true;
-            this.PrescalerVALUE.Location = new System.Drawing.Point(81, 242);
-            this.PrescalerVALUE.Name = "PrescalerVALUE";
-            this.PrescalerVALUE.Size = new System.Drawing.Size(17, 17);
-            this.PrescalerVALUE.TabIndex = 17;
-            this.PrescalerVALUE.Text = "X";
             // 
             // Timer0VALUE
             // 
@@ -1396,11 +1253,254 @@
             this.Timer0VALUE.TabIndex = 18;
             this.Timer0VALUE.Text = "X";
             // 
+            // PrescalerVALUE
+            // 
+            this.PrescalerVALUE.AutoSize = true;
+            this.PrescalerVALUE.Location = new System.Drawing.Point(81, 242);
+            this.PrescalerVALUE.Name = "PrescalerVALUE";
+            this.PrescalerVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PrescalerVALUE.TabIndex = 17;
+            this.PrescalerVALUE.Text = "X";
+            // 
+            // OptionVALUE
+            // 
+            this.OptionVALUE.AutoSize = true;
+            this.OptionVALUE.Location = new System.Drawing.Point(81, 219);
+            this.OptionVALUE.Name = "OptionVALUE";
+            this.OptionVALUE.Size = new System.Drawing.Size(17, 17);
+            this.OptionVALUE.TabIndex = 16;
+            this.OptionVALUE.Text = "X";
+            // 
+            // FSRVALUE
+            // 
+            this.FSRVALUE.AutoSize = true;
+            this.FSRVALUE.Location = new System.Drawing.Point(81, 193);
+            this.FSRVALUE.Name = "FSRVALUE";
+            this.FSRVALUE.Size = new System.Drawing.Size(17, 17);
+            this.FSRVALUE.TabIndex = 15;
+            this.FSRVALUE.Text = "X";
+            // 
+            // StatusVALUE
+            // 
+            this.StatusVALUE.AutoSize = true;
+            this.StatusVALUE.Location = new System.Drawing.Point(81, 167);
+            this.StatusVALUE.Name = "StatusVALUE";
+            this.StatusVALUE.Size = new System.Drawing.Size(17, 17);
+            this.StatusVALUE.TabIndex = 14;
+            this.StatusVALUE.Text = "X";
+            // 
+            // PCinternVALUE
+            // 
+            this.PCinternVALUE.AutoSize = true;
+            this.PCinternVALUE.Location = new System.Drawing.Point(81, 138);
+            this.PCinternVALUE.Name = "PCinternVALUE";
+            this.PCinternVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PCinternVALUE.TabIndex = 13;
+            this.PCinternVALUE.Text = "X";
+            // 
+            // PCLATHVALUE
+            // 
+            this.PCLATHVALUE.AutoSize = true;
+            this.PCLATHVALUE.Location = new System.Drawing.Point(81, 114);
+            this.PCLATHVALUE.Name = "PCLATHVALUE";
+            this.PCLATHVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PCLATHVALUE.TabIndex = 12;
+            this.PCLATHVALUE.Text = "X";
+            // 
+            // PCLVALUE
+            // 
+            this.PCLVALUE.AutoSize = true;
+            this.PCLVALUE.Location = new System.Drawing.Point(81, 87);
+            this.PCLVALUE.Name = "PCLVALUE";
+            this.PCLVALUE.Size = new System.Drawing.Size(17, 17);
+            this.PCLVALUE.TabIndex = 11;
+            this.PCLVALUE.Text = "X";
+            // 
+            // WregisterVALUE
+            // 
+            this.WregisterVALUE.AutoSize = true;
+            this.WregisterVALUE.Location = new System.Drawing.Point(81, 60);
+            this.WregisterVALUE.Name = "WregisterVALUE";
+            this.WregisterVALUE.Size = new System.Drawing.Size(17, 17);
+            this.WregisterVALUE.TabIndex = 10;
+            this.WregisterVALUE.Text = "X";
+            // 
+            // Timer0
+            // 
+            this.Timer0.AutoSize = true;
+            this.Timer0.Location = new System.Drawing.Point(6, 270);
+            this.Timer0.Name = "Timer0";
+            this.Timer0.Size = new System.Drawing.Size(52, 17);
+            this.Timer0.TabIndex = 8;
+            this.Timer0.Text = "Timer0";
+            // 
+            // Prescaler
+            // 
+            this.Prescaler.AutoSize = true;
+            this.Prescaler.Location = new System.Drawing.Point(6, 242);
+            this.Prescaler.Name = "Prescaler";
+            this.Prescaler.Size = new System.Drawing.Size(68, 17);
+            this.Prescaler.TabIndex = 7;
+            this.Prescaler.Text = "Prescaler";
+            // 
+            // Option
+            // 
+            this.Option.AutoSize = true;
+            this.Option.Location = new System.Drawing.Point(6, 219);
+            this.Option.Name = "Option";
+            this.Option.Size = new System.Drawing.Size(50, 17);
+            this.Option.TabIndex = 6;
+            this.Option.Text = "Option";
+            // 
+            // FSR
+            // 
+            this.FSR.AutoSize = true;
+            this.FSR.Location = new System.Drawing.Point(6, 193);
+            this.FSR.Name = "FSR";
+            this.FSR.Size = new System.Drawing.Size(35, 17);
+            this.FSR.TabIndex = 5;
+            this.FSR.Text = "FSR";
+            // 
+            // Status
+            // 
+            this.Status.AutoSize = true;
+            this.Status.Location = new System.Drawing.Point(6, 167);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(48, 17);
+            this.Status.TabIndex = 4;
+            this.Status.Text = "Status";
+            // 
+            // PCintern
+            // 
+            this.PCintern.AutoSize = true;
+            this.PCintern.Location = new System.Drawing.Point(6, 138);
+            this.PCintern.Name = "PCintern";
+            this.PCintern.Size = new System.Drawing.Size(62, 17);
+            this.PCintern.TabIndex = 3;
+            this.PCintern.Text = "PCintern";
+            // 
+            // PCLATH
+            // 
+            this.PCLATH.AutoSize = true;
+            this.PCLATH.Location = new System.Drawing.Point(6, 114);
+            this.PCLATH.Name = "PCLATH";
+            this.PCLATH.Size = new System.Drawing.Size(62, 17);
+            this.PCLATH.TabIndex = 2;
+            this.PCLATH.Text = "PCLATH";
+            // 
+            // PCL
+            // 
+            this.PCL.AutoSize = true;
+            this.PCL.Location = new System.Drawing.Point(6, 87);
+            this.PCL.Name = "PCL";
+            this.PCL.Size = new System.Drawing.Size(34, 17);
+            this.PCL.TabIndex = 1;
+            this.PCL.Text = "PCL";
+            // 
+            // Wregister
+            // 
+            this.Wregister.AutoSize = true;
+            this.Wregister.Location = new System.Drawing.Point(6, 60);
+            this.Wregister.Name = "Wregister";
+            this.Wregister.Size = new System.Drawing.Size(69, 17);
+            this.Wregister.TabIndex = 0;
+            this.Wregister.Text = "Wregister";
+            // 
+            // Stack
+            // 
+            this.Stack.Controls.Add(this.Stack7);
+            this.Stack.Controls.Add(this.Stack6);
+            this.Stack.Controls.Add(this.Stack5);
+            this.Stack.Controls.Add(this.Stack4);
+            this.Stack.Controls.Add(this.Stack3);
+            this.Stack.Controls.Add(this.Stack2);
+            this.Stack.Controls.Add(this.Stack1);
+            this.Stack.Controls.Add(this.Stack0);
+            this.Stack.Location = new System.Drawing.Point(317, 332);
+            this.Stack.Name = "Stack";
+            this.Stack.Size = new System.Drawing.Size(172, 112);
+            this.Stack.TabIndex = 21;
+            this.Stack.TabStop = false;
+            this.Stack.Text = "Stack";
+            // 
+            // Stack0
+            // 
+            this.Stack0.AutoSize = true;
+            this.Stack0.Location = new System.Drawing.Point(7, 22);
+            this.Stack0.Name = "Stack0";
+            this.Stack0.Size = new System.Drawing.Size(17, 17);
+            this.Stack0.TabIndex = 0;
+            this.Stack0.Text = "X";
+            // 
+            // Stack1
+            // 
+            this.Stack1.AutoSize = true;
+            this.Stack1.Location = new System.Drawing.Point(7, 43);
+            this.Stack1.Name = "Stack1";
+            this.Stack1.Size = new System.Drawing.Size(17, 17);
+            this.Stack1.TabIndex = 1;
+            this.Stack1.Text = "X";
+            // 
+            // Stack2
+            // 
+            this.Stack2.AutoSize = true;
+            this.Stack2.Location = new System.Drawing.Point(6, 64);
+            this.Stack2.Name = "Stack2";
+            this.Stack2.Size = new System.Drawing.Size(17, 17);
+            this.Stack2.TabIndex = 2;
+            this.Stack2.Text = "X";
+            // 
+            // Stack3
+            // 
+            this.Stack3.AutoSize = true;
+            this.Stack3.Location = new System.Drawing.Point(6, 85);
+            this.Stack3.Name = "Stack3";
+            this.Stack3.Size = new System.Drawing.Size(17, 17);
+            this.Stack3.TabIndex = 3;
+            this.Stack3.Text = "X";
+            // 
+            // Stack4
+            // 
+            this.Stack4.AutoSize = true;
+            this.Stack4.Location = new System.Drawing.Point(96, 21);
+            this.Stack4.Name = "Stack4";
+            this.Stack4.Size = new System.Drawing.Size(17, 17);
+            this.Stack4.TabIndex = 4;
+            this.Stack4.Text = "X";
+            // 
+            // Stack5
+            // 
+            this.Stack5.AutoSize = true;
+            this.Stack5.Location = new System.Drawing.Point(96, 43);
+            this.Stack5.Name = "Stack5";
+            this.Stack5.Size = new System.Drawing.Size(17, 17);
+            this.Stack5.TabIndex = 5;
+            this.Stack5.Text = "X";
+            // 
+            // Stack6
+            // 
+            this.Stack6.AutoSize = true;
+            this.Stack6.Location = new System.Drawing.Point(96, 64);
+            this.Stack6.Name = "Stack6";
+            this.Stack6.Size = new System.Drawing.Size(17, 17);
+            this.Stack6.TabIndex = 6;
+            this.Stack6.Text = "X";
+            // 
+            // Stack7
+            // 
+            this.Stack7.AutoSize = true;
+            this.Stack7.Location = new System.Drawing.Point(96, 85);
+            this.Stack7.Name = "Stack7";
+            this.Stack7.Size = new System.Drawing.Size(17, 17);
+            this.Stack7.TabIndex = 7;
+            this.Stack7.Text = "X";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 456);
+            this.Controls.Add(this.Stack);
             this.Controls.Add(this.Specialfunctionregister);
             this.Controls.Add(this.Watchdogvalue);
             this.Controls.Add(this.Watchdog);
@@ -1438,6 +1538,8 @@
             this.PORTB.PerformLayout();
             this.Specialfunctionregister.ResumeLayout(false);
             this.Specialfunctionregister.PerformLayout();
+            this.Stack.ResumeLayout(false);
+            this.Stack.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1568,6 +1670,15 @@
         public System.Windows.Forms.Label PCLATHVALUE;
         public System.Windows.Forms.Label PCLVALUE;
         public System.Windows.Forms.Label WregisterVALUE;
+        private System.Windows.Forms.GroupBox Stack;
+        private System.Windows.Forms.Label Stack7;
+        private System.Windows.Forms.Label Stack6;
+        private System.Windows.Forms.Label Stack5;
+        private System.Windows.Forms.Label Stack4;
+        private System.Windows.Forms.Label Stack3;
+        private System.Windows.Forms.Label Stack2;
+        private System.Windows.Forms.Label Stack1;
+        private System.Windows.Forms.Label Stack0;
     }
 }
 

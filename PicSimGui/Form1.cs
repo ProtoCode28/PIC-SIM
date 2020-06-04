@@ -16,17 +16,17 @@ namespace PicSim
         public Form1()
         {
             InitializeComponent();
-           
+
         }
 
         private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var fileContent = string.Empty;
             var filePath = string.Empty;
-            
-            
+
+
             Ausgabe.Text = "";
-            
+
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -41,13 +41,14 @@ namespace PicSim
                     filePath = openFileDialog.FileName;
                     Register R1 = new Register();
                     R1.PowerReset();
-              
+
                     LSTParse T1 = new LSTParse(filePath);
                     T1.Einlesen();
-                   
-                    
+                    //T1.Ausgeben();
+
+
                     int pc = Globals.programcounter;
-                    for(int i = 0; i <= pc; i++ )
+                    for (int i = 0; i <= pc; i++)
                     {
                         string pm = Globals.programmemory[i].ToString("X");
                         string counter = i.ToString("X");
@@ -73,8 +74,11 @@ namespace PicSim
                 else
                 {
                     // Perform a time consuming operation and report progress.
-                    System.Threading.Thread.Sleep(Globals.speed);
+                    but.StepButton();
                     UpdateGUI();
+
+                    System.Threading.Thread.Sleep(Globals.speed);
+
                 }
             }
         }
@@ -171,7 +175,7 @@ namespace PicSim
 
         private void WTDTMR_CheckedChanged(object sender, EventArgs e)
         {
-            if(WTDTMR.Checked)
+            if (WTDTMR.Checked)
             {
                 Globals.WDTCheckbox = true;
                 Console.WriteLine("checkbox true");
@@ -185,11 +189,11 @@ namespace PicSim
 
         private void RA4_Click(object sender, EventArgs e)
         {
-           if((Globals.bank0[5] & 0b0001_0000) == 16)
+            if ((Globals.bank0[5] & 0b0001_0000) == 16)
             {
-                Globals.bank0[5] -= 16; 
+                Globals.bank0[5] -= 16;
             }
-           else
+            else
             {
                 Globals.bank0[5] += 16;
             }
@@ -351,53 +355,62 @@ namespace PicSim
             }
             UpdateGUI();
         }
-        private void UpdateGUI()
+        public void UpdateGUI()
         {
-            Watchdogvalue.Text = Globals.WDT.ToString();
-            WregisterVALUE.Text = Globals.w.ToString();
-            PrescalerVALUE.Text = "1:" + Globals.prescaler.ToString();
+            Watchdogvalue.Invoke(new Action(() => Watchdogvalue.Text = Globals.WDT.ToString()));
+            WregisterVALUE.Invoke(new Action(() => WregisterVALUE.Text = Globals.w.ToString()));
+            PrescalerVALUE.Invoke(new Action(() => PrescalerVALUE.Text = "1:" + Globals.prescaler.ToString()));
 
-            IRPVALUE.Text = ((Globals.bank0[3] & 0b1000_0000) >> 7).ToString();
-            RP1VALUE.Text = ((Globals.bank0[3] & 0b0100_0000) >> 6).ToString();
-            RP0VALUE.Text = ((Globals.bank0[3] & 0b0010_0000) >> 5).ToString();
-            TOVALUE.Text = ((Globals.bank0[3] & 0b0001_0000) >> 4).ToString();
-            PDVALUE.Text = ((Globals.bank0[3] & 0b0000_1000) >> 3).ToString();
-            ZVALUE.Text = ((Globals.bank0[3] & 0b0000_0100) >> 2).ToString();
-            DCVALUE.Text = ((Globals.bank0[3] & 0b0000_0010) >> 1).ToString();
-            CVALUE.Text = (Globals.bank0[3] & 0b0000_0001).ToString();
+            IRPVALUE.Invoke(new Action(() => IRPVALUE.Text = ((Globals.bank0[3] & 0b1000_0000) >> 7).ToString()));
+            RP1VALUE.Invoke(new Action(() => RP1VALUE.Text = ((Globals.bank0[3] & 0b0100_0000) >> 6).ToString()));
+            RP0VALUE.Invoke(new Action(() => RP0VALUE.Text = ((Globals.bank0[3] & 0b0010_0000) >> 5).ToString()));
+            TOVALUE.Invoke(new Action(() => TOVALUE.Text = ((Globals.bank0[3] & 0b0001_0000) >> 4).ToString()));
+            PDVALUE.Invoke(new Action(() => PDVALUE.Text = ((Globals.bank0[3] & 0b0000_1000) >> 3).ToString()));
+            ZVALUE.Invoke(new Action(() => ZVALUE.Text = ((Globals.bank0[3] & 0b0000_0100) >> 2).ToString()));
+            DCVALUE.Invoke(new Action(() => DCVALUE.Text = ((Globals.bank0[3] & 0b0000_0010) >> 1).ToString()));
+            CVALUE.Invoke(new Action(() => CVALUE.Text = (Globals.bank0[3] & 0b0000_0001).ToString()));
 
-            RBPUVALUE.Text = ((Globals.bank1[1] & 0b1000_0000) >> 7).ToString();
-            INTEDGVALUE.Text = ((Globals.bank1[1] & 0b0100_0000) >> 6).ToString();
-            T0CSVALUE.Text = ((Globals.bank1[1] & 0b0010_0000) >> 5).ToString();
-            T0SEVALUE.Text = ((Globals.bank1[1] & 0b0001_0000) >> 4).ToString();
-            PSAVALUE.Text = ((Globals.bank1[1] & 0b0000_1000) >> 3).ToString();
-            PS2VALUE.Text = ((Globals.bank1[1] & 0b0000_0100) >> 2).ToString();
-            PS1VALUE.Text = ((Globals.bank1[1] & 0b0000_0010) >> 1).ToString();
-            PS0VALUE.Text = (Globals.bank1[1] & 0b0000_0001).ToString();
+            RBPUVALUE.Invoke(new Action(() => RBPUVALUE.Text = ((Globals.bank1[1] & 0b1000_0000) >> 7).ToString()));
+            INTEDGVALUE.Invoke(new Action(() => INTEDGVALUE.Text = ((Globals.bank1[1] & 0b0100_0000) >> 6).ToString()));
+            T0CSVALUE.Invoke(new Action(() => T0CSVALUE.Text = ((Globals.bank1[1] & 0b0010_0000) >> 5).ToString()));
+            T0SEVALUE.Invoke(new Action(() => T0SEVALUE.Text = ((Globals.bank1[1] & 0b0001_0000) >> 4).ToString()));
+            PSAVALUE.Invoke(new Action(() => PSAVALUE.Text = ((Globals.bank1[1] & 0b0000_1000) >> 3).ToString()));
+            PS2VALUE.Invoke(new Action(() => PS2VALUE.Text = ((Globals.bank1[1] & 0b0000_0100) >> 2).ToString()));
+            PS1VALUE.Invoke(new Action(() => PS1VALUE.Text = ((Globals.bank1[1] & 0b0000_0010) >> 1).ToString()));
+            PS0VALUE.Invoke(new Action(() => PS0VALUE.Text = (Globals.bank1[1] & 0b0000_0001).ToString()));
 
-            GIEVALUE.Text = ((Globals.bank0[11] & 0b1000_0000) >> 7).ToString();
-            EEIEVALUE.Text = ((Globals.bank0[11] & 0b0100_0000) >> 6).ToString();
-            T0IEVALUE.Text = ((Globals.bank0[11] & 0b0010_0000) >> 5).ToString();
-            INTEVALUE.Text = ((Globals.bank0[11] & 0b0001_0000) >> 4).ToString();
-            RBIEVALUE.Text = ((Globals.bank0[11] & 0b0000_1000) >> 3).ToString();
-            T0IFVALUE.Text = ((Globals.bank0[11] & 0b0000_0100) >> 2).ToString();
-            INTFVALUE.Text = ((Globals.bank0[11] & 0b0000_0010) >> 1).ToString();
-            RBIFVALUE.Text = (Globals.bank0[11] & 0b0000_0001).ToString();
+            GIEVALUE.Invoke(new Action(() => GIEVALUE.Text = ((Globals.bank0[11] & 0b1000_0000) >> 7).ToString()));
+            EEIEVALUE.Invoke(new Action(() => EEIEVALUE.Text = ((Globals.bank0[11] & 0b0100_0000) >> 6).ToString()));
+            T0IEVALUE.Invoke(new Action(() => T0IEVALUE.Text = ((Globals.bank0[11] & 0b0010_0000) >> 5).ToString()));
+            INTEVALUE.Invoke(new Action(() => INTEVALUE.Text = ((Globals.bank0[11] & 0b0001_0000) >> 4).ToString()));
+            RBIEVALUE.Invoke(new Action(() => RBIEVALUE.Text = ((Globals.bank0[11] & 0b0000_1000) >> 3).ToString()));
+            T0IFVALUE.Invoke(new Action(() => T0IFVALUE.Text = ((Globals.bank0[11] & 0b0000_0100) >> 2).ToString()));
+            INTFVALUE.Invoke(new Action(() => INTFVALUE.Text = ((Globals.bank0[11] & 0b0000_0010) >> 1).ToString()));
+            RBIFVALUE.Invoke(new Action(() => RBIFVALUE.Text = (Globals.bank0[11] & 0b0000_0001).ToString()));
 
-            RA4VALUE.Text = ((Globals.bank0[5] & 0b0001_0000) >> 4).ToString();
-            RA3VALUE.Text = ((Globals.bank0[5] & 0b0000_1000) >> 3).ToString();
-            RA2VALUE.Text = ((Globals.bank0[5] & 0b0000_0100) >> 2).ToString();
-            RA1VALUE.Text = ((Globals.bank0[5] & 0b0000_0010) >> 1).ToString();
-            RA0VALUE.Text = (Globals.bank0[5] & 0b0000_0001).ToString();
+            RA4VALUE.Invoke(new Action(() => RA4VALUE.Text = ((Globals.bank0[5] & 0b0001_0000) >> 4).ToString()));
+            RA3VALUE.Invoke(new Action(() => RA3VALUE.Text = ((Globals.bank0[5] & 0b0000_1000) >> 3).ToString()));
+            RA2VALUE.Invoke(new Action(() => RA2VALUE.Text = ((Globals.bank0[5] & 0b0000_0100) >> 2).ToString()));
+            RA1VALUE.Invoke(new Action(() => RA1VALUE.Text = ((Globals.bank0[5] & 0b0000_0010) >> 1).ToString()));
+            RA0VALUE.Invoke(new Action(() => RA0VALUE.Text = (Globals.bank0[5] & 0b0000_0001).ToString()));
 
-            RB7VALUE.Text = ((Globals.bank0[6] & 0b1000_0000) >> 7).ToString();
-            RB6VALUE.Text = ((Globals.bank0[6] & 0b0100_0000) >> 6).ToString();
-            RB5VALUE.Text = ((Globals.bank0[6] & 0b0010_0000) >> 5).ToString();
-            RB4VALUE.Text = ((Globals.bank0[6] & 0b0001_0000) >> 4).ToString();
-            RB3VALUE.Text = ((Globals.bank0[6] & 0b0000_1000) >> 3).ToString();
-            RB2VALUE.Text = ((Globals.bank0[6] & 0b0000_0100) >> 2).ToString();
-            RB1VALUE.Text = ((Globals.bank0[6] & 0b0000_0010) >> 1).ToString();
-            RB0VALUE.Text = (Globals.bank0[6] & 0b0000_0001).ToString();
+            RB7VALUE.Invoke(new Action(() => RB7VALUE.Text = ((Globals.bank0[6] & 0b1000_0000) >> 7).ToString()));
+            RB6VALUE.Invoke(new Action(() => RB6VALUE.Text = ((Globals.bank0[6] & 0b0100_0000) >> 6).ToString()));
+            RB5VALUE.Invoke(new Action(() => RB5VALUE.Text = ((Globals.bank0[6] & 0b0010_0000) >> 5).ToString()));
+            RB4VALUE.Invoke(new Action(() => RB4VALUE.Text = ((Globals.bank0[6] & 0b0001_0000) >> 4).ToString()));
+            RB3VALUE.Invoke(new Action(() => RB3VALUE.Text = ((Globals.bank0[6] & 0b0000_1000) >> 3).ToString()));
+            RB2VALUE.Invoke(new Action(() => RB2VALUE.Text = ((Globals.bank0[6] & 0b0000_0100) >> 2).ToString()));
+            RB1VALUE.Invoke(new Action(() => RB1VALUE.Text = ((Globals.bank0[6] & 0b0000_0010) >> 1).ToString()));
+            RB0VALUE.Invoke(new Action(() => RB0VALUE.Text = (Globals.bank0[6] & 0b0000_0001).ToString()));
+
+            Stack0.Invoke(new Action(() => Stack0.Text = Globals.stack.ElementAtOrDefault(0).ToString()));
+            Stack1.Invoke(new Action(() => Stack1.Text = Globals.stack.ElementAtOrDefault(1).ToString()));
+            Stack2.Invoke(new Action(() => Stack2.Text = Globals.stack.ElementAtOrDefault(2).ToString()));
+            Stack3.Invoke(new Action(() => Stack3.Text = Globals.stack.ElementAtOrDefault(3).ToString()));
+            Stack4.Invoke(new Action(() => Stack4.Text = Globals.stack.ElementAtOrDefault(4).ToString()));
+            Stack5.Invoke(new Action(() => Stack5.Text = Globals.stack.ElementAtOrDefault(5).ToString()));
+            Stack6.Invoke(new Action(() => Stack6.Text = Globals.stack.ElementAtOrDefault(6).ToString()));
+            Stack7.Invoke(new Action(() => Stack7.Text = Globals.stack.ElementAtOrDefault(7).ToString()));
         }
     }
 }
