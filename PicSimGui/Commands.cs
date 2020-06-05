@@ -265,21 +265,80 @@ namespace PicSim
                 }
                 else
                 {
-                    Globals.bank1[address & 0x7f] = result;
-                    System.Console.WriteLine($"SetData result: {Globals.bank1[address & 0x7f]}");
+                    if (Globals.bank1[address & 0x7f] == Globals.bank1[1])
+                    {
+                        CalcPrescaler();
+                        Globals.bank1[address & 0x7f] = result;
+                        System.Console.WriteLine($"SetData resultCalcPre: {Globals.bank1[address & 0x7f]}");
+                    }
+                    else
+                    {
+                        Globals.bank1[address & 0x7f] = result;
+                        System.Console.WriteLine($"SetData result: {Globals.bank1[address & 0x7f]}");
+                    }
                 }
             }
             else
             {
-                if (ExtractRP0() == 32)
+                if (ExtractRP0() != 0)
                 {
-                    Globals.bank1[address] = result;
-                    System.Console.WriteLine($"SetData result: {Globals.bank1[address]}");
+                    if (address == 0x01)  // Wenn die adresse auf das optionregister zeigt dann calcpres
+                    {
+                        CalcPrescaler();
+                        Globals.bank1[address] = result;
+                        System.Console.WriteLine($"SetData resultB1CalcPre: {Globals.bank1[address]}");
+                    }
+                    else
+                    {
+                        Globals.bank1[address] = result;
+                        if (address == 0x03)
+                        {
+                            Globals.bank0[0x03] = result;
+                        }
+                        if (address == 0x02)
+                        {
+                            Globals.bank0[0x02] = result;
+                        }
+                        if (address == 0x04)
+                        {
+                            Globals.bank0[0x04] = result;
+                        }
+                        if (address == 0x0A)
+                        {
+                            Globals.bank0[0x0A] = result;
+                        }
+                        if (address == 0x0B)
+                        {
+                            Globals.bank0[0x0B] = result;
+                        }
+                        System.Console.WriteLine($"SetData resultB1: {Globals.bank1[address]}");
+                    }
+
                 }
                 else
                 {
                     Globals.bank0[address] = result;
-                    System.Console.WriteLine($"SetData result: {Globals.bank0[address]}");
+                    if (address == 0x03)
+                    {
+                        Globals.bank1[0x03] = result;
+                    }
+                    else if (address == 0x02)
+                    {
+                        Globals.bank1[0x02] = result;
+                    }
+                    else if (address == 0x04)
+                    {
+                        Globals.bank1[0x04] = result;
+                    }
+                    else if (address == 0x0A)
+                    {
+                        Globals.bank1[0x0A] = result;
+                    }
+                    else if (address == 0x0B)
+                    {
+                        Globals.bank1[0x0B] = result;
+                    }
+                    System.Console.WriteLine($"SetData resultB0: {Globals.bank0[address]}");
                 }
             }
         }

@@ -360,6 +360,13 @@ namespace PicSim
             Watchdogvalue.Invoke(new Action(() => Watchdogvalue.Text = Globals.WDT.ToString()));
             WregisterVALUE.Invoke(new Action(() => WregisterVALUE.Text = Globals.w.ToString()));
             PrescalerVALUE.Invoke(new Action(() => PrescalerVALUE.Text = "1:" + Globals.prescaler.ToString()));
+            Timer0VALUE.Invoke(new Action(() => Timer0VALUE.Text = Globals.bank0[1].ToString()));
+            StatusVALUE.Invoke(new Action(() => StatusVALUE.Text = Globals.bank0[3].ToString()));
+            OptionVALUE.Invoke(new Action(() => OptionVALUE.Text = Globals.bank1[1].ToString()));
+            FSRVALUE.Invoke(new Action(() => FSRVALUE.Text = Globals.bank0[4].ToString()));
+            PCLVALUE.Invoke(new Action(() => PCLVALUE.Text = Globals.bank0[2].ToString()));
+            PCLATHVALUE.Invoke(new Action(() => PCLATHVALUE.Text = Globals.bank0[10].ToString()));
+            PCinternVALUE.Invoke(new Action(() => PCinternVALUE.Text = Globals.programcounter.ToString()));
 
             IRPVALUE.Invoke(new Action(() => IRPVALUE.Text = ((Globals.bank0[3] & 0b1000_0000) >> 7).ToString()));
             RP1VALUE.Invoke(new Action(() => RP1VALUE.Text = ((Globals.bank0[3] & 0b0100_0000) >> 6).ToString()));
