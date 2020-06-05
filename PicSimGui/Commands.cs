@@ -134,10 +134,12 @@ namespace PicSim
             {
                 int scaler = 2 ^ (ps + 1);
                 Globals.prescaler = scaler;
+                Console.WriteLine($"TMRPrescaler:{Globals.prescaler} ");
             }
             else
             {
                 Globals.prescaler = 2 ^ ps;
+                Console.WriteLine($"WDTPrescaler:{Globals.prescaler} ");
             }
         }
         
@@ -146,11 +148,15 @@ namespace PicSim
             //immer wenn optionregister beschrieben wird calcprescalertimer ---> abfrage ob optionregister das ziel ist -> falls ja
             if ((Globals.bank1[1] & 0b0000_1000) == 0)
             {
-                Globals.prescaler--;
+                if(Globals.prescaler > 0)
+                {
+                    Globals.prescaler--;
+                }
                 if (Globals.prescaler == 0)
                 {
-                    Globals.bank0[1]++;
                     CalcPrescaler();
+                    Globals.bank0[1]++;
+                    
                     if (Globals.bank0[1] > 255)
                     {
                         Globals.bank0[11] |= 0b0000_0100;
