@@ -17,7 +17,9 @@ namespace PicSim
         public static int speed = 500;
         public static bool WDTCheckbox;
       
-        
+        //Timer zählt scheinbar nicht richtig? Muss zero-flag bei Timer überlauf gesetzt werden?
+        //Mehrzyklische Befehle verändern prescaler? oder verändern direkt den timer? oder verändern nur Laufzeit?
+
     }
 
 }

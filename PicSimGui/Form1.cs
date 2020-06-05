@@ -161,7 +161,7 @@ namespace PicSim
         {
             if (comboBox2.SelectedIndex == 0)
             {
-                Globals.speed = 5000;
+                Globals.speed = 2000;
             }
             if (comboBox2.SelectedIndex == 1)
             {
@@ -169,7 +169,7 @@ namespace PicSim
             }
             if (comboBox2.SelectedIndex == 2)
             {
-                Globals.speed = 50;
+                Globals.speed = 0;
             }
         }
 

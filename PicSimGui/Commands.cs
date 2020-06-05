@@ -124,6 +124,7 @@ namespace PicSim
 
         public int ExtractPrescaler()
         {
+            Console.WriteLine($"ExtractPrescaler: {Globals.bank1[1] & 0b0000_0111}");
             return Globals.bank1[1] & 0b0000_0111;
         }
 
@@ -132,13 +133,12 @@ namespace PicSim
             int ps = ExtractPrescaler();
             if ((Globals.bank1[1] & 0b0000_1000) == 0)
             {
-                int scaler = 2 ^ (ps + 1);
-                Globals.prescaler = scaler;
+                Globals.prescaler = Convert.ToInt32(Math.Pow(2, (ps + 1)));
                 Console.WriteLine($"TMRPrescaler:{Globals.prescaler} ");
             }
             else
             {
-                Globals.prescaler = 2 ^ ps;
+                Globals.prescaler = Convert.ToInt32(Math.Pow(2, ps));
                 Console.WriteLine($"WDTPrescaler:{Globals.prescaler} ");
             }
         }
@@ -149,7 +149,7 @@ namespace PicSim
             if ((Globals.bank1[1] & 0b0000_1000) == 0)
             {
                 if(Globals.prescaler > 0)
-                {
+                { 
                     Globals.prescaler--;
                 }
                 if (Globals.prescaler == 0)
@@ -162,6 +162,8 @@ namespace PicSim
                         Globals.bank0[11] |= 0b0000_0100;
                         Globals.bank1[11] |= 0b0000_0100;
                         Globals.bank0[1] = 0;
+                        //Globals.bank0[3] |= 0b0000_0100; zeroflag wird nicht gesetzt beim überlauf
+                        //Globals.bank1[3] |= 0b0000_0100; zeroflag wird nicht gesetzt beim überlauf
                     }
                 }
             }
@@ -173,6 +175,8 @@ namespace PicSim
                     Globals.bank0[11] |= 0b0000_0100;
                     Globals.bank1[11] |= 0b0000_0100;
                     Globals.bank0[1] = 0;
+                    //Globals.bank0[3] |= 0b0000_0100; zeroflag wird nicht gesetzt beim überlauf
+                    //Globals.bank1[3] |= 0b0000_0100; zeroflag wird nicht gesetzt beim überlauf
                 }
             }
         }
@@ -273,9 +277,9 @@ namespace PicSim
                 {
                     if (Globals.bank1[address & 0x7f] == Globals.bank1[1])
                     {
-                        CalcPrescaler();
                         Globals.bank1[address & 0x7f] = result;
                         System.Console.WriteLine($"SetData resultCalcPre: {Globals.bank1[address & 0x7f]}");
+                        CalcPrescaler();
                     }
                     else
                     {
@@ -289,10 +293,10 @@ namespace PicSim
                 if (ExtractRP0() != 0)
                 {
                     if (address == 0x01)  // Wenn die adresse auf das optionregister zeigt dann calcpres
-                    {
-                        CalcPrescaler();
+                    {                        
                         Globals.bank1[address] = result;
                         System.Console.WriteLine($"SetData resultB1CalcPre: {Globals.bank1[address]}");
+                        CalcPrescaler();
                     }
                     else
                     {
@@ -500,6 +504,11 @@ namespace PicSim
         public void INCF(int cmd)
         {
             int result = GetData(cmd) + 1;
+         
+            if(result > 255)
+            {
+                result = 0;
+            }
             WoF(cmd, result);
             ChangeZ(result);
             System.Console.WriteLine($"INCF-> result: {result}");
@@ -536,6 +545,7 @@ namespace PicSim
             int result = GetData(cmd);
             WoF(cmd, result);
             ChangeZ(result);
+            System.Console.WriteLine($"MOVF-> Result {result}");
         }
 
         public void MOVWF(int cmd)
@@ -704,6 +714,15 @@ namespace PicSim
 
         public void GOTO(int cmd)
         {
+            //if(Globals.prescaler > 0)
+            //{
+            //    Globals.prescaler--;
+            //}
+            //else
+            //{
+            //    CalcPrescaler();
+            //    Globals.prescaler--;
+            //}
             int address = ExtractCall(cmd);
             Globals.programcounter = address;
             System.Console.WriteLine($"GOTO-> Programcounter: {Globals.programcounter} adress {address} ");
