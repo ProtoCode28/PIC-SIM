@@ -329,6 +329,10 @@ namespace PicSim
                 }
                 else
                 {
+                    if(address == 1)
+                    {
+                        CalcPrescaler();
+                    }
                     Globals.bank0[address] = result;
                     if (address == 0x03)
                     {
