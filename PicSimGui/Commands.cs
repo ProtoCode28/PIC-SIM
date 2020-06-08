@@ -380,7 +380,19 @@ namespace PicSim
                 Globals.bank1[3] &= 0b1111_1110;
             }
         }
-
+        public void ChangeCSub(int result)
+        {
+            if (result >= 0)
+            {
+                Globals.bank0[3] |= 0b0000_0001;
+                Globals.bank1[3] |= 1;              // geht weil zahl <9
+            }
+            else
+            {
+                Globals.bank0[3] &= 0b1111_1110;
+                Globals.bank1[3] &= 0b1111_1110;
+            }
+        }
         public void WoF(int cmd, int result)
         {
             if(ExtractDestination(cmd) == 0)
@@ -587,7 +599,7 @@ namespace PicSim
         {
             int result = GetData(cmd) - Globals.w;
             WoF(cmd, result);
-            ChangeC(result);
+            ChangeCSub(result);
             ChangeDCSUB(Globals.w, GetData(cmd));
             ChangeZ(result);
             System.Console.WriteLine($"SUBWF-> result: {result} w: {Globals.w}");
@@ -785,7 +797,7 @@ namespace PicSim
             Globals.w = result;
             WoF(cmd, result);
             ChangeZ(result);
-            ChangeC(result);
+            ChangeCSub(result);
             ChangeDCSUB(Globals.w, literal);            
             System.Console.WriteLine($"SUBLW w: {Globals.w} literal: {literal}");
         }

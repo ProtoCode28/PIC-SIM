@@ -152,14 +152,14 @@
             this.PCL = new System.Windows.Forms.Label();
             this.Wregister = new System.Windows.Forms.Label();
             this.Stack = new System.Windows.Forms.GroupBox();
-            this.Stack0 = new System.Windows.Forms.Label();
-            this.Stack1 = new System.Windows.Forms.Label();
-            this.Stack2 = new System.Windows.Forms.Label();
-            this.Stack3 = new System.Windows.Forms.Label();
-            this.Stack4 = new System.Windows.Forms.Label();
-            this.Stack5 = new System.Windows.Forms.Label();
-            this.Stack6 = new System.Windows.Forms.Label();
             this.Stack7 = new System.Windows.Forms.Label();
+            this.Stack6 = new System.Windows.Forms.Label();
+            this.Stack5 = new System.Windows.Forms.Label();
+            this.Stack4 = new System.Windows.Forms.Label();
+            this.Stack3 = new System.Windows.Forms.Label();
+            this.Stack2 = new System.Windows.Forms.Label();
+            this.Stack1 = new System.Windows.Forms.Label();
+            this.Stack0 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.STATUS_REG.SuspendLayout();
             this.OPTION_REG.SuspendLayout();
@@ -220,13 +220,11 @@
             // 
             // Programcounter
             // 
-            this.Programcounter.DisplayIndex = 1;
             this.Programcounter.Text = "Programcounter";
             this.Programcounter.Width = 110;
             // 
             // Program
             // 
-            this.Program.DisplayIndex = 0;
             this.Program.Text = "Program";
             this.Program.Width = 128;
             // 
@@ -1423,59 +1421,14 @@
             this.Stack.TabStop = false;
             this.Stack.Text = "Stack";
             // 
-            // Stack0
+            // Stack7
             // 
-            this.Stack0.AutoSize = true;
-            this.Stack0.Location = new System.Drawing.Point(7, 22);
-            this.Stack0.Name = "Stack0";
-            this.Stack0.Size = new System.Drawing.Size(17, 17);
-            this.Stack0.TabIndex = 0;
-            this.Stack0.Text = "X";
-            // 
-            // Stack1
-            // 
-            this.Stack1.AutoSize = true;
-            this.Stack1.Location = new System.Drawing.Point(7, 43);
-            this.Stack1.Name = "Stack1";
-            this.Stack1.Size = new System.Drawing.Size(17, 17);
-            this.Stack1.TabIndex = 1;
-            this.Stack1.Text = "X";
-            // 
-            // Stack2
-            // 
-            this.Stack2.AutoSize = true;
-            this.Stack2.Location = new System.Drawing.Point(6, 64);
-            this.Stack2.Name = "Stack2";
-            this.Stack2.Size = new System.Drawing.Size(17, 17);
-            this.Stack2.TabIndex = 2;
-            this.Stack2.Text = "X";
-            // 
-            // Stack3
-            // 
-            this.Stack3.AutoSize = true;
-            this.Stack3.Location = new System.Drawing.Point(6, 85);
-            this.Stack3.Name = "Stack3";
-            this.Stack3.Size = new System.Drawing.Size(17, 17);
-            this.Stack3.TabIndex = 3;
-            this.Stack3.Text = "X";
-            // 
-            // Stack4
-            // 
-            this.Stack4.AutoSize = true;
-            this.Stack4.Location = new System.Drawing.Point(96, 21);
-            this.Stack4.Name = "Stack4";
-            this.Stack4.Size = new System.Drawing.Size(17, 17);
-            this.Stack4.TabIndex = 4;
-            this.Stack4.Text = "X";
-            // 
-            // Stack5
-            // 
-            this.Stack5.AutoSize = true;
-            this.Stack5.Location = new System.Drawing.Point(96, 43);
-            this.Stack5.Name = "Stack5";
-            this.Stack5.Size = new System.Drawing.Size(17, 17);
-            this.Stack5.TabIndex = 5;
-            this.Stack5.Text = "X";
+            this.Stack7.AutoSize = true;
+            this.Stack7.Location = new System.Drawing.Point(96, 85);
+            this.Stack7.Name = "Stack7";
+            this.Stack7.Size = new System.Drawing.Size(17, 17);
+            this.Stack7.TabIndex = 7;
+            this.Stack7.Text = "X";
             // 
             // Stack6
             // 
@@ -1486,14 +1439,59 @@
             this.Stack6.TabIndex = 6;
             this.Stack6.Text = "X";
             // 
-            // Stack7
+            // Stack5
             // 
-            this.Stack7.AutoSize = true;
-            this.Stack7.Location = new System.Drawing.Point(96, 85);
-            this.Stack7.Name = "Stack7";
-            this.Stack7.Size = new System.Drawing.Size(17, 17);
-            this.Stack7.TabIndex = 7;
-            this.Stack7.Text = "X";
+            this.Stack5.AutoSize = true;
+            this.Stack5.Location = new System.Drawing.Point(96, 43);
+            this.Stack5.Name = "Stack5";
+            this.Stack5.Size = new System.Drawing.Size(17, 17);
+            this.Stack5.TabIndex = 5;
+            this.Stack5.Text = "X";
+            // 
+            // Stack4
+            // 
+            this.Stack4.AutoSize = true;
+            this.Stack4.Location = new System.Drawing.Point(96, 21);
+            this.Stack4.Name = "Stack4";
+            this.Stack4.Size = new System.Drawing.Size(17, 17);
+            this.Stack4.TabIndex = 4;
+            this.Stack4.Text = "X";
+            // 
+            // Stack3
+            // 
+            this.Stack3.AutoSize = true;
+            this.Stack3.Location = new System.Drawing.Point(6, 85);
+            this.Stack3.Name = "Stack3";
+            this.Stack3.Size = new System.Drawing.Size(17, 17);
+            this.Stack3.TabIndex = 3;
+            this.Stack3.Text = "X";
+            // 
+            // Stack2
+            // 
+            this.Stack2.AutoSize = true;
+            this.Stack2.Location = new System.Drawing.Point(6, 64);
+            this.Stack2.Name = "Stack2";
+            this.Stack2.Size = new System.Drawing.Size(17, 17);
+            this.Stack2.TabIndex = 2;
+            this.Stack2.Text = "X";
+            // 
+            // Stack1
+            // 
+            this.Stack1.AutoSize = true;
+            this.Stack1.Location = new System.Drawing.Point(7, 43);
+            this.Stack1.Name = "Stack1";
+            this.Stack1.Size = new System.Drawing.Size(17, 17);
+            this.Stack1.TabIndex = 1;
+            this.Stack1.Text = "X";
+            // 
+            // Stack0
+            // 
+            this.Stack0.AutoSize = true;
+            this.Stack0.Location = new System.Drawing.Point(7, 22);
+            this.Stack0.Name = "Stack0";
+            this.Stack0.Size = new System.Drawing.Size(17, 17);
+            this.Stack0.TabIndex = 0;
+            this.Stack0.Text = "X";
             // 
             // Form1
             // 
