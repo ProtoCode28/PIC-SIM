@@ -28,6 +28,7 @@ namespace PicSim
                 }
                 lastPortA = Globals.bank0[5];
             }
+            CalcWdt();
             switch (Globals.programmemory[pc])
             {
                 case int n when (n >= 0b00_0111_0000_0000 && n < 0b00_0111_1111_1111): ADDWF(Globals.programmemory[pc]); break; //DONE
@@ -185,7 +186,7 @@ namespace PicSim
         {
             //laufzeitberechnung in label ausgeben und berechnen in calcwdt  
             //für jeden befehl müssen wir die zyklen berechnen und in befehlsdauer eintragen checkboxfürWDT = 1 und quartzfrequenz einstellen
-            if (Globals.WDTCheckbox == true)//da steht aktuell stuss drin // wenn optionregister beschrieben wird (movwf 1) dann calcprescaler
+            if (Globals.WDTCheckbox == true)
             {
                 Globals.WDT += Globals.Befehlsdauer;
                 if (Globals.WDT == 18000)
@@ -202,6 +203,7 @@ namespace PicSim
                     else
                     {
                         Register.Reset();
+
                     }
                 }
             }
@@ -445,6 +447,10 @@ namespace PicSim
 
         public void ADDWF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz)
+                
+                
+                ;
             int result = Globals.w + GetData(cmd);
             ChangeDCADD(Globals.w, GetData(cmd));
             ChangeZ(result);
@@ -455,6 +461,7 @@ namespace PicSim
 
         public void ANDWF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = Globals.w & GetData(cmd);
             WoF(cmd, result & 255);
             ChangeZ(result);
@@ -464,6 +471,7 @@ namespace PicSim
 
         public void CLRF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = 0;
             SetData(cmd, result);
             ChangeZ(result);
@@ -472,6 +480,7 @@ namespace PicSim
 
         public void CLRW()
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = 0;
             Globals.w = result;
             ChangeZ(result);
@@ -480,6 +489,7 @@ namespace PicSim
 
         public void COMF(int cmd) 
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) ^ 255;
             WoF(cmd, result);
             System.Console.WriteLine($"COMF-> result: {result}");
@@ -488,6 +498,7 @@ namespace PicSim
 
         public void DECF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int data = GetData(cmd);
             int result = data - 1;
             WoF(cmd, result);
@@ -497,6 +508,7 @@ namespace PicSim
 
         public void DECFSZ(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) - 1;
             WoF(cmd, result);
             if (result == 0)
@@ -515,6 +527,7 @@ namespace PicSim
 
         public void INCF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) + 1;
          
             if(result > 255)
@@ -528,6 +541,7 @@ namespace PicSim
 
         public void INCFSZ(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) + 1;
             WoF(cmd, result);
             if ((result&0b1111_1111) == 0) //muss maskiert werden weil 256 = 100h und somit != 0 --> incfsz würde sonst nie enden
@@ -546,6 +560,7 @@ namespace PicSim
 
         public void IORWF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = Globals.w | GetData(cmd);
             WoF(cmd, result);
             System.Console.WriteLine($"IORWF-> w: {Globals.w}");
@@ -554,6 +569,7 @@ namespace PicSim
 
         public void MOVF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
             WoF(cmd, result);
             ChangeZ(result);
@@ -562,6 +578,7 @@ namespace PicSim
 
         public void MOVWF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = Globals.w;
             WoF(cmd, result);
             System.Console.WriteLine($"MOVWF result: {result} Programcounter: {Globals.programcounter}");
@@ -569,11 +586,13 @@ namespace PicSim
 
         public void NOP()
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             System.Console.WriteLine($"Nop von Programcounter: {Globals.programcounter}");
         }
 
         public void RLF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
             result <<= 1;
             result += ExtractCFlag();
@@ -585,6 +604,7 @@ namespace PicSim
 
         public void RRF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
             result += ExtractCFlag() << 9; // damit changeC funktioniert muss unser Carrybit an die 9 Stelle, also an die overflow stelle
             result += ((result & 0b1) << 10);
@@ -597,6 +617,7 @@ namespace PicSim
 
         public void SUBWF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) - Globals.w;
             WoF(cmd, result);
             ChangeCSub(result);
@@ -607,6 +628,7 @@ namespace PicSim
 
         public void SWAPF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int a = GetData(cmd) & 0b0000_1111;
             int b = GetData(cmd) & 0b1111_0000;
             a <<= 4;  //shift nach links
@@ -618,6 +640,7 @@ namespace PicSim
 
         public void XORWF(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = Globals.w ^ GetData(cmd);
             WoF(cmd, result);
             ChangeZ(result);
@@ -626,6 +649,7 @@ namespace PicSim
 
         public void BCF(int cmd) 
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 0 gesetzt werden
             int b = ClearBitB(result, a);
@@ -635,6 +659,7 @@ namespace PicSim
 
         public void BSF(int cmd) 
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);   // zb 7 also bit an 7. stelle muss auf 1 gesetzt werden 
             int b = SetBitB(result, a);
@@ -644,6 +669,7 @@ namespace PicSim
 
         public void BTFSC(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);
             int b = GetBitB(result, a);
@@ -665,6 +691,7 @@ namespace PicSim
 
         public void BTFSS(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
             int a = ExtractBitB(cmd);
             int b = GetBitB(result, a);
@@ -685,7 +712,8 @@ namespace PicSim
         }
 
         public void ADDLW(int cmd) //wieso wird DC beeinflusst?
-        {            
+        {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             int result = Globals.w + literal;
             WoF(cmd, result);
@@ -697,6 +725,7 @@ namespace PicSim
 
         public void ANDLW(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             int result = Globals.w & literal;
             WoF(cmd, result);
@@ -706,6 +735,9 @@ namespace PicSim
 
         public void CALL(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            CalcTMR0();
             int address = ExtractCall(cmd);
             Globals.stack.Push(Globals.programcounter);
             Globals.programcounter = address;
@@ -726,15 +758,9 @@ namespace PicSim
 
         public void GOTO(int cmd)
         {
-            //if(Globals.prescaler > 0)
-            //{
-            //    Globals.prescaler--;
-            //}
-            //else
-            //{
-            //    CalcPrescaler();
-            //    Globals.prescaler--;
-            //}
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            CalcTMR0();
             int address = ExtractCall(cmd);
             Globals.programcounter = address;
             System.Console.WriteLine($"GOTO-> Programcounter: {Globals.programcounter} adress {address} ");
@@ -742,6 +768,7 @@ namespace PicSim
 
         public void IORLW(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             int result = Globals.w | literal;
             WoF(cmd, result);
@@ -751,6 +778,7 @@ namespace PicSim
 
         public void MOVLW(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             Globals.w = literal;
             System.Console.WriteLine($"MOVLW w: {Globals.w} literal: {literal}");
@@ -758,6 +786,9 @@ namespace PicSim
 
         public void RETFIE()    
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            CalcTMR0();
             Globals.programcounter = Globals.stack.Pop();
             Globals.bank1[11] |= 0b1000_0000;
             Globals.bank0[11] |= 0b1000_0000;
@@ -766,6 +797,9 @@ namespace PicSim
 
         public void RETLW(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            CalcTMR0();
             int literal = ExtractLiteral(cmd);
             Globals.w = literal;
             Globals.programcounter = Globals.stack.Pop();
@@ -774,13 +808,16 @@ namespace PicSim
 
         public void RETURN()
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
+            CalcTMR0();
             Globals.programcounter = Globals.stack.Pop();
             System.Console.WriteLine($"Programcounter: {Globals.programcounter} ");
         }
 
         public void SLEEP() // noch nicht fertig programmiert!
         {
-            
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             Globals.bank0[3] |= 0b0001_0000; //Set TO to 1
             Globals.bank1[3] |= 0b0001_0000; //Set TO to 1
             Globals.bank0[3] &= 0b1111_0111; //Set PD to 0
@@ -792,6 +829,7 @@ namespace PicSim
 
         public void SUBLW(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             int result = Globals.w - literal;
             Globals.w = result;
@@ -804,6 +842,7 @@ namespace PicSim
 
         public void XORLW(int cmd)
         {
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             int result = Globals.w ^ literal;
             WoF(cmd, result);

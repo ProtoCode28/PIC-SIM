@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ColumnHeader Bank1;
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ladenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -160,6 +161,15 @@
             this.Stack2 = new System.Windows.Forms.Label();
             this.Stack1 = new System.Windows.Forms.Label();
             this.Stack0 = new System.Windows.Forms.Label();
+            this.LaufzeitVALUE = new System.Windows.Forms.Label();
+            this.Laufzeit = new System.Windows.Forms.Label();
+            this.GPRBank0 = new System.Windows.Forms.ListView();
+            this.Bank0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.GPRBank1 = new System.Windows.Forms.ListView();
+            this.Position0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Position1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.GPR = new System.Windows.Forms.GroupBox();
+            Bank1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.STATUS_REG.SuspendLayout();
             this.OPTION_REG.SuspendLayout();
@@ -168,7 +178,14 @@
             this.PORTB.SuspendLayout();
             this.Specialfunctionregister.SuspendLayout();
             this.Stack.SuspendLayout();
+            this.GPR.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // Bank1
+            // 
+            Bank1.Tag = "";
+            Bank1.Text = "Bank1";
+            Bank1.Width = 81;
             // 
             // menuStrip1
             // 
@@ -206,6 +223,7 @@
             // 
             // Ausgabe
             // 
+            this.Ausgabe.CheckBoxes = true;
             this.Ausgabe.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Programcounter,
             this.Program});
@@ -213,7 +231,7 @@
             this.Ausgabe.Location = new System.Drawing.Point(11, 55);
             this.Ausgabe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Ausgabe.Name = "Ausgabe";
-            this.Ausgabe.Size = new System.Drawing.Size(299, 370);
+            this.Ausgabe.Size = new System.Drawing.Size(299, 528);
             this.Ausgabe.TabIndex = 1;
             this.Ausgabe.UseCompatibleStateImageBehavior = false;
             this.Ausgabe.View = System.Windows.Forms.View.Details;
@@ -1493,11 +1511,84 @@
             this.Stack0.TabIndex = 0;
             this.Stack0.Text = "X";
             // 
+            // LaufzeitVALUE
+            // 
+            this.LaufzeitVALUE.AutoSize = true;
+            this.LaufzeitVALUE.Location = new System.Drawing.Point(979, 248);
+            this.LaufzeitVALUE.Name = "LaufzeitVALUE";
+            this.LaufzeitVALUE.Size = new System.Drawing.Size(17, 17);
+            this.LaufzeitVALUE.TabIndex = 22;
+            this.LaufzeitVALUE.Text = "X";
+            // 
+            // Laufzeit
+            // 
+            this.Laufzeit.AutoSize = true;
+            this.Laufzeit.Location = new System.Drawing.Point(884, 248);
+            this.Laufzeit.Name = "Laufzeit";
+            this.Laufzeit.Size = new System.Drawing.Size(58, 17);
+            this.Laufzeit.TabIndex = 23;
+            this.Laufzeit.Text = "Laufzeit";
+            // 
+            // GPRBank0
+            // 
+            this.GPRBank0.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Position0,
+            this.Bank0});
+            this.GPRBank0.HideSelection = false;
+            this.GPRBank0.Location = new System.Drawing.Point(58, 12);
+            this.GPRBank0.Name = "GPRBank0";
+            this.GPRBank0.Size = new System.Drawing.Size(261, 120);
+            this.GPRBank0.TabIndex = 25;
+            this.GPRBank0.UseCompatibleStateImageBehavior = false;
+            this.GPRBank0.View = System.Windows.Forms.View.Details;
+            // 
+            // Bank0
+            // 
+            this.Bank0.Text = "Bank0";
+            this.Bank0.Width = 93;
+            // 
+            // GPRBank1
+            // 
+            this.GPRBank1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Position1,
+            Bank1});
+            this.GPRBank1.HideSelection = false;
+            this.GPRBank1.Location = new System.Drawing.Point(398, 12);
+            this.GPRBank1.Name = "GPRBank1";
+            this.GPRBank1.Size = new System.Drawing.Size(253, 120);
+            this.GPRBank1.TabIndex = 26;
+            this.GPRBank1.UseCompatibleStateImageBehavior = false;
+            this.GPRBank1.View = System.Windows.Forms.View.Details;
+            // 
+            // Position0
+            // 
+            this.Position0.Text = "Position";
+            this.Position0.Width = 80;
+            // 
+            // Position1
+            // 
+            this.Position1.Text = "Position";
+            this.Position1.Width = 82;
+            // 
+            // GPR
+            // 
+            this.GPR.Controls.Add(this.GPRBank0);
+            this.GPR.Controls.Add(this.GPRBank1);
+            this.GPR.Location = new System.Drawing.Point(326, 450);
+            this.GPR.Name = "GPR";
+            this.GPR.Size = new System.Drawing.Size(688, 133);
+            this.GPR.TabIndex = 27;
+            this.GPR.TabStop = false;
+            this.GPR.Text = "GPR";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 456);
+            this.ClientSize = new System.Drawing.Size(1026, 594);
+            this.Controls.Add(this.GPR);
+            this.Controls.Add(this.Laufzeit);
+            this.Controls.Add(this.LaufzeitVALUE);
             this.Controls.Add(this.Stack);
             this.Controls.Add(this.Specialfunctionregister);
             this.Controls.Add(this.Watchdogvalue);
@@ -1538,6 +1629,7 @@
             this.Specialfunctionregister.PerformLayout();
             this.Stack.ResumeLayout(false);
             this.Stack.PerformLayout();
+            this.GPR.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1677,6 +1769,14 @@
         private System.Windows.Forms.Label Stack2;
         private System.Windows.Forms.Label Stack1;
         private System.Windows.Forms.Label Stack0;
+        private System.Windows.Forms.Label LaufzeitVALUE;
+        private System.Windows.Forms.Label Laufzeit;
+        private System.Windows.Forms.ListView GPRBank0;
+        public System.Windows.Forms.ColumnHeader Bank0;
+        private System.Windows.Forms.ListView GPRBank1;
+        private System.Windows.Forms.ColumnHeader Position0;
+        private System.Windows.Forms.ColumnHeader Position1;
+        private System.Windows.Forms.GroupBox GPR;
     }
 }
 

@@ -26,6 +26,8 @@ namespace PicSim
             Globals.bank1[10] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);    //PCLATH
             Globals.bank1[11] = int.Parse("0000", System.Globalization.NumberStyles.HexNumber);    //INTCON
             Globals.programcounter = 0;
+            Globals.WDT = 0;
+            Globals.Befehlsdauer = 0;
 
         }
 
@@ -45,7 +47,8 @@ namespace PicSim
             setByte(10, true, "cccccccc");
             setByte(11, true, "cccccccx");
             Globals.programcounter = 0;
-
+            Globals.WDT = 0;
+            Globals.Befehlsdauer = 0;
         }
 
         public static void setByte(int adresse, bool bank, string mask)

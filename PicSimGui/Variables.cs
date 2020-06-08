@@ -12,13 +12,19 @@ namespace PicSim
         public static Stack<int> stack;
         public static int prescaler; //auch einfach eine variable, die je nach dem ob der WDT oder der TMR0 sie verwendet, angepasst wird
         public static float WDT = 0; //variable die hoch oder runter gezählt wird, muss aber ein float sein da abhängig von quarz
-        public static int Befehlsdauer; // 4/quartz ergibt dauer in microsekunden
+        public static float Befehlsdauer; // 4/quartz ergibt dauer in microsekunden
         public static float Quartz; //Werte werden von der GUI zugewiesen Quartz => 1/sekunde
         public static int speed = 500;
         public static bool WDTCheckbox;
+        public static int backgroundcolorindex;
       
         //Timer zählt scheinbar nicht richtig? Muss zero-flag bei Timer überlauf gesetzt werden?
         //Mehrzyklische Befehle verändern prescaler? oder verändern direkt den timer? oder verändern nur Laufzeit?
+        
+
+        //GPR Implementieren
+        //Messagebox bei WDT
+        //GIE TOIE && TOIF dann addresse 4
 
     }
 

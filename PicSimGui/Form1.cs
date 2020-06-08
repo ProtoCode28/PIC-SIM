@@ -12,11 +12,16 @@ namespace PicSim
 {
     public partial class Form1 : Form
     {
-        Buttons but = new Buttons();
+        Commands cmd = new Commands();
         public Form1()
         {
             InitializeComponent();
-
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 1;
+        }
+        public void StepButton()
+        {
+            cmd.Switchcase(Globals.programcounter);
         }
 
         private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,6 +59,7 @@ namespace PicSim
                         string counter = i.ToString("X");
                         Ausgabe.Items.Add(counter).SubItems.Add(pm);
                     }
+                    Globals.backgroundcolorindex = Globals.programcounter;
                     Globals.programcounter = 0; //nötiger reset sonst wird programm beim letzten befehl gestartet
                 }
             }
@@ -73,12 +79,28 @@ namespace PicSim
                 }
                 else
                 {
-                    // Perform a time consuming operation and report progress.
-                    but.StepButton();
-                    UpdateGUI();
-
-                    System.Threading.Thread.Sleep(Globals.speed);
-
+                    bool result = false;
+                    var checkbreakpoint = new Action(() => result = Ausgabe.Items[Globals.programcounter].Checked);
+                    if (Ausgabe.InvokeRequired)
+                    {
+                        Ausgabe.Invoke(checkbreakpoint);
+                    }
+                    if (result == false)
+                    {
+                        StepButton();
+                        UpdateGUI();
+                        System.Threading.Thread.Sleep(Globals.speed);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Breakpoint");
+                        if (backgroundWorker1.WorkerSupportsCancellation == true)
+                        {
+                            // Cancel the asynchronous operation.
+                            backgroundWorker1.CancelAsync();
+                        }
+                    }
+              
                 }
             }
         }
@@ -92,10 +114,16 @@ namespace PicSim
         }
 
         private void Step_Click(object sender, EventArgs e)
-        {
-            //Buttons.StepButton();
-            but.StepButton();
-            UpdateGUI();
+        { 
+            if (Ausgabe.Items[Globals.programcounter].Checked)
+            {
+                MessageBox.Show("Breakpoint");  
+            }
+            else
+            {
+                StepButton();
+                UpdateGUI();
+            }
         }
 
         private void Reset_Click(object sender, EventArgs e)
@@ -358,6 +386,7 @@ namespace PicSim
         public void UpdateGUI()
         {
             Watchdogvalue.Invoke(new Action(() => Watchdogvalue.Text = Globals.WDT.ToString()));
+            LaufzeitVALUE.Invoke(new Action(() => LaufzeitVALUE.Text = Globals.Befehlsdauer.ToString()));
             WregisterVALUE.Invoke(new Action(() => WregisterVALUE.Text = Globals.w.ToString()));
             PrescalerVALUE.Invoke(new Action(() => PrescalerVALUE.Text = "1:" + Globals.prescaler.ToString()));
             Timer0VALUE.Invoke(new Action(() => Timer0VALUE.Text = Globals.bank0[1].ToString()));
@@ -367,6 +396,7 @@ namespace PicSim
             PCLVALUE.Invoke(new Action(() => PCLVALUE.Text = Globals.bank0[2].ToString()));
             PCLATHVALUE.Invoke(new Action(() => PCLATHVALUE.Text = Globals.bank0[10].ToString()));
             PCinternVALUE.Invoke(new Action(() => PCinternVALUE.Text = Globals.programcounter.ToString()));
+
 
             IRPVALUE.Invoke(new Action(() => IRPVALUE.Text = ((Globals.bank0[3] & 0b1000_0000) >> 7).ToString()));
             RP1VALUE.Invoke(new Action(() => RP1VALUE.Text = ((Globals.bank0[3] & 0b0100_0000) >> 6).ToString()));
@@ -418,6 +448,20 @@ namespace PicSim
             Stack5.Invoke(new Action(() => Stack5.Text = Globals.stack.ElementAtOrDefault(5).ToString()));
             Stack6.Invoke(new Action(() => Stack6.Text = Globals.stack.ElementAtOrDefault(6).ToString()));
             Stack7.Invoke(new Action(() => Stack7.Text = Globals.stack.ElementAtOrDefault(7).ToString()));
+
+            for (int i = 0; i <= Globals.backgroundcolorindex; i++)
+            {
+
+                Ausgabe.Invoke(new Action(() => Ausgabe.Items[i].BackColor = Color.Transparent));
+
+            }
+            Ausgabe.Invoke(new Action(() => Ausgabe.Items[Globals.programcounter].BackColor = Color.Aqua));
+           
+            for (int i = 12; i <= 79; i++)
+            {
+                GPRBank0.Invoke(new Action(() => GPRBank0.Items.Add(i.ToString("X")).SubItems.Add(Globals.bank0[i].ToString("X"))));
+                GPRBank1.Invoke(new Action(() => GPRBank1.Items.Add(i.ToString("X")).SubItems.Add(Globals.bank1[i].ToString("X"))));
+            }
         }
     }
 }
