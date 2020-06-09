@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace PicSim
 {
@@ -17,10 +18,11 @@ namespace PicSim
         public static int speed = 500;
         public static bool WDTCheckbox;
         public static int backgroundcolorindex;
-      
+
+
         //Timer zählt scheinbar nicht richtig? Muss zero-flag bei Timer überlauf gesetzt werden?
         //Mehrzyklische Befehle verändern prescaler? oder verändern direkt den timer? oder verändern nur Laufzeit?
-        
+
 
         //GPR Implementieren
         //Messagebox bei WDT

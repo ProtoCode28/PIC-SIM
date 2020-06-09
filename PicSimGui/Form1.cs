@@ -18,6 +18,7 @@ namespace PicSim
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 1;
+           
         }
         public void StepButton()
         {
@@ -58,6 +59,11 @@ namespace PicSim
                         string pm = Globals.programmemory[i].ToString("X");
                         string counter = i.ToString("X");
                         Ausgabe.Items.Add(counter).SubItems.Add(pm);
+                    }
+                    for (int i = 12; i <= 79; i++)
+                    {
+                        GPRBank0.Items.Add(i.ToString("X")).SubItems.Add(Globals.bank0[i].ToString("X"));
+                        GPRBank1.Items.Add(i.ToString("X")).SubItems.Add(Globals.bank1[i].ToString("X"));
                     }
                     Globals.backgroundcolorindex = Globals.programcounter;
                     Globals.programcounter = 0; //nötiger reset sonst wird programm beim letzten befehl gestartet
@@ -456,12 +462,30 @@ namespace PicSim
 
             }
             Ausgabe.Invoke(new Action(() => Ausgabe.Items[Globals.programcounter].BackColor = Color.Aqua));
-           
+            
+            UpdateGPR();
+        }
+        public void UpdateGPR()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(UpdateGPR));
+            }
+         
+            GPRBank0.Invoke(new Action(() => GPRBank0.BeginUpdate()));
+            GPRBank1.Invoke(new Action(() => GPRBank1.BeginUpdate()));
+         
+            GPRBank0.Invoke(new Action(() => GPRBank0.Items.Clear()));
+            GPRBank1.Invoke(new Action(() => GPRBank1.Items.Clear()));
+            
             for (int i = 12; i <= 79; i++)
             {
                 GPRBank0.Invoke(new Action(() => GPRBank0.Items.Add(i.ToString("X")).SubItems.Add(Globals.bank0[i].ToString("X"))));
                 GPRBank1.Invoke(new Action(() => GPRBank1.Items.Add(i.ToString("X")).SubItems.Add(Globals.bank1[i].ToString("X"))));
             }
+
+            GPRBank0.Invoke(new Action(() => GPRBank0.EndUpdate()));
+            GPRBank1.Invoke(new Action(() => GPRBank1.EndUpdate()));
         }
     }
 }
