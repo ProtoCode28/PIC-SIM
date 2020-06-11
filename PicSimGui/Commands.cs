@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
+
 namespace PicSim
 {
     class Commands
@@ -29,6 +30,16 @@ namespace PicSim
                 lastPortA = Globals.bank0[5];
             }
             CalcWdt();
+            if(CheckInterrupt() == true)
+            {
+                Globals.stack.Push(Globals.programcounter);
+                Globals.programcounter = 3;
+                pc = 4;
+                Globals.Interrupt = true;
+                Globals.bank0[11] &= 0b0111_1111;
+                Globals.bank1[11] &= 0b0111_1111; //resets GIE
+
+            }
             switch (Globals.programmemory[pc])
             {
                 case int n when (n >= 0b00_0111_0000_0000 && n < 0b00_0111_1111_1111): ADDWF(Globals.programmemory[pc]); break; //DONE
@@ -442,6 +453,24 @@ namespace PicSim
             {
                 Globals.bank0[3] &= 0b1111_1101;
                 Globals.bank1[3] &= 0b1111_1101;
+            }
+        }
+
+        public bool CheckInterrupt()
+        {
+            int GIE0 = Globals.bank0[11] & 0b1000_0000;
+            int T0IF0 = Globals.bank0[11] & 0b000_0100;
+            int T0IE0 = Globals.bank0[11] & 0b0010_0000;
+            int GIE1 = Globals.bank1[11] & 0b1000_0000;
+            int T0IF1 = Globals.bank1[11] & 0b000_0100;
+            int T0IE1 = Globals.bank1[11] & 0b0010_0000;
+            if ((GIE0 | GIE1) != 0 && (T0IF0 | T0IF1) != 0 && (T0IE0 | T0IE1) != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

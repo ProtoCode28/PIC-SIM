@@ -164,9 +164,9 @@
             this.LaufzeitVALUE = new System.Windows.Forms.Label();
             this.Laufzeit = new System.Windows.Forms.Label();
             this.GPRBank0 = new System.Windows.Forms.ListView();
+            this.Position0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Bank0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GPRBank1 = new System.Windows.Forms.ListView();
-            this.Position0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Position1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.GPR = new System.Windows.Forms.GroupBox();
             Bank1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -1514,7 +1514,7 @@
             // LaufzeitVALUE
             // 
             this.LaufzeitVALUE.AutoSize = true;
-            this.LaufzeitVALUE.Location = new System.Drawing.Point(979, 248);
+            this.LaufzeitVALUE.Location = new System.Drawing.Point(960, 248);
             this.LaufzeitVALUE.Name = "LaufzeitVALUE";
             this.LaufzeitVALUE.Size = new System.Drawing.Size(17, 17);
             this.LaufzeitVALUE.TabIndex = 22;
@@ -1542,6 +1542,11 @@
             this.GPRBank0.UseCompatibleStateImageBehavior = false;
             this.GPRBank0.View = System.Windows.Forms.View.Details;
             // 
+            // Position0
+            // 
+            this.Position0.Text = "Position";
+            this.Position0.Width = 80;
+            // 
             // Bank0
             // 
             this.Bank0.Text = "Bank0";
@@ -1559,11 +1564,6 @@
             this.GPRBank1.TabIndex = 26;
             this.GPRBank1.UseCompatibleStateImageBehavior = false;
             this.GPRBank1.View = System.Windows.Forms.View.Details;
-            // 
-            // Position0
-            // 
-            this.Position0.Text = "Position";
-            this.Position0.Width = 80;
             // 
             // Position1
             // 

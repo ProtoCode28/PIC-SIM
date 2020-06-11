@@ -93,9 +93,23 @@ namespace PicSim
                     }
                     if (result == false)
                     {
-                        StepButton();
-                        UpdateGUI();
-                        System.Threading.Thread.Sleep(Globals.speed);
+                        if (Globals.Interrupt == true)
+                        {
+                            MessageBox.Show("Interrupt");
+                            Globals.Interrupt = false;
+                            if (backgroundWorker1.WorkerSupportsCancellation == true)
+                            {
+                                // Cancel the asynchronous operation.
+                                backgroundWorker1.CancelAsync();
+                            }
+                            
+                        }
+                        else
+                        {
+                            StepButton();
+                            UpdateGUI();
+                            System.Threading.Thread.Sleep(Globals.speed);
+                        }
                     }
                     else
                     {
@@ -106,7 +120,8 @@ namespace PicSim
                             backgroundWorker1.CancelAsync();
                         }
                     }
-              
+                   
+
                 }
             }
         }
@@ -119,11 +134,16 @@ namespace PicSim
             }
         }
 
-        private void Step_Click(object sender, EventArgs e)
+        private void Step_Click(object sender, EventArgs e) //step button interupt und breakpoints müssen extra abseits vom go button implementiert sein
         { 
             if (Ausgabe.Items[Globals.programcounter].Checked)
             {
                 MessageBox.Show("Breakpoint");  
+            }
+            else if (Globals.Interrupt == true)
+            {
+                MessageBox.Show("Interrupt");
+                Globals.Interrupt = false;
             }
             else
             {
@@ -463,7 +483,7 @@ namespace PicSim
             }
             Ausgabe.Invoke(new Action(() => Ausgabe.Items[Globals.programcounter].BackColor = Color.Aqua));
             
-            UpdateGPR();
+            //UpdateGPR();
         }
         public void UpdateGPR()
         {
@@ -487,5 +507,8 @@ namespace PicSim
             GPRBank0.Invoke(new Action(() => GPRBank0.EndUpdate()));
             GPRBank1.Invoke(new Action(() => GPRBank1.EndUpdate()));
         }
+    
+           
+        
     }
 }
