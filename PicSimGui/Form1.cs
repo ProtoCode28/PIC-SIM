@@ -483,7 +483,7 @@ namespace PicSim
             }
             Ausgabe.Invoke(new Action(() => Ausgabe.Items[Globals.programcounter].BackColor = Color.Aqua));
             
-            //UpdateGPR();
+            UpdateGPR();
         }
         public void UpdateGPR()
         {

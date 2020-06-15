@@ -402,7 +402,7 @@ namespace PicSim
             if (result >= 0)
             {
                 Globals.bank0[3] |= 0b0000_0001;
-                Globals.bank1[3] |= 1;              // geht weil zahl <9
+                Globals.bank1[3] |= 1;              // geht weil zahl <10
             }
             else
             {
@@ -443,7 +443,7 @@ namespace PicSim
         {
             w &= 15;
             data &= 15;
-            int a = w - data;
+            int a = data - w;
             if (a >= 0)
             {
                 Globals.bank0[3] |= 0b0000_0010;
@@ -534,6 +534,7 @@ namespace PicSim
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int data = GetData(cmd);
             int result = data - 1;
+            result &= 0xFF;
             WoF(cmd, result);
             ChangeZ(result);
             System.Console.WriteLine($"DECF-> result: {result} w: {Globals.w}");
@@ -639,11 +640,22 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd);
-            result += ExtractCFlag() << 9; // damit changeC funktioniert muss unser Carrybit an die 9 Stelle, also an die overflow stelle
-            result += ((result & 0b1) << 10);
+            int Carry = result & 1;
             result >>= 1;
-            ChangeC(result);
-            result &= 0b1111_1111;
+            result += ExtractCFlag() << 7;
+            Globals.bank0[3] &= 0xFE;
+            Globals.bank1[3] &= 0xFE;
+            Globals.bank0[3] |= Carry;
+            Globals.bank1[3] |= Carry;
+
+            ////result += ExtractCFlag() << 9; // damit changeC funktioniert muss unser Carrybit an die 9 Stelle, also an die overflow stelle
+            ////result += ((result & 0b1) << 10);
+            //result >>= 1;
+            //ChangeC(result);
+
+            ///Globals.bank0[3] |= (result & 0b1);
+            //Globals.bank1[3] |= (result & 0b1);
+            //result &= 0b1111_1111;
             WoF(cmd, result);
             System.Console.WriteLine($"RRF-> result: {result} w: {Globals.w}");
         }
