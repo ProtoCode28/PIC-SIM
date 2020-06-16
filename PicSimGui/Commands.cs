@@ -480,10 +480,7 @@ namespace PicSim
 
         public void ADDWF(int cmd)
         {
-            Globals.Befehlsdauer += (4 / Globals.Quartz)
-                
-                
-                ;
+            Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = Globals.w + GetData(cmd);
             ChangeDCADD(Globals.w, GetData(cmd));
             ChangeZ(result);
@@ -534,9 +531,8 @@ namespace PicSim
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int data = GetData(cmd);
             int result = data - 1;
-            result &= 0xFF;
-            WoF(cmd, result);
             ChangeZ(result);
+            WoF(cmd, result & 255);
             System.Console.WriteLine($"DECF-> result: {result} w: {Globals.w}");
         }
 
@@ -544,7 +540,7 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) - 1;
-            WoF(cmd, result);
+            WoF(cmd, result & 255);
             if (result == 0)
             {
                 NOP();
@@ -563,13 +559,8 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) + 1;
-         
-            if(result > 255)
-            {
-                result = 0;
-            }
-            WoF(cmd, result);
             ChangeZ(result);
+            WoF(cmd, result & 255);
             System.Console.WriteLine($"INCF-> result: {result}");
         }
 
@@ -577,7 +568,7 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) + 1;
-            WoF(cmd, result);
+            WoF(cmd, result & 255);
             if ((result&0b1111_1111) == 0) //muss maskiert werden weil 256 = 100h und somit != 0 --> incfsz würde sonst nie enden
             {
                 NOP();
@@ -664,10 +655,10 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int result = GetData(cmd) - Globals.w;
-            WoF(cmd, result);
             ChangeCSub(result);
             ChangeDCSUB(Globals.w, GetData(cmd));
             ChangeZ(result);
+            WoF(cmd, result & 255);
             System.Console.WriteLine($"SUBWF-> result: {result} w: {Globals.w}");
         }
 
@@ -761,7 +752,7 @@ namespace PicSim
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             int result = Globals.w + literal;
-            WoF(cmd, result);
+            WoF(cmd, result & 255);
             ChangeC(result);
             ChangeDCADD(Globals.w, literal);
             ChangeZ(result);
@@ -773,7 +764,7 @@ namespace PicSim
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             int literal = ExtractLiteral(cmd);
             int result = Globals.w & literal;
-            WoF(cmd, result);
+            WoF(cmd, result & 255);
             ChangeZ(result);
             System.Console.WriteLine($"ANDLW W: {Globals.w} literal {literal} Programcounter: {Globals.programcounter}"); //$ + geschwungene klammern formatieren den String
         }
@@ -878,7 +869,7 @@ namespace PicSim
             int literal = ExtractLiteral(cmd);
             int result = Globals.w - literal;
             Globals.w = result;
-            WoF(cmd, result);
+            WoF(cmd, result & 255);
             ChangeZ(result);
             ChangeCSub(result);
             ChangeDCSUB(Globals.w, literal);            
