@@ -23,7 +23,7 @@ namespace PicSim
             else // hier muss geprüft werden, ob die richtige flanke an RA4 anliegt (vergleich alterzustand/neuerzustand)
             {
                 int bit4 = lastPortA & 0b0001_0000;
-                if (lastPortA != -1 && (bit4 != (Globals.bank0[5] & 0b0001_0000)) && bit4 == 1)
+                if (lastPortA != -1 && (bit4 != (Globals.bank0[5] & 0b0001_0000)) && bit4 != 0)
                 {
                     CalcTMR0();
                 }
@@ -714,7 +714,10 @@ namespace PicSim
             {
                 NOP();
                 Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
-                CalcTMR0();
+                if ((Globals.bank1[1] & 0b0010_0000) == 0)
+                {
+                    CalcTMR0();
+                }
                 CalcWdt();
                 System.Console.WriteLine($"NOP von BTFSC");
             }
@@ -736,7 +739,10 @@ namespace PicSim
             {
                 NOP();
                 Globals.programcounter++; // muss manuell gemacht werden, alternative wäre switch methode aufzurufen und den hex wert von NOP zu übergeben
-                CalcTMR0();
+                if ((Globals.bank1[1] & 0b0010_0000) == 0)
+                {
+                    CalcTMR0();
+                }
                 CalcWdt();
                 System.Console.WriteLine($"NOP von BTFSS");
             }
@@ -773,7 +779,10 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             Globals.Befehlsdauer += (4 / Globals.Quartz);
-            CalcTMR0();
+            if ((Globals.bank1[1] & 0b0010_0000) == 0)
+            {
+                CalcTMR0();
+            }
             int address = ExtractCall(cmd);
             Globals.stack.Push(Globals.programcounter);
             Globals.programcounter = address;
@@ -796,7 +805,10 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             Globals.Befehlsdauer += (4 / Globals.Quartz);
-            CalcTMR0();
+            if ((Globals.bank1[1] & 0b0010_0000) == 0)
+            {
+                CalcTMR0();
+            }
             int address = ExtractCall(cmd);
             Globals.programcounter = address;
             System.Console.WriteLine($"GOTO-> Programcounter: {Globals.programcounter} adress {address} ");
@@ -824,7 +836,10 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             Globals.Befehlsdauer += (4 / Globals.Quartz);
-            CalcTMR0();
+            if ((Globals.bank1[1] & 0b0010_0000) == 0)
+            {
+                CalcTMR0();
+            }
             Globals.programcounter = Globals.stack.Pop();
             Globals.bank1[11] |= 0b1000_0000;
             Globals.bank0[11] |= 0b1000_0000;
@@ -835,7 +850,10 @@ namespace PicSim
         {
             Globals.Befehlsdauer += (4 / Globals.Quartz);
             Globals.Befehlsdauer += (4 / Globals.Quartz);
-            CalcTMR0();
+            if ((Globals.bank1[1] & 0b0010_0000) == 0)
+            {
+                CalcTMR0();
+            }
             int literal = ExtractLiteral(cmd);
             Globals.w = literal;
             Globals.programcounter = Globals.stack.Pop();
